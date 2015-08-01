@@ -156,6 +156,48 @@
     <Compile Include="Layouts\Fichas\Students\mdlParents.Designer.cs">
       <DependentUpon>mdlParents.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\MaterialControl\frmAsignarMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layouts\MaterialControl\frmAsignarMaterial.Designer.cs">
+      <DependentUpon>frmAsignarMaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\MaterialControl\frmIngresos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layouts\MaterialControl\frmIngresos.Designer.cs">
+      <DependentUpon>frmIngresos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\MaterialControl\frmRegistrarMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layouts\MaterialControl\frmRegistrarMaterial.Designer.cs">
+      <DependentUpon>frmRegistrarMaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\MaterialControl\frmReportar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layouts\MaterialControl\frmReportar.Designer.cs">
+      <DependentUpon>frmReportar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\MaterialControl\mdlReporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layouts\MaterialControl\mdlReporte.Designer.cs">
+      <DependentUpon>mdlReporte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\MaterialControl\mdlSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layouts\MaterialControl\mdlSearch.Designer.cs">
+      <DependentUpon>mdlSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\MaterialControl\mdlSolucionarMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layouts\MaterialControl\mdlSolucionarMaterial.Designer.cs">
+      <DependentUpon>mdlSolucionarMaterial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\prsApertura\frmInitialMessage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -300,6 +342,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Layouts\Fichas\Students\mdlParents.resx">
       <DependentUpon>mdlParents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layouts\MaterialControl\frmAsignarMaterial.resx">
+      <DependentUpon>frmAsignarMaterial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layouts\MaterialControl\frmIngresos.resx">
+      <DependentUpon>frmIngresos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layouts\MaterialControl\frmRegistrarMaterial.resx">
+      <DependentUpon>frmRegistrarMaterial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layouts\MaterialControl\frmReportar.resx">
+      <DependentUpon>frmReportar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layouts\MaterialControl\mdlReporte.resx">
+      <DependentUpon>mdlReporte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layouts\MaterialControl\mdlSearch.resx">
+      <DependentUpon>mdlSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layouts\MaterialControl\mdlSolucionarMaterial.resx">
+      <DependentUpon>mdlSolucionarMaterial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Layouts\prsApertura\frmInitialMessage.resx">
       <DependentUpon>frmInitialMessage.cs</DependentUpon>

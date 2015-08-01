@@ -227,5 +227,33 @@ namespace LawrApp
 			search.Show();
 			this.Close();
 		}
+
+		private void registroDeMaterialesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Layouts.MaterialControl.frmRegistrarMaterial material = new Layouts.MaterialControl.frmRegistrarMaterial();
+			material.Show();
+			this.Close();
+		}
+
+		private void registroDeAdquisicionToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Layouts.MaterialControl.frmIngresos Ingresos = new Layouts.MaterialControl.frmIngresos();
+			Ingresos.Show();
+			this.Close();
+		}
+
+		private void inventarioDeAulaToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Layouts.MaterialControl.frmAsignarMaterial Asignar = new Layouts.MaterialControl.frmAsignarMaterial();
+			Asignar.Show();
+			this.Close();
+		}
+
+		private void reportarMaterialesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Layouts.MaterialControl.frmReportar ReportarMaterial = new Layouts.MaterialControl.frmReportar();
+			ReportarMaterial.Show();
+			this.Close();
+		}
 	}
 }
