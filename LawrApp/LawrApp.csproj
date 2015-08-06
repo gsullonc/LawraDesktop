@@ -56,6 +56,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Access.dll</HintPath>
     </Reference>
+    <Reference Include="MaterialControl">
+      <HintPath>..\MaterialControl\bin\Debug\MaterialControl.dll</HintPath>
+    </Reference>
     <Reference Include="MetroFramework, Version=1.3.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.3.0.0\lib\net\MetroFramework.dll</HintPath>
       <Private>True</Private>
@@ -180,6 +183,7 @@
     <Compile Include="Layouts\MaterialControl\frmReportar.Designer.cs">
       <DependentUpon>frmReportar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\MaterialControl\IMateriales.cs" />
     <Compile Include="Layouts\MaterialControl\mdlReporte.cs">
       <SubType>Form</SubType>
     </Compile>

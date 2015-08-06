@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Processes\pMaterialControl.cs" />
     <Compile Include="Processes\pInitial.cs" />
     <Compile Include="Processes\plogin.cs" />
     <Compile Include="Processes\pAlumno.cs" />
@@ -58,6 +63,9 @@
     <Compile Include="Tables\tFaseDivision.cs" />
     <Compile Include="Tables\tGrado.cs" />
     <Compile Include="Tables\tHoraClase.cs" />
+    <Compile Include="Tables\tKardex.cs" />
+    <Compile Include="Tables\tMaterial.cs" />
+    <Compile Include="Tables\tMaterialSalon.cs" />
     <Compile Include="Tables\tNivel.cs" />
     <Compile Include="Tables\tNivelParametro.cs" />
     <Compile Include="Tables\tNivelTurno.cs" />
@@ -67,8 +75,10 @@
     <Compile Include="Tables\tPeriodoParametro.cs" />
     <Compile Include="Tables\tPersonal.cs" />
     <Compile Include="Tables\tProfesiones.cs" />
+    <Compile Include="Tables\tReportarMaterial.cs" />
     <Compile Include="Tables\tSalon.cs" />
     <Compile Include="Tables\tSeccion.cs" />
+    <Compile Include="Tables\tSolucionarMaterial.cs" />
     <Compile Include="Tables\tTipoApoderado.cs" />
     <Compile Include="Tables\tTipoDocumento.cs" />
     <Compile Include="Tables\tTipoFase.cs" />

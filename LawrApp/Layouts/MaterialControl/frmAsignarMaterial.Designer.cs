@@ -28,29 +28,31 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.panel1 = new System.Windows.Forms.Panel();
+			this.panelMain = new System.Windows.Forms.Panel();
 			this.spcAsignacion = new System.Windows.Forms.SplitContainer();
-			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
-			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-			this.txtMarca = new System.Windows.Forms.TextBox();
-			this.btnbuscar = new MetroFramework.Controls.MetroButton();
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-			this.txtCategoria = new System.Windows.Forms.TextBox();
-			this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+			this.pgsLoad = new MetroFramework.Controls.MetroProgressSpinner();
+			this.btnSalir = new MetroFramework.Controls.MetroButton();
+			this.btnAgregar = new MetroFramework.Controls.MetroButton();
+			this.nudCantidad = new System.Windows.Forms.NumericUpDown();
+			this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
 			this.txtModelo = new System.Windows.Forms.TextBox();
 			this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
-			this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
-			this.nudCantidad = new System.Windows.Forms.NumericUpDown();
-			this.btnAgregar = new MetroFramework.Controls.MetroButton();
-			this.btnSalir = new MetroFramework.Controls.MetroButton();
+			this.txtCategoria = new System.Windows.Forms.TextBox();
+			this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+			this.txtMarca = new System.Windows.Forms.TextBox();
+			this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+			this.btnbuscar = new MetroFramework.Controls.MetroButton();
+			this.txtDescripcion = new System.Windows.Forms.TextBox();
+			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+			this.cboSalones = new System.Windows.Forms.ComboBox();
+			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+			this.btnEliminar = new MetroFramework.Controls.MetroButton();
 			this.dgvListado = new System.Windows.Forms.DataGridView();
 			this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colCodMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.btnEliminar = new MetroFramework.Controls.MetroButton();
-			this.panel1.SuspendLayout();
+			this.panelMain.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.spcAsignacion)).BeginInit();
 			this.spcAsignacion.Panel1.SuspendLayout();
 			this.spcAsignacion.Panel2.SuspendLayout();
@@ -59,14 +61,14 @@
 			((System.ComponentModel.ISupportInitialize)(this.dgvListado)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// panel1
+			// panelMain
 			// 
-			this.panel1.Controls.Add(this.spcAsignacion);
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel1.Location = new System.Drawing.Point(30, 97);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(590, 379);
-			this.panel1.TabIndex = 0;
+			this.panelMain.Controls.Add(this.spcAsignacion);
+			this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelMain.Location = new System.Drawing.Point(30, 70);
+			this.panelMain.Name = "panelMain";
+			this.panelMain.Size = new System.Drawing.Size(590, 406);
+			this.panelMain.TabIndex = 0;
 			// 
 			// spcAsignacion
 			// 
@@ -76,6 +78,7 @@
 			// 
 			// spcAsignacion.Panel1
 			// 
+			this.spcAsignacion.Panel1.Controls.Add(this.pgsLoad);
 			this.spcAsignacion.Panel1.Controls.Add(this.btnSalir);
 			this.spcAsignacion.Panel1.Controls.Add(this.btnAgregar);
 			this.spcAsignacion.Panel1.Controls.Add(this.nudCantidad);
@@ -84,97 +87,76 @@
 			this.spcAsignacion.Panel1.Controls.Add(this.metroLabel5);
 			this.spcAsignacion.Panel1.Controls.Add(this.txtCategoria);
 			this.spcAsignacion.Panel1.Controls.Add(this.metroLabel4);
-			this.spcAsignacion.Panel1.Controls.Add(this.textBox1);
+			this.spcAsignacion.Panel1.Controls.Add(this.txtMarca);
 			this.spcAsignacion.Panel1.Controls.Add(this.metroLabel3);
 			this.spcAsignacion.Panel1.Controls.Add(this.btnbuscar);
-			this.spcAsignacion.Panel1.Controls.Add(this.txtMarca);
+			this.spcAsignacion.Panel1.Controls.Add(this.txtDescripcion);
 			this.spcAsignacion.Panel1.Controls.Add(this.metroLabel2);
-			this.spcAsignacion.Panel1.Controls.Add(this.comboBox1);
+			this.spcAsignacion.Panel1.Controls.Add(this.cboSalones);
 			this.spcAsignacion.Panel1.Controls.Add(this.metroLabel1);
 			// 
 			// spcAsignacion.Panel2
 			// 
 			this.spcAsignacion.Panel2.Controls.Add(this.btnEliminar);
 			this.spcAsignacion.Panel2.Controls.Add(this.dgvListado);
-			this.spcAsignacion.Size = new System.Drawing.Size(590, 379);
+			this.spcAsignacion.Size = new System.Drawing.Size(590, 406);
 			this.spcAsignacion.SplitterDistance = 244;
 			this.spcAsignacion.TabIndex = 0;
 			// 
-			// metroLabel1
+			// pgsLoad
 			// 
-			this.metroLabel1.AutoSize = true;
-			this.metroLabel1.Location = new System.Drawing.Point(10, 14);
-			this.metroLabel1.Name = "metroLabel1";
-			this.metroLabel1.Size = new System.Drawing.Size(41, 19);
-			this.metroLabel1.TabIndex = 0;
-			this.metroLabel1.Text = "Salon";
+			this.pgsLoad.Location = new System.Drawing.Point(210, 14);
+			this.pgsLoad.Maximum = 100;
+			this.pgsLoad.Name = "pgsLoad";
+			this.pgsLoad.Size = new System.Drawing.Size(21, 19);
+			this.pgsLoad.Speed = 2F;
+			this.pgsLoad.Style = MetroFramework.MetroColorStyle.Green;
+			this.pgsLoad.TabIndex = 155;
+			this.pgsLoad.UseSelectable = true;
+			this.pgsLoad.Value = 50;
 			// 
-			// comboBox1
+			// btnSalir
 			// 
-			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Location = new System.Drawing.Point(13, 36);
-			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(217, 29);
-			this.comboBox1.TabIndex = 1;
+			this.btnSalir.Location = new System.Drawing.Point(10, 372);
+			this.btnSalir.Name = "btnSalir";
+			this.btnSalir.Size = new System.Drawing.Size(75, 31);
+			this.btnSalir.TabIndex = 14;
+			this.btnSalir.Text = "Salir";
+			this.btnSalir.UseSelectable = true;
+			this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
 			// 
-			// metroLabel2
+			// btnAgregar
 			// 
-			this.metroLabel2.AutoSize = true;
-			this.metroLabel2.Location = new System.Drawing.Point(10, 68);
-			this.metroLabel2.Name = "metroLabel2";
-			this.metroLabel2.Size = new System.Drawing.Size(57, 19);
-			this.metroLabel2.TabIndex = 2;
-			this.metroLabel2.Text = "Material";
+			this.btnAgregar.Enabled = false;
+			this.btnAgregar.Location = new System.Drawing.Point(156, 372);
+			this.btnAgregar.Name = "btnAgregar";
+			this.btnAgregar.Size = new System.Drawing.Size(75, 31);
+			this.btnAgregar.TabIndex = 13;
+			this.btnAgregar.Text = "Agregar";
+			this.btnAgregar.UseSelectable = true;
+			this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
 			// 
-			// txtMarca
+			// nudCantidad
 			// 
-			this.txtMarca.Location = new System.Drawing.Point(13, 90);
-			this.txtMarca.Name = "txtMarca";
-			this.txtMarca.Size = new System.Drawing.Size(166, 29);
-			this.txtMarca.TabIndex = 3;
+			this.nudCantidad.Enabled = false;
+			this.nudCantidad.Location = new System.Drawing.Point(12, 310);
+			this.nudCantidad.Name = "nudCantidad";
+			this.nudCantidad.Size = new System.Drawing.Size(218, 29);
+			this.nudCantidad.TabIndex = 3;
+			this.nudCantidad.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
 			// 
-			// btnbuscar
+			// metroLabel6
 			// 
-			this.btnbuscar.Location = new System.Drawing.Point(185, 90);
-			this.btnbuscar.Name = "btnbuscar";
-			this.btnbuscar.Size = new System.Drawing.Size(45, 29);
-			this.btnbuscar.TabIndex = 2;
-			this.btnbuscar.Text = "....";
-			this.btnbuscar.UseSelectable = true;
-			// 
-			// textBox1
-			// 
-			this.textBox1.Enabled = false;
-			this.textBox1.Location = new System.Drawing.Point(13, 144);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(217, 29);
-			this.textBox1.TabIndex = 6;
-			// 
-			// metroLabel3
-			// 
-			this.metroLabel3.AutoSize = true;
-			this.metroLabel3.Location = new System.Drawing.Point(10, 122);
-			this.metroLabel3.Name = "metroLabel3";
-			this.metroLabel3.Size = new System.Drawing.Size(46, 19);
-			this.metroLabel3.TabIndex = 5;
-			this.metroLabel3.Text = "Marca";
-			// 
-			// txtCategoria
-			// 
-			this.txtCategoria.Enabled = false;
-			this.txtCategoria.Location = new System.Drawing.Point(13, 198);
-			this.txtCategoria.Name = "txtCategoria";
-			this.txtCategoria.Size = new System.Drawing.Size(217, 29);
-			this.txtCategoria.TabIndex = 8;
-			// 
-			// metroLabel4
-			// 
-			this.metroLabel4.AutoSize = true;
-			this.metroLabel4.Location = new System.Drawing.Point(9, 176);
-			this.metroLabel4.Name = "metroLabel4";
-			this.metroLabel4.Size = new System.Drawing.Size(67, 19);
-			this.metroLabel4.TabIndex = 7;
-			this.metroLabel4.Text = "Categoria";
+			this.metroLabel6.AutoSize = true;
+			this.metroLabel6.Location = new System.Drawing.Point(10, 288);
+			this.metroLabel6.Name = "metroLabel6";
+			this.metroLabel6.Size = new System.Drawing.Size(62, 19);
+			this.metroLabel6.TabIndex = 11;
+			this.metroLabel6.Text = "Cantidad";
 			// 
 			// txtModelo
 			// 
@@ -193,39 +175,98 @@
 			this.metroLabel5.TabIndex = 9;
 			this.metroLabel5.Text = "Modelo";
 			// 
-			// metroLabel6
+			// txtCategoria
 			// 
-			this.metroLabel6.AutoSize = true;
-			this.metroLabel6.Location = new System.Drawing.Point(10, 284);
-			this.metroLabel6.Name = "metroLabel6";
-			this.metroLabel6.Size = new System.Drawing.Size(62, 19);
-			this.metroLabel6.TabIndex = 11;
-			this.metroLabel6.Text = "Cantidad";
+			this.txtCategoria.Enabled = false;
+			this.txtCategoria.Location = new System.Drawing.Point(13, 198);
+			this.txtCategoria.Name = "txtCategoria";
+			this.txtCategoria.Size = new System.Drawing.Size(217, 29);
+			this.txtCategoria.TabIndex = 8;
 			// 
-			// nudCantidad
+			// metroLabel4
 			// 
-			this.nudCantidad.Location = new System.Drawing.Point(13, 306);
-			this.nudCantidad.Name = "nudCantidad";
-			this.nudCantidad.Size = new System.Drawing.Size(218, 29);
-			this.nudCantidad.TabIndex = 3;
+			this.metroLabel4.AutoSize = true;
+			this.metroLabel4.Location = new System.Drawing.Point(9, 176);
+			this.metroLabel4.Name = "metroLabel4";
+			this.metroLabel4.Size = new System.Drawing.Size(67, 19);
+			this.metroLabel4.TabIndex = 7;
+			this.metroLabel4.Text = "Categoria";
 			// 
-			// btnAgregar
+			// txtMarca
 			// 
-			this.btnAgregar.Location = new System.Drawing.Point(156, 341);
-			this.btnAgregar.Name = "btnAgregar";
-			this.btnAgregar.Size = new System.Drawing.Size(75, 31);
-			this.btnAgregar.TabIndex = 13;
-			this.btnAgregar.Text = "Agregar";
-			this.btnAgregar.UseSelectable = true;
+			this.txtMarca.Enabled = false;
+			this.txtMarca.Location = new System.Drawing.Point(13, 144);
+			this.txtMarca.Name = "txtMarca";
+			this.txtMarca.Size = new System.Drawing.Size(217, 29);
+			this.txtMarca.TabIndex = 6;
 			// 
-			// btnSalir
+			// metroLabel3
 			// 
-			this.btnSalir.Location = new System.Drawing.Point(13, 341);
-			this.btnSalir.Name = "btnSalir";
-			this.btnSalir.Size = new System.Drawing.Size(75, 31);
-			this.btnSalir.TabIndex = 14;
-			this.btnSalir.Text = "Salir";
-			this.btnSalir.UseSelectable = true;
+			this.metroLabel3.AutoSize = true;
+			this.metroLabel3.Location = new System.Drawing.Point(10, 122);
+			this.metroLabel3.Name = "metroLabel3";
+			this.metroLabel3.Size = new System.Drawing.Size(46, 19);
+			this.metroLabel3.TabIndex = 5;
+			this.metroLabel3.Text = "Marca";
+			// 
+			// btnbuscar
+			// 
+			this.btnbuscar.Enabled = false;
+			this.btnbuscar.Location = new System.Drawing.Point(185, 90);
+			this.btnbuscar.Name = "btnbuscar";
+			this.btnbuscar.Size = new System.Drawing.Size(45, 29);
+			this.btnbuscar.TabIndex = 2;
+			this.btnbuscar.Text = "....";
+			this.btnbuscar.UseSelectable = true;
+			this.btnbuscar.Click += new System.EventHandler(this.btnbuscar_Click);
+			// 
+			// txtDescripcion
+			// 
+			this.txtDescripcion.Enabled = false;
+			this.txtDescripcion.Location = new System.Drawing.Point(13, 90);
+			this.txtDescripcion.Name = "txtDescripcion";
+			this.txtDescripcion.Size = new System.Drawing.Size(166, 29);
+			this.txtDescripcion.TabIndex = 3;
+			this.txtDescripcion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMarca_KeyDown);
+			// 
+			// metroLabel2
+			// 
+			this.metroLabel2.AutoSize = true;
+			this.metroLabel2.Location = new System.Drawing.Point(10, 68);
+			this.metroLabel2.Name = "metroLabel2";
+			this.metroLabel2.Size = new System.Drawing.Size(57, 19);
+			this.metroLabel2.TabIndex = 2;
+			this.metroLabel2.Text = "Material";
+			// 
+			// cboSalones
+			// 
+			this.cboSalones.FormattingEnabled = true;
+			this.cboSalones.Location = new System.Drawing.Point(13, 36);
+			this.cboSalones.Name = "cboSalones";
+			this.cboSalones.Size = new System.Drawing.Size(217, 29);
+			this.cboSalones.TabIndex = 1;
+			this.cboSalones.SelectionChangeCommitted += new System.EventHandler(this.cboSalones_SelectionChangeCommitted);
+			this.cboSalones.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMarca_KeyDown);
+			// 
+			// metroLabel1
+			// 
+			this.metroLabel1.AutoSize = true;
+			this.metroLabel1.Location = new System.Drawing.Point(10, 14);
+			this.metroLabel1.Name = "metroLabel1";
+			this.metroLabel1.Size = new System.Drawing.Size(41, 19);
+			this.metroLabel1.TabIndex = 0;
+			this.metroLabel1.Text = "Salon";
+			// 
+			// btnEliminar
+			// 
+			this.btnEliminar.Enabled = false;
+			this.btnEliminar.Location = new System.Drawing.Point(257, 372);
+			this.btnEliminar.Name = "btnEliminar";
+			this.btnEliminar.Size = new System.Drawing.Size(75, 31);
+			this.btnEliminar.TabIndex = 15;
+			this.btnEliminar.Text = "Eliminar";
+			this.btnEliminar.UseSelectable = true;
+			this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
 			// 
 			// dgvListado
 			// 
@@ -241,6 +282,7 @@
 			this.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvListado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCodigo,
+            this.colCodMaterial,
             this.colDescripcion,
             this.colCategoria});
 			this.dgvListado.Location = new System.Drawing.Point(10, 36);
@@ -261,16 +303,24 @@
 			this.dgvListado.ShowCellToolTips = false;
 			this.dgvListado.ShowEditingIcon = false;
 			this.dgvListado.ShowRowErrors = false;
-			this.dgvListado.Size = new System.Drawing.Size(322, 299);
+			this.dgvListado.Size = new System.Drawing.Size(322, 317);
 			this.dgvListado.StandardTab = true;
 			this.dgvListado.TabIndex = 4;
+			this.dgvListado.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellDoubleClick);
 			// 
 			// colCodigo
 			// 
-			this.colCodigo.HeaderText = "Codigo";
+			this.colCodigo.HeaderText = "Codigo Aula";
 			this.colCodigo.Name = "colCodigo";
 			this.colCodigo.ReadOnly = true;
 			this.colCodigo.Visible = false;
+			// 
+			// colCodMaterial
+			// 
+			this.colCodMaterial.HeaderText = "Codigo Material";
+			this.colCodMaterial.Name = "colCodMaterial";
+			this.colCodMaterial.ReadOnly = true;
+			this.colCodMaterial.Visible = false;
 			// 
 			// colDescripcion
 			// 
@@ -286,31 +336,23 @@
 			this.colCategoria.Name = "colCategoria";
 			this.colCategoria.ReadOnly = true;
 			// 
-			// btnEliminar
-			// 
-			this.btnEliminar.Location = new System.Drawing.Point(257, 341);
-			this.btnEliminar.Name = "btnEliminar";
-			this.btnEliminar.Size = new System.Drawing.Size(75, 31);
-			this.btnEliminar.TabIndex = 15;
-			this.btnEliminar.Text = "Eliminar";
-			this.btnEliminar.UseSelectable = true;
-			// 
 			// frmAsignarMaterial
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(650, 508);
-			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.panelMain);
 			this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.MaximizeBox = false;
 			this.Name = "frmAsignarMaterial";
-			this.Padding = new System.Windows.Forms.Padding(30, 97, 30, 32);
+			this.Padding = new System.Windows.Forms.Padding(30, 70, 30, 32);
 			this.Resizable = false;
 			this.ShadowType = MetroFramework.Forms.MetroFormShadowType.SystemShadow;
 			this.Style = MetroFramework.MetroColorStyle.Green;
 			this.Text = "Asignar Material";
-			this.panel1.ResumeLayout(false);
+			this.Load += new System.EventHandler(this.frmAsignarMaterial_Load);
+			this.panelMain.ResumeLayout(false);
 			this.spcAsignacion.Panel1.ResumeLayout(false);
 			this.spcAsignacion.Panel1.PerformLayout();
 			this.spcAsignacion.Panel2.ResumeLayout(false);
@@ -324,15 +366,15 @@
 
 		#endregion
 
-		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Panel panelMain;
 		private System.Windows.Forms.SplitContainer spcAsignacion;
 		private MetroFramework.Controls.MetroLabel metroLabel1;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.TextBox txtMarca;
 		private MetroFramework.Controls.MetroLabel metroLabel3;
 		private MetroFramework.Controls.MetroButton btnbuscar;
-		private System.Windows.Forms.TextBox txtMarca;
+		private System.Windows.Forms.TextBox txtDescripcion;
 		private MetroFramework.Controls.MetroLabel metroLabel2;
-		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.ComboBox cboSalones;
 		private System.Windows.Forms.NumericUpDown nudCantidad;
 		private MetroFramework.Controls.MetroLabel metroLabel6;
 		private System.Windows.Forms.TextBox txtModelo;
@@ -343,7 +385,9 @@
 		private MetroFramework.Controls.MetroButton btnAgregar;
 		private MetroFramework.Controls.MetroButton btnEliminar;
 		private System.Windows.Forms.DataGridView dgvListado;
+		private MetroFramework.Controls.MetroProgressSpinner pgsLoad;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colCodigo;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colCodMaterial;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colDescripcion;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colCategoria;
 	}

@@ -28,10 +28,10 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.panel1 = new System.Windows.Forms.Panel();
+			this.panelMain = new System.Windows.Forms.Panel();
 			this.btnSalir = new MetroFramework.Controls.MetroButton();
 			this.btnguardar = new MetroFramework.Controls.MetroButton();
-			this.textBox2 = new System.Windows.Forms.TextBox();
+			this.txtDetalle = new System.Windows.Forms.TextBox();
 			this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
 			this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
 			this.txtResponsable = new System.Windows.Forms.TextBox();
@@ -40,30 +40,30 @@
 			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
 			this.txtDescripcion = new System.Windows.Forms.TextBox();
 			this.pgsLoad = new MetroFramework.Controls.MetroProgressSpinner();
-			this.panel1.SuspendLayout();
+			this.panelMain.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// panel1
+			// panelMain
 			// 
-			this.panel1.Controls.Add(this.btnSalir);
-			this.panel1.Controls.Add(this.btnguardar);
-			this.panel1.Controls.Add(this.textBox2);
-			this.panel1.Controls.Add(this.metroLabel4);
-			this.panel1.Controls.Add(this.metroLabel3);
-			this.panel1.Controls.Add(this.txtResponsable);
-			this.panel1.Controls.Add(this.cboCondicion);
-			this.panel1.Controls.Add(this.metroLabel2);
-			this.panel1.Controls.Add(this.metroLabel1);
-			this.panel1.Controls.Add(this.txtDescripcion);
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel1.Location = new System.Drawing.Point(30, 97);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(340, 278);
-			this.panel1.TabIndex = 0;
+			this.panelMain.Controls.Add(this.btnSalir);
+			this.panelMain.Controls.Add(this.btnguardar);
+			this.panelMain.Controls.Add(this.txtDetalle);
+			this.panelMain.Controls.Add(this.metroLabel4);
+			this.panelMain.Controls.Add(this.metroLabel3);
+			this.panelMain.Controls.Add(this.txtResponsable);
+			this.panelMain.Controls.Add(this.cboCondicion);
+			this.panelMain.Controls.Add(this.metroLabel2);
+			this.panelMain.Controls.Add(this.metroLabel1);
+			this.panelMain.Controls.Add(this.txtDescripcion);
+			this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelMain.Location = new System.Drawing.Point(30, 70);
+			this.panelMain.Name = "panelMain";
+			this.panelMain.Size = new System.Drawing.Size(340, 305);
+			this.panelMain.TabIndex = 0;
 			// 
 			// btnSalir
 			// 
-			this.btnSalir.Location = new System.Drawing.Point(185, 231);
+			this.btnSalir.Location = new System.Drawing.Point(189, 271);
 			this.btnSalir.Name = "btnSalir";
 			this.btnSalir.Size = new System.Drawing.Size(75, 31);
 			this.btnSalir.TabIndex = 5;
@@ -72,20 +72,21 @@
 			// 
 			// btnguardar
 			// 
-			this.btnguardar.Location = new System.Drawing.Point(266, 231);
+			this.btnguardar.Location = new System.Drawing.Point(266, 271);
 			this.btnguardar.Name = "btnguardar";
 			this.btnguardar.Size = new System.Drawing.Size(71, 31);
 			this.btnguardar.TabIndex = 4;
 			this.btnguardar.Text = "Guardar";
 			this.btnguardar.UseSelectable = true;
+			this.btnguardar.Click += new System.EventHandler(this.btnguardar_Click);
 			// 
-			// textBox2
+			// txtDetalle
 			// 
-			this.textBox2.Location = new System.Drawing.Point(3, 152);
-			this.textBox2.Multiline = true;
-			this.textBox2.Name = "textBox2";
-			this.textBox2.Size = new System.Drawing.Size(334, 66);
-			this.textBox2.TabIndex = 3;
+			this.txtDetalle.Location = new System.Drawing.Point(3, 152);
+			this.txtDetalle.Multiline = true;
+			this.txtDetalle.Name = "txtDetalle";
+			this.txtDetalle.Size = new System.Drawing.Size(334, 102);
+			this.txtDetalle.TabIndex = 3;
 			// 
 			// metroLabel4
 			// 
@@ -115,10 +116,14 @@
 			// cboCondicion
 			// 
 			this.cboCondicion.FormattingEnabled = true;
+			this.cboCondicion.Items.AddRange(new object[] {
+            "Reg.Reparacion",
+            "Pesimo"});
 			this.cboCondicion.Location = new System.Drawing.Point(189, 34);
 			this.cboCondicion.Name = "cboCondicion";
 			this.cboCondicion.Size = new System.Drawing.Size(148, 29);
 			this.cboCondicion.TabIndex = 1;
+			this.cboCondicion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cboCondicion_KeyDown);
 			// 
 			// metroLabel2
 			// 
@@ -142,12 +147,12 @@
 			// 
 			this.txtDescripcion.Location = new System.Drawing.Point(3, 34);
 			this.txtDescripcion.Name = "txtDescripcion";
-			this.txtDescripcion.Size = new System.Drawing.Size(170, 29);
+			this.txtDescripcion.Size = new System.Drawing.Size(180, 29);
 			this.txtDescripcion.TabIndex = 0;
 			// 
 			// pgsLoad
 			// 
-			this.pgsLoad.Location = new System.Drawing.Point(47, 378);
+			this.pgsLoad.Location = new System.Drawing.Point(30, 381);
 			this.pgsLoad.Maximum = 100;
 			this.pgsLoad.Name = "pgsLoad";
 			this.pgsLoad.Size = new System.Drawing.Size(21, 19);
@@ -164,26 +169,27 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(400, 407);
 			this.Controls.Add(this.pgsLoad);
-			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.panelMain);
 			this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.MaximizeBox = false;
 			this.Name = "mdlReporte";
-			this.Padding = new System.Windows.Forms.Padding(30, 97, 30, 32);
+			this.Padding = new System.Windows.Forms.Padding(30, 70, 30, 32);
 			this.Resizable = false;
 			this.ShadowType = MetroFramework.Forms.MetroFormShadowType.SystemShadow;
 			this.Style = MetroFramework.MetroColorStyle.Green;
 			this.Text = "Reporte Material";
-			this.panel1.ResumeLayout(false);
-			this.panel1.PerformLayout();
+			this.Load += new System.EventHandler(this.mdlReporte_Load);
+			this.panelMain.ResumeLayout(false);
+			this.panelMain.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.TextBox textBox2;
+		private System.Windows.Forms.Panel panelMain;
+		private System.Windows.Forms.TextBox txtDetalle;
 		private MetroFramework.Controls.MetroLabel metroLabel4;
 		private MetroFramework.Controls.MetroLabel metroLabel3;
 		private System.Windows.Forms.TextBox txtResponsable;

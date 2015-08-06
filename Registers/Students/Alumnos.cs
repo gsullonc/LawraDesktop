@@ -51,7 +51,7 @@ namespace Registers.Students
 			set
 			{
 				this._dataDocumento.Add( value );
-			}
+			} 
 		}
 
 		public tApoderado DataApoderado
@@ -119,7 +119,7 @@ namespace Registers.Students
 					throw new ArgumentNullException( "No se encontraron datos", "Ultimos Colegios" );
 
 				List<tUltimoColegio> schools = JsonConvert.DeserializeObject<List<tUltimoColegio>>( query.ResponseContent );
-
+				
 				foreach ( tUltimoColegio Items in schools )
 				{
 					object[] temp = new object[4] { 

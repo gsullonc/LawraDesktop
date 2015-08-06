@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{15C61B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registers", "Registers\Registers.csproj", "{558FB5AD-B143-4DD0-9F43-27B6F3E7B9A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialControl", "MaterialControl\MaterialControl.csproj", "{42D6D1AD-F1D3-4442-ADBA-D52AFE38CD77}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialControl", "MaterialControl\MaterialControl.csproj", "{27899411-9FBE-4D08-BA21-C4A215612ABB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,10 +51,10 @@ Global
 		{558FB5AD-B143-4DD0-9F43-27B6F3E7B9A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{558FB5AD-B143-4DD0-9F43-27B6F3E7B9A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{558FB5AD-B143-4DD0-9F43-27B6F3E7B9A1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{42D6D1AD-F1D3-4442-ADBA-D52AFE38CD77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{42D6D1AD-F1D3-4442-ADBA-D52AFE38CD77}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{42D6D1AD-F1D3-4442-ADBA-D52AFE38CD77}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{42D6D1AD-F1D3-4442-ADBA-D52AFE38CD77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27899411-9FBE-4D08-BA21-C4A215612ABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27899411-9FBE-4D08-BA21-C4A215612ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27899411-9FBE-4D08-BA21-C4A215612ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27899411-9FBE-4D08-BA21-C4A215612ABB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

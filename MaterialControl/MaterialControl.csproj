@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{42D6D1AD-F1D3-4442-ADBA-D52AFE38CD77}</ProjectGuid>
+    <ProjectGuid>{27899411-9FBE-4D08-BA21-C4A215612ABB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MaterialControl</RootNamespace>
@@ -30,6 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Objects">
+      <HintPath>..\Objects\obj\Debug\Objects.dll</HintPath>
+    </Reference>
+    <Reference Include="Options">
+      <HintPath>..\Options\obj\Debug\Options.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.105.1.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,6 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlMaterial\Adquisicion.cs" />
+    <Compile Include="ControlMaterial\AsignarMaterial.cs" />
+    <Compile Include="ControlMaterial\Materiales.cs" />
+    <Compile Include="ControlMaterial\ReportarMaterial.cs" />
+    <Compile Include="ControlMaterial\SolucionarMaterial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

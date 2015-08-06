@@ -230,28 +230,28 @@ namespace LawrApp
 
 		private void registroDeMaterialesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			Layouts.MaterialControl.frmRegistrarMaterial material = new Layouts.MaterialControl.frmRegistrarMaterial();
+			Layouts.MaterialControl.frmRegistrarMaterial material = new Layouts.MaterialControl.frmRegistrarMaterial(this._data);
 			material.Show();
 			this.Close();
 		}
 
 		private void registroDeAdquisicionToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			Layouts.MaterialControl.frmIngresos Ingresos = new Layouts.MaterialControl.frmIngresos();
+			Layouts.MaterialControl.frmIngresos Ingresos = new Layouts.MaterialControl.frmIngresos(this._data);
 			Ingresos.Show();
 			this.Close();
 		}
 
 		private void inventarioDeAulaToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			Layouts.MaterialControl.frmAsignarMaterial Asignar = new Layouts.MaterialControl.frmAsignarMaterial();
+			Layouts.MaterialControl.frmAsignarMaterial Asignar = new Layouts.MaterialControl.frmAsignarMaterial(this._data);
 			Asignar.Show();
 			this.Close();
 		}
 
 		private void reportarMaterialesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			Layouts.MaterialControl.frmReportar ReportarMaterial = new Layouts.MaterialControl.frmReportar();
+			Layouts.MaterialControl.frmReportar ReportarMaterial = new Layouts.MaterialControl.frmReportar(this._data);
 			ReportarMaterial.Show();
 			this.Close();
 		}

@@ -28,21 +28,24 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.panelMain = new System.Windows.Forms.Panel();
 			this.tabpageMain = new MetroFramework.Controls.MetroTabControl();
 			this.tabpagMaterial = new MetroFramework.Controls.MetroTabPage();
 			this.panelSearch = new System.Windows.Forms.Panel();
 			this.txtFiltrar = new System.Windows.Forms.TextBox();
 			this.btnSalir = new MetroFramework.Controls.MetroButton();
-			this.metroButton2 = new MetroFramework.Controls.MetroButton();
-			this.metroButton1 = new MetroFramework.Controls.MetroButton();
+			this.btnEliminar = new MetroFramework.Controls.MetroButton();
+			this.btnModificar = new MetroFramework.Controls.MetroButton();
 			this.btnNuevo = new MetroFramework.Controls.MetroButton();
 			this.dgvListado = new System.Windows.Forms.DataGridView();
 			this.btnbuscar = new MetroFramework.Controls.MetroButton();
 			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
 			this.tabpagRegistro = new MetroFramework.Controls.MetroTabPage();
 			this.panelRegister = new System.Windows.Forms.Panel();
-			this.cboAula = new System.Windows.Forms.ComboBox();
+			this.lblValidateCategoria = new System.Windows.Forms.Label();
+			this.lblValidateDescripcion = new System.Windows.Forms.Label();
+			this.cboMarca = new System.Windows.Forms.ComboBox();
 			this.cboCategoria = new System.Windows.Forms.ComboBox();
 			this.btnCancelar = new MetroFramework.Controls.MetroButton();
 			this.btnGuardar = new MetroFramework.Controls.MetroButton();
@@ -57,12 +60,7 @@
 			this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.pgsLoad = new MetroFramework.Controls.MetroProgressSpinner();
-			this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colMarca = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colModelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colModifiedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.toltipValid = new System.Windows.Forms.ToolTip(this.components);
 			this.panelMain.SuspendLayout();
 			this.tabpageMain.SuspendLayout();
 			this.tabpagMaterial.SuspendLayout();
@@ -101,7 +99,7 @@
 			this.tabpagMaterial.Controls.Add(this.panelSearch);
 			this.tabpagMaterial.HorizontalScrollbarBarColor = true;
 			this.tabpagMaterial.HorizontalScrollbarHighlightOnWheel = false;
-			this.tabpagMaterial.HorizontalScrollbarSize = 4;
+			this.tabpagMaterial.HorizontalScrollbarSize = 1;
 			this.tabpagMaterial.Location = new System.Drawing.Point(4, 38);
 			this.tabpagMaterial.Name = "tabpagMaterial";
 			this.tabpagMaterial.Size = new System.Drawing.Size(593, 335);
@@ -109,7 +107,7 @@
 			this.tabpagMaterial.Text = "Material";
 			this.tabpagMaterial.VerticalScrollbarBarColor = true;
 			this.tabpagMaterial.VerticalScrollbarHighlightOnWheel = false;
-			this.tabpagMaterial.VerticalScrollbarSize = 5;
+			this.tabpagMaterial.VerticalScrollbarSize = 1;
 			// 
 			// panelSearch
 			// 
@@ -119,8 +117,8 @@
 			this.panelSearch.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.panelSearch.Controls.Add(this.txtFiltrar);
 			this.panelSearch.Controls.Add(this.btnSalir);
-			this.panelSearch.Controls.Add(this.metroButton2);
-			this.panelSearch.Controls.Add(this.metroButton1);
+			this.panelSearch.Controls.Add(this.btnEliminar);
+			this.panelSearch.Controls.Add(this.btnModificar);
 			this.panelSearch.Controls.Add(this.btnNuevo);
 			this.panelSearch.Controls.Add(this.dgvListado);
 			this.panelSearch.Controls.Add(this.btnbuscar);
@@ -133,10 +131,11 @@
 			// txtFiltrar
 			// 
 			this.txtFiltrar.BackColor = System.Drawing.Color.White;
-			this.txtFiltrar.Location = new System.Drawing.Point(59, 6);
+			this.txtFiltrar.Location = new System.Drawing.Point(59, 10);
 			this.txtFiltrar.Name = "txtFiltrar";
-			this.txtFiltrar.Size = new System.Drawing.Size(431, 29);
+			this.txtFiltrar.Size = new System.Drawing.Size(442, 29);
 			this.txtFiltrar.TabIndex = 1;
+			this.txtFiltrar.TextChanged += new System.EventHandler(this.txtFiltrar_TextChanged);
 			// 
 			// btnSalir
 			// 
@@ -146,28 +145,31 @@
 			this.btnSalir.TabIndex = 7;
 			this.btnSalir.Text = "Salir";
 			this.btnSalir.UseSelectable = true;
+			this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
 			// 
-			// metroButton2
+			// btnEliminar
 			// 
-			this.metroButton2.Location = new System.Drawing.Point(314, 298);
-			this.metroButton2.Name = "metroButton2";
-			this.metroButton2.Size = new System.Drawing.Size(75, 30);
-			this.metroButton2.TabIndex = 6;
-			this.metroButton2.Text = "Eliminar";
-			this.metroButton2.UseSelectable = true;
+			this.btnEliminar.Location = new System.Drawing.Point(325, 298);
+			this.btnEliminar.Name = "btnEliminar";
+			this.btnEliminar.Size = new System.Drawing.Size(75, 30);
+			this.btnEliminar.TabIndex = 6;
+			this.btnEliminar.Text = "Eliminar";
+			this.btnEliminar.UseSelectable = true;
+			this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
 			// 
-			// metroButton1
+			// btnModificar
 			// 
-			this.metroButton1.Location = new System.Drawing.Point(395, 298);
-			this.metroButton1.Name = "metroButton1";
-			this.metroButton1.Size = new System.Drawing.Size(75, 30);
-			this.metroButton1.TabIndex = 5;
-			this.metroButton1.Text = "Modificar";
-			this.metroButton1.UseSelectable = true;
+			this.btnModificar.Location = new System.Drawing.Point(406, 298);
+			this.btnModificar.Name = "btnModificar";
+			this.btnModificar.Size = new System.Drawing.Size(75, 30);
+			this.btnModificar.TabIndex = 5;
+			this.btnModificar.Text = "Modificar";
+			this.btnModificar.UseSelectable = true;
+			this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
 			// 
 			// btnNuevo
 			// 
-			this.btnNuevo.Location = new System.Drawing.Point(498, 298);
+			this.btnNuevo.Location = new System.Drawing.Point(507, 298);
 			this.btnNuevo.Name = "btnNuevo";
 			this.btnNuevo.Size = new System.Drawing.Size(75, 30);
 			this.btnNuevo.TabIndex = 4;
@@ -187,14 +189,7 @@
 			this.dgvListado.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
 			this.dgvListado.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
 			this.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgvListado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colCodigo,
-            this.colDescripcion,
-            this.colCategoria,
-            this.colMarca,
-            this.colModelo,
-            this.colModifiedDate});
-			this.dgvListado.Location = new System.Drawing.Point(3, 42);
+			this.dgvListado.Location = new System.Drawing.Point(3, 47);
 			this.dgvListado.MultiSelect = false;
 			this.dgvListado.Name = "dgvListado";
 			this.dgvListado.ReadOnly = true;
@@ -212,24 +207,23 @@
 			this.dgvListado.ShowCellToolTips = false;
 			this.dgvListado.ShowEditingIcon = false;
 			this.dgvListado.ShowRowErrors = false;
-			this.dgvListado.Size = new System.Drawing.Size(570, 239);
+			this.dgvListado.Size = new System.Drawing.Size(581, 239);
 			this.dgvListado.StandardTab = true;
 			this.dgvListado.TabIndex = 3;
 			// 
 			// btnbuscar
 			// 
-			this.btnbuscar.Location = new System.Drawing.Point(496, 6);
+			this.btnbuscar.Location = new System.Drawing.Point(507, 10);
 			this.btnbuscar.Name = "btnbuscar";
-			this.btnbuscar.Size = new System.Drawing.Size(77, 30);
+			this.btnbuscar.Size = new System.Drawing.Size(77, 29);
 			this.btnbuscar.TabIndex = 2;
 			this.btnbuscar.Text = "Buscar";
 			this.btnbuscar.UseSelectable = true;
-			this.btnbuscar.Click += new System.EventHandler(this.btnbuscar_Click);
 			// 
 			// metroLabel1
 			// 
 			this.metroLabel1.AutoSize = true;
-			this.metroLabel1.Location = new System.Drawing.Point(3, 11);
+			this.metroLabel1.Location = new System.Drawing.Point(3, 12);
 			this.metroLabel1.Name = "metroLabel1";
 			this.metroLabel1.Size = new System.Drawing.Size(57, 19);
 			this.metroLabel1.TabIndex = 0;
@@ -241,7 +235,7 @@
 			this.tabpagRegistro.Controls.Add(this.panelRegister);
 			this.tabpagRegistro.HorizontalScrollbarBarColor = true;
 			this.tabpagRegistro.HorizontalScrollbarHighlightOnWheel = false;
-			this.tabpagRegistro.HorizontalScrollbarSize = 4;
+			this.tabpagRegistro.HorizontalScrollbarSize = 1;
 			this.tabpagRegistro.Location = new System.Drawing.Point(4, 38);
 			this.tabpagRegistro.Name = "tabpagRegistro";
 			this.tabpagRegistro.Size = new System.Drawing.Size(593, 335);
@@ -249,7 +243,7 @@
 			this.tabpagRegistro.Text = " Registro de Materiales";
 			this.tabpagRegistro.VerticalScrollbarBarColor = true;
 			this.tabpagRegistro.VerticalScrollbarHighlightOnWheel = false;
-			this.tabpagRegistro.VerticalScrollbarSize = 5;
+			this.tabpagRegistro.VerticalScrollbarSize = 1;
 			// 
 			// panelRegister
 			// 
@@ -257,7 +251,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.panelRegister.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.panelRegister.Controls.Add(this.cboAula);
+			this.panelRegister.Controls.Add(this.lblValidateCategoria);
+			this.panelRegister.Controls.Add(this.lblValidateDescripcion);
+			this.panelRegister.Controls.Add(this.cboMarca);
 			this.panelRegister.Controls.Add(this.cboCategoria);
 			this.panelRegister.Controls.Add(this.btnCancelar);
 			this.panelRegister.Controls.Add(this.btnGuardar);
@@ -277,13 +273,37 @@
 			this.panelRegister.Size = new System.Drawing.Size(576, 331);
 			this.panelRegister.TabIndex = 3;
 			// 
-			// cboAula
+			// lblValidateCategoria
 			// 
-			this.cboAula.FormattingEnabled = true;
-			this.cboAula.Location = new System.Drawing.Point(318, 91);
-			this.cboAula.Name = "cboAula";
-			this.cboAula.Size = new System.Drawing.Size(255, 29);
-			this.cboAula.TabIndex = 3;
+			this.lblValidateCategoria.BackColor = System.Drawing.Color.Transparent;
+			this.lblValidateCategoria.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblValidateCategoria.ForeColor = System.Drawing.Color.Red;
+			this.lblValidateCategoria.Location = new System.Drawing.Point(71, 73);
+			this.lblValidateCategoria.Name = "lblValidateCategoria";
+			this.lblValidateCategoria.Size = new System.Drawing.Size(24, 16);
+			this.lblValidateCategoria.TabIndex = 56;
+			this.lblValidateCategoria.Text = "*";
+			// 
+			// lblValidateDescripcion
+			// 
+			this.lblValidateDescripcion.BackColor = System.Drawing.Color.Transparent;
+			this.lblValidateDescripcion.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblValidateDescripcion.ForeColor = System.Drawing.Color.Red;
+			this.lblValidateDescripcion.Location = new System.Drawing.Point(78, 18);
+			this.lblValidateDescripcion.Name = "lblValidateDescripcion";
+			this.lblValidateDescripcion.Size = new System.Drawing.Size(24, 16);
+			this.lblValidateDescripcion.TabIndex = 55;
+			this.lblValidateDescripcion.Text = "*";
+			// 
+			// cboMarca
+			// 
+			this.cboMarca.FormattingEnabled = true;
+			this.cboMarca.Location = new System.Drawing.Point(318, 91);
+			this.cboMarca.Name = "cboMarca";
+			this.cboMarca.Size = new System.Drawing.Size(255, 29);
+			this.cboMarca.TabIndex = 3;
+			this.cboMarca.SelectionChangeCommitted += new System.EventHandler(this.cboMarca_SelectionChangeCommitted);
+			this.cboMarca.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cboMarca_KeyDown);
 			// 
 			// cboCategoria
 			// 
@@ -292,6 +312,8 @@
 			this.cboCategoria.Name = "cboCategoria";
 			this.cboCategoria.Size = new System.Drawing.Size(287, 29);
 			this.cboCategoria.TabIndex = 2;
+			this.cboCategoria.SelectionChangeCommitted += new System.EventHandler(this.cboCategoria_SelectionChangeCommitted);
+			this.cboCategoria.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cboCategoria_KeyDown);
 			// 
 			// btnCancelar
 			// 
@@ -311,6 +333,7 @@
 			this.btnGuardar.TabIndex = 7;
 			this.btnGuardar.Text = "Hecho";
 			this.btnGuardar.UseSelectable = true;
+			this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
 			// 
 			// metroLabel7
 			// 
@@ -358,15 +381,16 @@
 			this.txtDescripcion.Name = "txtDescripcion";
 			this.txtDescripcion.Size = new System.Drawing.Size(570, 29);
 			this.txtDescripcion.TabIndex = 1;
+			this.txtDescripcion.TextChanged += new System.EventHandler(this.txtDescripcion_TextChanged);
 			// 
 			// metroLabel5
 			// 
 			this.metroLabel5.AutoSize = true;
 			this.metroLabel5.Location = new System.Drawing.Point(318, 69);
 			this.metroLabel5.Name = "metroLabel5";
-			this.metroLabel5.Size = new System.Drawing.Size(39, 19);
+			this.metroLabel5.Size = new System.Drawing.Size(46, 19);
 			this.metroLabel5.TabIndex = 8;
-			this.metroLabel5.Text = "Aula ";
+			this.metroLabel5.Text = "Marca";
 			// 
 			// metroLabel4
 			// 
@@ -408,47 +432,10 @@
 			this.pgsLoad.Value = 50;
 			this.pgsLoad.Visible = false;
 			// 
-			// colCodigo
+			// toltipValid
 			// 
-			this.colCodigo.HeaderText = "Codigo";
-			this.colCodigo.Name = "colCodigo";
-			this.colCodigo.ReadOnly = true;
-			this.colCodigo.Visible = false;
-			// 
-			// colDescripcion
-			// 
-			this.colDescripcion.FillWeight = 110.57F;
-			this.colDescripcion.HeaderText = "Descripcion";
-			this.colDescripcion.Name = "colDescripcion";
-			this.colDescripcion.ReadOnly = true;
-			// 
-			// colCategoria
-			// 
-			this.colCategoria.FillWeight = 75.36043F;
-			this.colCategoria.HeaderText = "Categoria";
-			this.colCategoria.Name = "colCategoria";
-			this.colCategoria.ReadOnly = true;
-			// 
-			// colMarca
-			// 
-			this.colMarca.FillWeight = 65.40177F;
-			this.colMarca.HeaderText = "Marca";
-			this.colMarca.Name = "colMarca";
-			this.colMarca.ReadOnly = true;
-			// 
-			// colModelo
-			// 
-			this.colModelo.FillWeight = 55.08561F;
-			this.colModelo.HeaderText = "Modelo";
-			this.colModelo.Name = "colModelo";
-			this.colModelo.ReadOnly = true;
-			// 
-			// colModifiedDate
-			// 
-			this.colModifiedDate.FillWeight = 73.58218F;
-			this.colModifiedDate.HeaderText = "Ult. Modificación";
-			this.colModifiedDate.Name = "colModifiedDate";
-			this.colModifiedDate.ReadOnly = true;
+			this.toltipValid.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+			this.toltipValid.ToolTipTitle = "Requerido";
 			// 
 			// frmRegistrarMaterial
 			// 
@@ -466,6 +453,7 @@
 			this.ShadowType = MetroFramework.Forms.MetroFormShadowType.SystemShadow;
 			this.Style = MetroFramework.MetroColorStyle.Green;
 			this.Text = "Registro Material";
+			this.Load += new System.EventHandler(this.frmRegistrarMaterial_Load_1);
 			this.panelMain.ResumeLayout(false);
 			this.tabpageMain.ResumeLayout(false);
 			this.tabpagMaterial.ResumeLayout(false);
@@ -490,8 +478,8 @@
 		private MetroFramework.Controls.MetroLabel metroLabel1;
 		private MetroFramework.Controls.MetroButton btnbuscar;
 		private MetroFramework.Controls.MetroButton btnSalir;
-		private MetroFramework.Controls.MetroButton metroButton2;
-		private MetroFramework.Controls.MetroButton metroButton1;
+		private MetroFramework.Controls.MetroButton btnEliminar;
+		private MetroFramework.Controls.MetroButton btnModificar;
 		private MetroFramework.Controls.MetroButton btnNuevo;
 		private System.Windows.Forms.DataGridView dgvListado;
 		private MetroFramework.Controls.MetroLabel metroLabel4;
@@ -509,12 +497,9 @@
 		private MetroFramework.Controls.MetroButton btnGuardar;
 		private System.Windows.Forms.ComboBox cboCategoria;
 		private MetroFramework.Controls.MetroProgressSpinner pgsLoad;
-		private System.Windows.Forms.ComboBox cboAula;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colCodigo;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colDescripcion;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colCategoria;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colMarca;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colModelo;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colModifiedDate;
+		private System.Windows.Forms.ComboBox cboMarca;
+		private System.Windows.Forms.ToolTip toltipValid;
+		private System.Windows.Forms.Label lblValidateCategoria;
+		private System.Windows.Forms.Label lblValidateDescripcion;
 	}
 }

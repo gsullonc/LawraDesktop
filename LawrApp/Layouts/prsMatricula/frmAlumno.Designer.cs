@@ -204,7 +204,7 @@
 			this.tabRegitroAlumno.FontWeight = MetroFramework.MetroTabControlWeight.Regular;
 			this.tabRegitroAlumno.Location = new System.Drawing.Point(-7, -4);
 			this.tabRegitroAlumno.Name = "tabRegitroAlumno";
-			this.tabRegitroAlumno.SelectedIndex = 2;
+			this.tabRegitroAlumno.SelectedIndex = 1;
 			this.tabRegitroAlumno.Size = new System.Drawing.Size(761, 485);
 			this.tabRegitroAlumno.Style = MetroFramework.MetroColorStyle.Green;
 			this.tabRegitroAlumno.TabIndex = 2;
