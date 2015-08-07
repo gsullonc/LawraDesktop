@@ -255,5 +255,12 @@ namespace LawrApp
 			ReportarMaterial.Show();
 			this.Close();
 		}
+
+		private void registroDeInformeInventarioToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Layouts.MaterialControl.frmInformeInventario RegInformeInventario = new Layouts.MaterialControl.frmInformeInventario(this._data);
+			RegInformeInventario.Show();
+			this.Close();
+		}
 	}
 }

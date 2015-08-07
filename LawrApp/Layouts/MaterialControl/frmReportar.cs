@@ -74,7 +74,9 @@ namespace LawrApp.Layouts.MaterialControl
 
 				this.cboTipoBusqueda.ValueMember = "Codigo";
 				this.cboTipoBusqueda.DisplayMember = "Nombre";
+
 				this.cboTipoBusqueda.DataSource = this.TempEstadoMaterial();
+
 				this.cboTipoBusqueda.SelectedValue = "All";
 				this.cboTipoBusqueda.Enabled = true;
 				this.txtfiltro.Enabled = true;
@@ -254,6 +256,12 @@ namespace LawrApp.Layouts.MaterialControl
 			frmMain main = new frmMain(this._data);
 			main.Show();
 			this.Close();
+		}
+
+		private void cboSalon_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode != Keys.Down && e.KeyCode != Keys.Up)
+				e.SuppressKeyPress = true;
 		}
 	}
 }

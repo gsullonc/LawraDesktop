@@ -95,6 +95,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
@@ -184,6 +185,12 @@
       <DependentUpon>frmReportar.cs</DependentUpon>
     </Compile>
     <Compile Include="Layouts\MaterialControl\IMateriales.cs" />
+    <Compile Include="Layouts\MaterialControl\frmInformeInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layouts\MaterialControl\frmInformeInventario.Designer.cs">
+      <DependentUpon>frmInformeInventario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\MaterialControl\mdlReporte.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -349,6 +356,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Layouts\MaterialControl\frmAsignarMaterial.resx">
       <DependentUpon>frmAsignarMaterial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layouts\MaterialControl\frmInformeInventario.resx">
+      <DependentUpon>frmInformeInventario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Layouts\MaterialControl\frmIngresos.resx">
       <DependentUpon>frmIngresos.cs</DependentUpon>

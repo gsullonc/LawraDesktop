@@ -86,7 +86,7 @@
 			this.tabpageMain.Controls.Add(this.tabpagRegistro);
 			this.tabpageMain.Location = new System.Drawing.Point(3, 5);
 			this.tabpageMain.Name = "tabpageMain";
-			this.tabpageMain.SelectedIndex = 0;
+			this.tabpageMain.SelectedIndex = 1;
 			this.tabpageMain.Size = new System.Drawing.Size(601, 377);
 			this.tabpageMain.Style = MetroFramework.MetroColorStyle.Green;
 			this.tabpageMain.TabIndex = 0;
@@ -350,6 +350,7 @@
 			this.txtCostoReparacion.Name = "txtCostoReparacion";
 			this.txtCostoReparacion.Size = new System.Drawing.Size(255, 29);
 			this.txtCostoReparacion.TabIndex = 5;
+			this.txtCostoReparacion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCostoReparacion_KeyPress);
 			// 
 			// metroLabel6
 			// 

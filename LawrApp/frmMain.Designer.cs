@@ -102,6 +102,7 @@
 			this.lblUserName = new MetroFramework.Controls.MetroLabel();
 			this.ttInfo = new System.Windows.Forms.ToolTip(this.components);
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.registroDeInformeInventarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuOptions.SuspendLayout();
 			this.tableTiles.SuspendLayout();
 			this.panelLoginIn.SuspendLayout();
@@ -294,7 +295,8 @@
             this.registroDeMaterialesToolStripMenuItem,
             this.registroDeAdquisicionToolStripMenuItem,
             this.inventarioDeAulaToolStripMenuItem,
-            this.reportarMaterialesToolStripMenuItem});
+            this.reportarMaterialesToolStripMenuItem,
+            this.registroDeInformeInventarioToolStripMenuItem});
 			this.controlDeMaterialesToolStripMenuItem.Name = "controlDeMaterialesToolStripMenuItem";
 			this.controlDeMaterialesToolStripMenuItem.Size = new System.Drawing.Size(164, 24);
 			this.controlDeMaterialesToolStripMenuItem.Text = "Control de Materiales";
@@ -302,28 +304,28 @@
 			// registroDeMaterialesToolStripMenuItem
 			// 
 			this.registroDeMaterialesToolStripMenuItem.Name = "registroDeMaterialesToolStripMenuItem";
-			this.registroDeMaterialesToolStripMenuItem.Size = new System.Drawing.Size(236, 24);
+			this.registroDeMaterialesToolStripMenuItem.Size = new System.Drawing.Size(284, 24);
 			this.registroDeMaterialesToolStripMenuItem.Text = "Registro de Materiales";
 			this.registroDeMaterialesToolStripMenuItem.Click += new System.EventHandler(this.registroDeMaterialesToolStripMenuItem_Click);
 			// 
 			// registroDeAdquisicionToolStripMenuItem
 			// 
 			this.registroDeAdquisicionToolStripMenuItem.Name = "registroDeAdquisicionToolStripMenuItem";
-			this.registroDeAdquisicionToolStripMenuItem.Size = new System.Drawing.Size(236, 24);
+			this.registroDeAdquisicionToolStripMenuItem.Size = new System.Drawing.Size(284, 24);
 			this.registroDeAdquisicionToolStripMenuItem.Text = "Registro de Adquisicion";
 			this.registroDeAdquisicionToolStripMenuItem.Click += new System.EventHandler(this.registroDeAdquisicionToolStripMenuItem_Click);
 			// 
 			// inventarioDeAulaToolStripMenuItem
 			// 
 			this.inventarioDeAulaToolStripMenuItem.Name = "inventarioDeAulaToolStripMenuItem";
-			this.inventarioDeAulaToolStripMenuItem.Size = new System.Drawing.Size(236, 24);
+			this.inventarioDeAulaToolStripMenuItem.Size = new System.Drawing.Size(284, 24);
 			this.inventarioDeAulaToolStripMenuItem.Text = "Inventario de Aula";
 			this.inventarioDeAulaToolStripMenuItem.Click += new System.EventHandler(this.inventarioDeAulaToolStripMenuItem_Click);
 			// 
 			// reportarMaterialesToolStripMenuItem
 			// 
 			this.reportarMaterialesToolStripMenuItem.Name = "reportarMaterialesToolStripMenuItem";
-			this.reportarMaterialesToolStripMenuItem.Size = new System.Drawing.Size(236, 24);
+			this.reportarMaterialesToolStripMenuItem.Size = new System.Drawing.Size(284, 24);
 			this.reportarMaterialesToolStripMenuItem.Text = "Reportar Materiales";
 			this.reportarMaterialesToolStripMenuItem.Click += new System.EventHandler(this.reportarMaterialesToolStripMenuItem_Click);
 			// 
@@ -938,6 +940,13 @@
 			this.pictureBox1.TabIndex = 10;
 			this.pictureBox1.TabStop = false;
 			// 
+			// registroDeInformeInventarioToolStripMenuItem
+			// 
+			this.registroDeInformeInventarioToolStripMenuItem.Name = "registroDeInformeInventarioToolStripMenuItem";
+			this.registroDeInformeInventarioToolStripMenuItem.Size = new System.Drawing.Size(284, 24);
+			this.registroDeInformeInventarioToolStripMenuItem.Text = "Registro de Informe inventario ";
+			this.registroDeInformeInventarioToolStripMenuItem.Click += new System.EventHandler(this.registroDeInformeInventarioToolStripMenuItem_Click);
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -1052,6 +1061,7 @@
 		private System.Windows.Forms.ToolStripMenuItem registroDeAdquisicionToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem inventarioDeAulaToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem reportarMaterialesToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem registroDeInformeInventarioToolStripMenuItem;
 
     }
 }

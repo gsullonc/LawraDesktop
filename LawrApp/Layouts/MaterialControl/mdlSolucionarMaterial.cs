@@ -70,10 +70,11 @@ namespace LawrApp.Layouts.MaterialControl
 
 				if (codigo > 0)
 				{
-					
-					DataRow[] material = this._dt.Select("Codigo=" + codigo);
-					material[0]["Condicion"] = " Buen Estado";
-					
+			
+					DataRow[] datos = this._dt.Select("Codigo=" + this._codigo );
+					DataRow row = datos[0];
+					this._dt.Rows[this._dt.Rows.IndexOf(row)][3] = "En Buen Estado";
+				
 					this.pgsLoad.Visible = false;
 					MetroMessageBox.Show(this, "Material Solucionado", "Correcto",
 					MessageBoxButtons.OK, MessageBoxIcon.Question);

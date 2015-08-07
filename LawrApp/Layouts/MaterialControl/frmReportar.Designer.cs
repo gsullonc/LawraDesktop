@@ -178,6 +178,7 @@
 			this.cboSalon.Size = new System.Drawing.Size(195, 29);
 			this.cboSalon.TabIndex = 3;
 			this.cboSalon.SelectionChangeCommitted += new System.EventHandler(this.cboSalon_SelectionChangeCommitted);
+			this.cboSalon.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cboSalon_KeyDown);
 			// 
 			// metroLabel1
 			// 
@@ -209,31 +210,31 @@
             this.toolStripSeparator1,
             this.eliminarToolStripMenuItem});
 			this.cmsOptions.Name = "cmsOptions";
-			this.cmsOptions.Size = new System.Drawing.Size(153, 98);
+			this.cmsOptions.Size = new System.Drawing.Size(131, 76);
 			// 
 			// rEPORTARToolStripMenuItem
 			// 
 			this.rEPORTARToolStripMenuItem.Name = "rEPORTARToolStripMenuItem";
-			this.rEPORTARToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.rEPORTARToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
 			this.rEPORTARToolStripMenuItem.Text = "Reportar";
 			this.rEPORTARToolStripMenuItem.Click += new System.EventHandler(this.rEPORTARToolStripMenuItem_Click);
 			// 
 			// tsmItemSolucionar
 			// 
 			this.tsmItemSolucionar.Name = "tsmItemSolucionar";
-			this.tsmItemSolucionar.Size = new System.Drawing.Size(152, 22);
+			this.tsmItemSolucionar.Size = new System.Drawing.Size(130, 22);
 			this.tsmItemSolucionar.Text = "Solucionar";
 			this.tsmItemSolucionar.Click += new System.EventHandler(this.tsmItemSolucionar_Click);
 			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(127, 6);
 			// 
 			// eliminarToolStripMenuItem
 			// 
 			this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-			this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
 			this.eliminarToolStripMenuItem.Text = "Eliminar";
 			// 
 			// frmReportar

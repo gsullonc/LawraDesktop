@@ -51,11 +51,23 @@ namespace LawrApp.Layouts.MaterialControl
 				if (codigo > 0)
 				{
 					this.pgsLoad.Visible = false;
-					this.dgvListado.DataSource = this._data.Tables["ListaMaterial"];
+					object[] d = new object[5]
+					{
+						codigo,
+						this._cMaterial.DataMaterial.Description + "" + "_"  +
+						this._cMaterial.DataMarca.Name + "" + "_"  +
+						this._cMaterial.DataMaterial.Model ,
+						this._cMaterial.DataCategoria.Name,
+						"Buen Estado",
+						DateTime.Now.ToString("yy-mm-dd")
+					};
+
+					this._data.Tables["ListaMaterial"].Rows.Add(d);
+
 					this.tabpageMain.SelectedTab = this.tabpagMaterial;
 					MetroMessageBox.Show(this, "El Material a sido registrado correctamente", "Correcto", 
 				    MessageBoxButtons.OK, MessageBoxIcon.Question);
-
+					this.dgvListado.DataSource = this._data.Tables["ListaMaterial"];
 					this.ResetControls();
 					this.tabpageMain.SelectedTab = this.tabpagMaterial;
 				}
@@ -282,9 +294,12 @@ namespace LawrApp.Layouts.MaterialControl
 			this._hilo.Start();
 		}
 	
-		private void TemCategoria()
-		{	
+		private void TemCategoriaAndMarca()
+		{
+			CheckForIllegalCrossThreadCalls = false;
+
 			string[] Categorias = new string[3] { "Escritorio", "Mesas", "Oficina" };
+			string[] Marca = new string[3] { "Faver Castel", "Viccarbe", "Ebanis" };
 			
 			for (int i = 0; i < Categorias.Length; i++)
 			{
@@ -297,11 +312,6 @@ namespace LawrApp.Layouts.MaterialControl
 
 				this._data.Tables["ListaCategoria"].Rows.Add(d);
 			}
-		}
-
-		private void TemMarca()
-		{
-			string[] Marca = new string[3] { "Faver Castel", "Viccarbe", "Ebanis" };
 
 			for (int i = 0; i < Marca.Length; i++)
 			{
@@ -314,6 +324,20 @@ namespace LawrApp.Layouts.MaterialControl
 
 				this._data.Tables["ListaMarca"].Rows.Add(d);
 			}
+
+			this.cboCategoria.ValueMember = "Codigo";
+			this.cboCategoria.DisplayMember = "Name";
+			this.cboCategoria.DataSource = this._data.Tables["ListaCategoria"];
+			this.cboCategoria.SelectedIndex = -1;
+			this.cboCategoria.Text = "Seleccione...";
+
+			this.cboMarca.ValueMember = "Codigo";
+			this.cboMarca.DisplayMember = "Name";
+			this.cboMarca.DataSource = this._data.Tables["ListaMarca"];
+			this.cboMarca.SelectedIndex = -1;
+			this.cboMarca.Text = "Seleccione...";
+
+			this._hilo.Abort();
 		}
 
 		private bool ValidateData()
@@ -463,22 +487,12 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void frmRegistrarMaterial_Load_1(object sender, EventArgs e)
 		{
-
-			this.TemCategoria();
-			this.cboCategoria.ValueMember   = "Codigo";
-			this.cboCategoria.DisplayMember = "Name";
-			this.cboCategoria.DataSource    = this._data.Tables["ListaCategoria"];
-			this.cboCategoria.SelectedIndex = -1;
-			this.cboCategoria.Text          = "Seleccione...";
-
-			this.TemMarca();
-			this.cboMarca.ValueMember       = "Codigo";
-			this.cboMarca.DisplayMember     = "Name";
-			this.cboMarca.DataSource        = this._data.Tables["ListaMarca"];
-			this.cboMarca.SelectedIndex     = -1;
-			this.cboMarca.Text              = "Seleccione...";
+			this.tabpageMain.SelectedTab = this.tabpagMaterial;
 
 			this.GetMateriales();
+
+			this._hilo = new Thread(new ThreadStart(this.TemCategoriaAndMarca));
+			this._hilo.Start();
 		}
 
 		private void cboMarca_SelectionChangeCommitted(object sender, EventArgs e)
@@ -570,6 +584,24 @@ namespace LawrApp.Layouts.MaterialControl
 			frmMain main = new frmMain(this._data);
 			main.Show();
 			this.Close();
+		}
+
+		private void txtCostoReparacion_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (this.txtCostoReparacion.Text.Contains('.'))
+			{
+				if (!char.IsDigit(e.KeyChar))
+					e.Handled = true;
+				if (e.KeyChar == '\b')
+					e.Handled = false;
+			}
+			else
+			{
+				if (!char.IsDigit(e.KeyChar))
+					e.Handled = true;
+				if (e.KeyChar == '.' || e.KeyChar=='\b')
+					e.Handled = false;
+			}
 		}
 	}
 }
