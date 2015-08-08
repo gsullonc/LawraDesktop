@@ -12,6 +12,7 @@ using MetroFramework;
 
 using MaterialControl.ControlMaterial;
 using Objects.Processes;
+using System.Collections;
 
 namespace LawrApp.Layouts.MaterialControl
 {
@@ -36,46 +37,37 @@ namespace LawrApp.Layouts.MaterialControl
 		private void LoadMaterialOfAula()
 		{
 			CheckForIllegalCrossThreadCalls = false;
-
+	   
 			List<lMaterial> lista = this._cMaterial.ListforAula(this._codAula);
 
 			if (lista != null && lista.Any())
 			{
 				foreach (lMaterial item in lista)
+
 				{
-					(this.dgvListado.Columns[3] as DataGridViewComboBoxColumn).DisplayMember = "Descripcion";
-					(this.dgvListado.Columns[3] as DataGridViewComboBoxColumn).ValueMember = "Codigo";
-					(this.dgvListado.Columns[3] as DataGridViewComboBoxColumn).DataSource = this.Condition_Table();
-
 					string conditionString = string.Empty;
-
 					//switch (item.Condicion)
 					//{
 					//	case "A": conditionString = "En Buen Estado"; break;
 					//	case "B": conditionString = "Req. Reparacion"; break;
 					//	case "C": conditionString = "En Pesimo Estado"; break;
 					//}
-
-					object[] obj = new object[5] 
+				
+					object[] obj = new object[3] 
 					{
 						item.Codigo,
 						item.Description + " " + "_" + item.Marca + " " + "_" + item.Model,
 						item.Category,
-						(this.dgvListado.Columns[3] as DataGridViewComboBoxColumn),
-						item.Condicion
 					};
 
-					this._dt.Rows.Add(obj);
+					 this.dgvListado.Rows.Add(obj);
+
+					 this.colCondicion.DataSource = this.Condition_Table();
+					 this.colCondicion.ValueMember = "Codigo";
+					 this.colCondicion.DisplayMember = "Descripcion";
 				}
 
-				this.dgvListado.DataSource = this._dt;
-
-				this.dgvListado.Columns["Codigo"].Visible = false;
-				this.dgvListado.Columns["C_Value"].Visible = false;
-
-				this.dgvListado.Columns["Categoria"].FillWeight = 50;
-				this.dgvListado.Columns["Condicion"].FillWeight = 50;
-
+						
 				this.pgsLoad.Visible = false;
 				this.dgvListado.Enabled = true;
 			}
@@ -87,6 +79,7 @@ namespace LawrApp.Layouts.MaterialControl
 
 			this.pgsLoad.Enabled = false;
 			this.panelMain.Enabled = true;
+		
 			this.btnGuardar.Enabled = true;
 			this.btnSalir.Enabled = true;
 
@@ -95,7 +88,7 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void DataAulas()
 		{
-			CheckForIllegalCrossThreadCalls = false; 
+			CheckForIllegalCrossThreadCalls = false;
 
 			string[] Aulas = new string[3] { "Semillitas del saber", "Nº 1", "Nº 2" };
 
@@ -145,6 +138,7 @@ namespace LawrApp.Layouts.MaterialControl
 		{
 			this._hilo = new Thread(new ThreadStart(this.LoadMaterialOfAula));
 			this._codAula = Convert.ToInt32(this.cboSalon.SelectedValue);
+			this.dgvListado.Rows.Clear();
 			this.pgsLoad.Visible = true;
 			this.panelMain.Enabled = false;
 
@@ -180,7 +174,9 @@ namespace LawrApp.Layouts.MaterialControl
 		private void frmInformeInventario_Load(object sender, EventArgs e)
 		{
 			this.AgregarColumnDatatableGlobal();
+
 			this._hilo = new Thread(new ThreadStart(this.DataAulas));
+
 			this._hilo.Start();
 			//this.dgvListado.Rows.Add();
 			//this.dgvListado.Rows[0].Cells[1].Value = "hola";
