@@ -6211,7 +6211,9 @@ namespace LawrApp {
             
             private global::System.Data.DataColumn columnCodigo;
             
-            private global::System.Data.DataColumn columnDescripcion;
+            private global::System.Data.DataColumn columnDescription;
+            
+            private global::System.Data.DataColumn columnModifieddate;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -6256,9 +6258,17 @@ namespace LawrApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DescripcionColumn {
+            public global::System.Data.DataColumn DescriptionColumn {
                 get {
-                    return this.columnDescripcion;
+                    return this.columnDescription;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ModifieddateColumn {
+                get {
+                    return this.columnModifieddate;
                 }
             }
             
@@ -6299,11 +6309,12 @@ namespace LawrApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ListaSalonesRow AddListaSalonesRow(string Codigo, string Descripcion) {
+            public ListaSalonesRow AddListaSalonesRow(string Codigo, string Description, string Modifieddate) {
                 ListaSalonesRow rowListaSalonesRow = ((ListaSalonesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Codigo,
-                        Descripcion};
+                        Description,
+                        Modifieddate};
                 rowListaSalonesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowListaSalonesRow);
                 return rowListaSalonesRow;
@@ -6327,7 +6338,8 @@ namespace LawrApp {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnCodigo = base.Columns["Codigo"];
-                this.columnDescripcion = base.Columns["Descripcion"];
+                this.columnDescription = base.Columns["Description"];
+                this.columnModifieddate = base.Columns["Modifieddate"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6335,8 +6347,10 @@ namespace LawrApp {
             private void InitClass() {
                 this.columnCodigo = new global::System.Data.DataColumn("Codigo", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCodigo);
-                this.columnDescripcion = new global::System.Data.DataColumn("Descripcion", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDescripcion);
+                this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDescription);
+                this.columnModifieddate = new global::System.Data.DataColumn("Modifieddate", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnModifieddate);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10270,17 +10284,33 @@ namespace LawrApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Descripcion {
+            public string Description {
                 get {
                     try {
-                        return ((string)(this[this.tableListaSalones.DescripcionColumn]));
+                        return ((string)(this[this.tableListaSalones.DescriptionColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Descripcion\' de la tabla \'ListaSalones\' es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Description\' de la tabla \'ListaSalones\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableListaSalones.DescripcionColumn] = value;
+                    this[this.tableListaSalones.DescriptionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Modifieddate {
+                get {
+                    try {
+                        return ((string)(this[this.tableListaSalones.ModifieddateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Modifieddate\' de la tabla \'ListaSalones\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableListaSalones.ModifieddateColumn] = value;
                 }
             }
             
@@ -10298,14 +10328,26 @@ namespace LawrApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsDescripcionNull() {
-                return this.IsNull(this.tableListaSalones.DescripcionColumn);
+            public bool IsDescriptionNull() {
+                return this.IsNull(this.tableListaSalones.DescriptionColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetDescripcionNull() {
-                this[this.tableListaSalones.DescripcionColumn] = global::System.Convert.DBNull;
+            public void SetDescriptionNull() {
+                this[this.tableListaSalones.DescriptionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsModifieddateNull() {
+                return this.IsNull(this.tableListaSalones.ModifieddateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetModifieddateNull() {
+                this[this.tableListaSalones.ModifieddateColumn] = global::System.Convert.DBNull;
             }
         }
         

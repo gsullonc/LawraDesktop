@@ -166,6 +166,18 @@
     <Compile Include="Layouts\MaterialControl\frmAsignarMaterial.Designer.cs">
       <DependentUpon>frmAsignarMaterial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\MaterialControl\frmDetalleIngresos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layouts\MaterialControl\frmDetalleIngresos.Designer.cs">
+      <DependentUpon>frmDetalleIngresos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\MaterialControl\frmInformeIngresosPorMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layouts\MaterialControl\frmInformeIngresosPorMaterial.Designer.cs">
+      <DependentUpon>frmInformeIngresosPorMaterial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\MaterialControl\frmIngresos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -356,6 +368,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Layouts\MaterialControl\frmAsignarMaterial.resx">
       <DependentUpon>frmAsignarMaterial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layouts\MaterialControl\frmDetalleIngresos.resx">
+      <DependentUpon>frmDetalleIngresos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Layouts\MaterialControl\frmInformeIngresosPorMaterial.resx">
+      <DependentUpon>frmInformeIngresosPorMaterial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Layouts\MaterialControl\frmInformeInventario.resx">
       <DependentUpon>frmInformeInventario.cs</DependentUpon>

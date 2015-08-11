@@ -212,7 +212,7 @@ namespace Options
 			if ( !this._requestFiles.Any() )
 				this.Request.AlwaysMultipartFormData = false;
 
-            this.Request.Method = Method.POST;
+            this.Request.Method = Method.PUT;
 
 			try
             {

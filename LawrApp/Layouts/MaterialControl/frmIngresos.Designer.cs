@@ -103,6 +103,7 @@
 			this.nudCantidad.Name = "nudCantidad";
 			this.nudCantidad.Size = new System.Drawing.Size(195, 29);
 			this.nudCantidad.TabIndex = 63;
+			this.nudCantidad.ValueChanged += new System.EventHandler(this.nudCantidad_ValueChanged);
 			// 
 			// lblValidateCosto
 			// 

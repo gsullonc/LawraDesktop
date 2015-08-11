@@ -120,6 +120,5 @@ namespace MaterialControl.ControlMaterial
 		}
 
 		#endregion
-
 	}
 }

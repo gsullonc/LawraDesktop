@@ -30,6 +30,9 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.btneliminardd = new MetroFramework.Controls.MetroButton();
+			this.btnSeleccionar = new MetroFramework.Controls.MetroButton();
+			this.metroButton1 = new MetroFramework.Controls.MetroButton();
 			this.btnSalir = new MetroFramework.Controls.MetroButton();
 			this.btnSolucionar = new MetroFramework.Controls.MetroButton();
 			this.btnReportar = new MetroFramework.Controls.MetroButton();
@@ -44,8 +47,8 @@
 			this.cmsOptions = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.rEPORTARToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmItemSolucionar = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvListado)).BeginInit();
 			this.cmsOptions.SuspendLayout();
@@ -53,6 +56,9 @@
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.btneliminardd);
+			this.panel1.Controls.Add(this.btnSeleccionar);
+			this.panel1.Controls.Add(this.metroButton1);
 			this.panel1.Controls.Add(this.btnSalir);
 			this.panel1.Controls.Add(this.btnSolucionar);
 			this.panel1.Controls.Add(this.btnReportar);
@@ -66,12 +72,41 @@
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(30, 97);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(590, 379);
+			this.panel1.Size = new System.Drawing.Size(740, 471);
 			this.panel1.TabIndex = 0;
+			// 
+			// btneliminardd
+			// 
+			this.btneliminardd.Location = new System.Drawing.Point(213, 437);
+			this.btneliminardd.Name = "btneliminardd";
+			this.btneliminardd.Size = new System.Drawing.Size(75, 31);
+			this.btneliminardd.TabIndex = 21;
+			this.btneliminardd.Text = "Eliminar";
+			this.btneliminardd.UseSelectable = true;
+			this.btneliminardd.Click += new System.EventHandler(this.btneliminardd_Click);
+			// 
+			// btnSeleccionar
+			// 
+			this.btnSeleccionar.Location = new System.Drawing.Point(104, 437);
+			this.btnSeleccionar.Name = "btnSeleccionar";
+			this.btnSeleccionar.Size = new System.Drawing.Size(103, 31);
+			this.btnSeleccionar.TabIndex = 20;
+			this.btnSeleccionar.Text = "Seleccionar todo";
+			this.btnSeleccionar.UseSelectable = true;
+			this.btnSeleccionar.Click += new System.EventHandler(this.btnElimnar_Click);
+			// 
+			// metroButton1
+			// 
+			this.metroButton1.Location = new System.Drawing.Point(500, 437);
+			this.metroButton1.Name = "metroButton1";
+			this.metroButton1.Size = new System.Drawing.Size(75, 31);
+			this.metroButton1.TabIndex = 19;
+			this.metroButton1.Text = "Imprimir";
+			this.metroButton1.UseSelectable = true;
 			// 
 			// btnSalir
 			// 
-			this.btnSalir.Location = new System.Drawing.Point(3, 329);
+			this.btnSalir.Location = new System.Drawing.Point(3, 437);
 			this.btnSalir.Name = "btnSalir";
 			this.btnSalir.Size = new System.Drawing.Size(75, 31);
 			this.btnSalir.TabIndex = 18;
@@ -81,7 +116,7 @@
 			// 
 			// btnSolucionar
 			// 
-			this.btnSolucionar.Location = new System.Drawing.Point(415, 329);
+			this.btnSolucionar.Location = new System.Drawing.Point(581, 437);
 			this.btnSolucionar.Name = "btnSolucionar";
 			this.btnSolucionar.Size = new System.Drawing.Size(75, 31);
 			this.btnSolucionar.TabIndex = 17;
@@ -90,7 +125,7 @@
 			// 
 			// btnReportar
 			// 
-			this.btnReportar.Location = new System.Drawing.Point(512, 329);
+			this.btnReportar.Location = new System.Drawing.Point(662, 437);
 			this.btnReportar.Name = "btnReportar";
 			this.btnReportar.Size = new System.Drawing.Size(75, 31);
 			this.btnReportar.TabIndex = 16;
@@ -112,7 +147,6 @@
 			this.dgvListado.Location = new System.Drawing.Point(3, 70);
 			this.dgvListado.MultiSelect = false;
 			this.dgvListado.Name = "dgvListado";
-			this.dgvListado.ReadOnly = true;
 			this.dgvListado.RowHeadersVisible = false;
 			this.dgvListado.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.dgvListado.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -121,21 +155,22 @@
 			this.dgvListado.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
 			this.dgvListado.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
 			this.dgvListado.RowTemplate.Height = 28;
-			this.dgvListado.RowTemplate.ReadOnly = true;
 			this.dgvListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvListado.ShowCellErrors = false;
 			this.dgvListado.ShowCellToolTips = false;
-			this.dgvListado.ShowEditingIcon = false;
 			this.dgvListado.ShowRowErrors = false;
-			this.dgvListado.Size = new System.Drawing.Size(584, 238);
+			this.dgvListado.Size = new System.Drawing.Size(734, 349);
 			this.dgvListado.StandardTab = true;
 			this.dgvListado.TabIndex = 8;
+			this.dgvListado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellContentClick);
+			this.dgvListado.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellContentClick);
+			this.dgvListado.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgvListado_CurrentCellDirtyStateChanged);
 			this.dgvListado.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvListado_MouseDown);
 			// 
 			// metroLabel3
 			// 
 			this.metroLabel3.AutoSize = true;
-			this.metroLabel3.Location = new System.Drawing.Point(400, 13);
+			this.metroLabel3.Location = new System.Drawing.Point(456, 13);
 			this.metroLabel3.Name = "metroLabel3";
 			this.metroLabel3.Size = new System.Drawing.Size(39, 19);
 			this.metroLabel3.TabIndex = 7;
@@ -144,9 +179,9 @@
 			// txtfiltro
 			// 
 			this.txtfiltro.Enabled = false;
-			this.txtfiltro.Location = new System.Drawing.Point(400, 35);
+			this.txtfiltro.Location = new System.Drawing.Point(456, 35);
 			this.txtfiltro.Name = "txtfiltro";
-			this.txtfiltro.Size = new System.Drawing.Size(187, 29);
+			this.txtfiltro.Size = new System.Drawing.Size(281, 29);
 			this.txtfiltro.TabIndex = 6;
 			this.txtfiltro.TextChanged += new System.EventHandler(this.txtfiltro_TextChanged);
 			// 
@@ -154,9 +189,9 @@
 			// 
 			this.cboTipoBusqueda.Enabled = false;
 			this.cboTipoBusqueda.FormattingEnabled = true;
-			this.cboTipoBusqueda.Location = new System.Drawing.Point(210, 35);
+			this.cboTipoBusqueda.Location = new System.Drawing.Point(232, 35);
 			this.cboTipoBusqueda.Name = "cboTipoBusqueda";
-			this.cboTipoBusqueda.Size = new System.Drawing.Size(184, 29);
+			this.cboTipoBusqueda.Size = new System.Drawing.Size(218, 29);
 			this.cboTipoBusqueda.TabIndex = 5;
 			this.cboTipoBusqueda.SelectionChangeCommitted += new System.EventHandler(this.cboTipoBusqueda_SelectionChangeCommitted);
 			this.cboTipoBusqueda.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cboTipoBusqueda_KeyDown);
@@ -164,7 +199,7 @@
 			// metroLabel2
 			// 
 			this.metroLabel2.AutoSize = true;
-			this.metroLabel2.Location = new System.Drawing.Point(210, 13);
+			this.metroLabel2.Location = new System.Drawing.Point(232, 13);
 			this.metroLabel2.Name = "metroLabel2";
 			this.metroLabel2.Size = new System.Drawing.Size(47, 19);
 			this.metroLabel2.TabIndex = 4;
@@ -175,7 +210,7 @@
 			this.cboSalon.FormattingEnabled = true;
 			this.cboSalon.Location = new System.Drawing.Point(3, 35);
 			this.cboSalon.Name = "cboSalon";
-			this.cboSalon.Size = new System.Drawing.Size(195, 29);
+			this.cboSalon.Size = new System.Drawing.Size(223, 29);
 			this.cboSalon.TabIndex = 3;
 			this.cboSalon.SelectionChangeCommitted += new System.EventHandler(this.cboSalon_SelectionChangeCommitted);
 			this.cboSalon.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cboSalon_KeyDown);
@@ -191,7 +226,7 @@
 			// 
 			// pgsLoad
 			// 
-			this.pgsLoad.Location = new System.Drawing.Point(56, 482);
+			this.pgsLoad.Location = new System.Drawing.Point(30, 574);
 			this.pgsLoad.Maximum = 100;
 			this.pgsLoad.Name = "pgsLoad";
 			this.pgsLoad.Size = new System.Drawing.Size(21, 19);
@@ -207,8 +242,8 @@
 			this.cmsOptions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rEPORTARToolStripMenuItem,
             this.tsmItemSolucionar,
-            this.toolStripSeparator1,
-            this.eliminarToolStripMenuItem});
+            this.eliminarToolStripMenuItem,
+            this.toolStripSeparator1});
 			this.cmsOptions.Name = "cmsOptions";
 			this.cmsOptions.Size = new System.Drawing.Size(131, 76);
 			// 
@@ -226,22 +261,22 @@
 			this.tsmItemSolucionar.Text = "Solucionar";
 			this.tsmItemSolucionar.Click += new System.EventHandler(this.tsmItemSolucionar_Click);
 			// 
-			// toolStripSeparator1
-			// 
-			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(127, 6);
-			// 
 			// eliminarToolStripMenuItem
 			// 
 			this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
 			this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
 			this.eliminarToolStripMenuItem.Text = "Eliminar";
 			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(127, 6);
+			// 
 			// frmReportar
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(650, 508);
+			this.ClientSize = new System.Drawing.Size(800, 600);
 			this.Controls.Add(this.pgsLoad);
 			this.Controls.Add(this.panel1);
 			this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -281,5 +316,8 @@
 		private System.Windows.Forms.ToolStripMenuItem tsmItemSolucionar;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
+		private MetroFramework.Controls.MetroButton metroButton1;
+		private MetroFramework.Controls.MetroButton btnSeleccionar;
+		private MetroFramework.Controls.MetroButton btneliminardd;
 	}
 }

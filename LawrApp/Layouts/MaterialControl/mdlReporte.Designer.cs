@@ -117,8 +117,8 @@
 			// 
 			this.cboCondicion.FormattingEnabled = true;
 			this.cboCondicion.Items.AddRange(new object[] {
-            "Reg.Reparacion",
-            "Pesimo"});
+            "Req. Reparacion",
+            "En Pesimo Estado"});
 			this.cboCondicion.Location = new System.Drawing.Point(189, 34);
 			this.cboCondicion.Name = "cboCondicion";
 			this.cboCondicion.Size = new System.Drawing.Size(148, 29);

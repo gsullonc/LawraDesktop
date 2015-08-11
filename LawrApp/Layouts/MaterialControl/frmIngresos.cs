@@ -198,11 +198,11 @@ namespace LawrApp.Layouts.MaterialControl
 			if (cboTipoIngreso.SelectedIndex == 0)
 			{
 				this.txtCosto.Enabled                = false;
-				this.nudCantidad.Enabled             = false;
-				this.dtpFecha_Compra.Enabled         = false;
+				this.nudCantidad.Enabled             = true;
+				this.dtpFecha_Compra.Enabled         = true;
 
-				this.lblValidateFecha_Compra.Visible = false;
-				this.lblValidateCantidad.Visible	 = false;
+				this.lblValidateFecha_Compra.Visible = true;
+				this.lblValidateCantidad.Visible	 = true;
 				this.lblValidateCosto.Visible		 = false;
 				this.lblValidateNº_Documento.Visible = false;
 
@@ -261,6 +261,14 @@ namespace LawrApp.Layouts.MaterialControl
 			else
 				this.lblValidateNº_Documento.Visible = false;
 
+		}
+
+		private void nudCantidad_ValueChanged(object sender, EventArgs e)
+		{
+			if (this.nudCantidad.Value > 0)
+				this.lblValidateCantidad.Visible = false;
+			else
+				this.lblValidateCantidad.Visible = true; 
 		}
 	}
 }

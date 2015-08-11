@@ -10,40 +10,39 @@ using MetroFramework.Forms;
 using MetroFramework;
 using MaterialControl.ControlMaterial;
 using Objects.Tables;
+using Objects.Processes;
 using System.Threading;
 
 namespace LawrApp.Layouts.MaterialControl
 {
 	public partial class mdlReporte : MetroForm
 	{
-		private int _codigoMaterial;
+		private int    _codigoMaterial;
 		private string _nombreMaterial;
-
+		private int	   _codigoSalon;
+		private string _condicion;
 		private Materiales _cMaterial = new Materiales();
+
+		public delegate void getCondicionMaterial(int CodigoMaterial, string Condicion);
+		public event getCondicionMaterial UpdateCondicionMaterial;
+
 		private ReportarMaterial _cReportarMaterial = new ReportarMaterial();
 
-		private tReportarMaterial _objReportMaterial = new tReportarMaterial();
+		private lMaterial _ListReportMaterial = new lMaterial();
 
 		private Thread _hilo;
 
 		DataTable _dt = new DataTable();
 
-		public mdlReporte(int codigo , string nombre)
+		public mdlReporte( int CodigoSalon,int CodigoMaterial , string nombre, string condicion)
 		{
 			InitializeComponent();
-			this._codigoMaterial = codigo;
+
+			this._codigoMaterial = CodigoMaterial;
 			this._nombreMaterial = nombre;
+			this._codigoSalon    = CodigoSalon;
+			this._condicion      = condicion;
 		}
-
-		#region PROPIEDADES
-
-		public int Codigo
-		{
-			get { return this._codigoMaterial; }
-			set { this._codigoMaterial = value; }
-		}
-
-		#endregion
 
 		#region HILOS
 
@@ -54,7 +53,9 @@ namespace LawrApp.Layouts.MaterialControl
 			if (this._codigoMaterial > 0)
 			{
 				this.txtDescripcion.Text = this._nombreMaterial;
-
+				if(this._condicion == "Req. Reparacion" )
+					this.cboCondicion.Items.RemoveAt(0);
+		
 				this.pgsLoad.Visible = false;
 				this.panelMain.Enabled = true;
 			}
@@ -67,27 +68,29 @@ namespace LawrApp.Layouts.MaterialControl
 			this._hilo.Abort();
 		}
 
-		private void SubmitInsert()
+		private void SubmitUpdate()
 		{
 			CheckForIllegalCrossThreadCalls = false;
 
-				int codigo = this._cReportarMaterial.Insert();
+			if (this._cReportarMaterial.Update(this._codigoMaterial,this._codigoSalon))
+			{
+				this.pgsLoad.Visible = false;
 
-				if (codigo > 0)
-				{
-					this.pgsLoad.Visible = false;
-					MetroMessageBox.Show(this, "Reporte registrado Satisfactoriamente", "Correcto",
-					MessageBoxButtons.OK, MessageBoxIcon.Question);
-					this.ResetControls();
-					this.Close();
-				}
-				else
-				{
-					this.pgsLoad.Visible = false;
-					MetroMessageBox.Show(this, "Faill al registrar Reporte ", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MetroMessageBox.Show(this, "Reporte creado Satisfactoriamente", "Correcto",
+				MessageBoxButtons.OK, MessageBoxIcon.Question);
 
-					this.panelMain.Enabled = false;	
-				}
+				UpdateCondicionMaterial(_codigoMaterial,this.cboCondicion.Text);
+
+				this.ResetControls();
+				this.Close();
+			}
+			else
+			{
+				this.pgsLoad.Visible = false;
+				MetroMessageBox.Show(this, "Faill al registrar Reporte ", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+				this.panelMain.Enabled = false;	
+			}
 
 			this._hilo.Abort();
 		}
@@ -106,12 +109,7 @@ namespace LawrApp.Layouts.MaterialControl
 
 		void JoinData()
 		{
-			this._objReportMaterial.CodigoMaterial = this._codigoMaterial;
-			this._objReportMaterial.Condicion      = this.cboCondicion.Text;
-			this._objReportMaterial.Responsable    = this.txtResponsable.Text; 
-
-
-			this._cReportarMaterial.Data = this._objReportMaterial;
+			this._ListReportMaterial.Condicion = this.cboCondicion.Text;
 		}
 
 		#endregion
@@ -134,12 +132,12 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void btnguardar_Click(object sender, EventArgs e)
 		{
-			this._hilo = new Thread(new ThreadStart(this.SubmitInsert));
+			this._hilo = new Thread(new ThreadStart(this.SubmitUpdate));
 
 			this.JoinData();
 			this.panelMain.Enabled = false;
 			this.pgsLoad.Visible   = true;
-
+			
 			this._hilo.Start();
 		}
 	}

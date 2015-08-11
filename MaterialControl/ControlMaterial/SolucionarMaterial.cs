@@ -35,25 +35,26 @@ namespace MaterialControl.ControlMaterial
 
 		#region METODOS
 
-		public int Insert()
+		public bool Update(int CodigoMaterial, int CodigoSalon)
 		{
-			Query query = new Query("api/students/insert");
+			Query query = new Query("api/students/update/" + CodigoMaterial);
 
 			query.RequestParameters = this._data;
 
 			try
 			{
-				query.SendRequestPOST();
+				query.SendRequestPUT();
 
-				if (query.ResponseStatusCode != HttpStatusCode.Created)
+				if (query.ResponseStatusCode != HttpStatusCode.OK)
 					throw new ArgumentNullException(query.MsgExceptionQuery, "ERROR");
 
-				return Convert.ToInt32(query.ResponseContent); ;
+				return Convert.ToBoolean(query.ResponseContent);
+
 			}
 			catch (Exception e)
 			{
 				this._msgExceptionSolMateriales = e.Message;
-				return 0;
+				return false;
 			}
 		}
 

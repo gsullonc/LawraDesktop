@@ -1,11 +1,17 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 using System.Net;
+using RestSharp;
+using Objects.Processes;
 using Objects.Tables;
 using Options;
+
+using Newtonsoft.Json;
+
 
 namespace MaterialControl.ControlMaterial
 {
@@ -21,6 +27,7 @@ namespace MaterialControl.ControlMaterial
 		public string MsExecpcion
 		{
 			get { return this._msgException; }
+			set { this.MsExecpcion = value; }
 		}
 
 		public tKardex Data
@@ -52,6 +59,69 @@ namespace MaterialControl.ControlMaterial
 			{
 				this._msgException = e.Message;
 				return 0;
+			}
+		}
+
+		public List<lIngresos> ListDetalleOfIngresosForMaterial(int codMaterial)
+		{
+			Query query = new Query("api/material/entry/" + codMaterial);
+
+			try
+			{
+				query.SendRequestGET();
+
+				if (query.ResponseStatusCode != HttpStatusCode.OK)
+					throw new ArgumentNullException("No se encontro ninguna Informacion", "Informacion de Ingresos");
+
+				return JsonConvert.DeserializeObject<List<lIngresos>>(query.ResponseContent);
+			}
+			catch (Exception ex)
+			{
+				this._msgException = ex.Message;
+				return null;
+			}
+		}
+
+		public bool UpdateQuantityIngresosOfMaterial(int CodigoMaterial, int CodigoIngreso)
+		{
+			Query query = new Query("api/material/" + CodigoMaterial + "/entry/" + CodigoIngreso);
+
+			query.RequestParameters = this._data;
+
+			try
+			{
+				query.SendRequestPUT();
+
+				if (query.ResponseStatusCode != HttpStatusCode.OK)
+					throw new ArgumentNullException(query.MsgExceptionQuery, "Error al modificar la cantidad del Ingreso");
+
+				return Convert.ToBoolean(query.ResponseContent);
+			}
+			catch (Exception e)
+			{
+				this._msgException = e.Message;
+				return false;
+			}
+		}
+
+		public tKardex Find(int CodigoMaterial, int CodigoIngreso)
+		{
+			Query query = new Query("api/material/"+ CodigoMaterial + "/entry/" + CodigoIngreso);
+
+			try
+			{
+				query.SendRequestGET();
+
+				if (query.ResponseStatusCode != HttpStatusCode.OK)
+					throw new ArgumentNullException("Docoumentos no encontrados", "No se encontro ningun Detalle");
+
+				tKardex result = JsonConvert.DeserializeObject<tKardex>(query.ResponseContent);
+				return result;
+			}
+			catch (Exception ex)
+			{
+				this.MsExecpcion = ex.Message;
+				return null;
 			}
 		}
 	}

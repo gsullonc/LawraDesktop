@@ -82,7 +82,6 @@ namespace MaterialControl.ControlMaterial
 			}
 		}
 
-
 		public DataSet List(DataSet dts)
 		{
 			Query query = new Query("api/students");
@@ -123,7 +122,7 @@ namespace MaterialControl.ControlMaterial
 
 		public List<lMaterial>ListforAula(int codAula)
 		{
-			Query query = new Query("api/students/parents_index/" + codAula);
+			Query query = new Query("api/students/"+ codAula + "/parents");
 
 			try
 			{

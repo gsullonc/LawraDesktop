@@ -53,21 +53,24 @@ namespace LawrApp.Layouts.MaterialControl
 					//	case "C": conditionString = "En Pesimo Estado"; break;
 					//}
 				
-					object[] obj = new object[3] 
+					object[] obj = new object[5] 
 					{
 						item.Codigo,
+						item.Key,
 						item.Description + " " + "_" + item.Marca + " " + "_" + item.Model,
 						item.Category,
+						item.Condicion
 					};
 
+					 this._dt.Rows.Add(obj);
 					 this.dgvListado.Rows.Add(obj);
 
 					 this.colCondicion.DataSource = this.Condition_Table();
 					 this.colCondicion.ValueMember = "Codigo";
 					 this.colCondicion.DisplayMember = "Descripcion";
+					
 				}
-
-						
+				
 				this.pgsLoad.Visible = false;
 				this.dgvListado.Enabled = true;
 			}
@@ -83,7 +86,7 @@ namespace LawrApp.Layouts.MaterialControl
 			this.btnGuardar.Enabled = true;
 			this.btnSalir.Enabled = true;
 
-			this._hilo.Abort();
+			 this._hilo.Abort();
 		}
 
 		private void DataAulas()
@@ -104,7 +107,7 @@ namespace LawrApp.Layouts.MaterialControl
 			}
 
 			this.cboSalon.ValueMember   = "Codigo";
-			this.cboSalon.DisplayMember = "Descripcion";
+			this.cboSalon.DisplayMember = "Description";
 
 			this.cboSalon.DataSource    = this._data.Tables["ListaSalones"];
 
@@ -120,10 +123,10 @@ namespace LawrApp.Layouts.MaterialControl
 		private void AgregarColumnDatatableGlobal()
 		{
 			this._dt.Columns.Add("Codigo",      typeof(int));
+			this._dt.Columns.Add("Keys",	    typeof(string));
 			this._dt.Columns.Add("Descripcion", typeof(string));
 			this._dt.Columns.Add("Categoria",   typeof(string));
-			this._dt.Columns.Add("Condicion", typeof(DataGridViewComboBoxColumn));
-			this._dt.Columns.Add("C_Value",     typeof(string));
+			this._dt.Columns.Add("Condicion",   typeof(string));
 		}
 
 		#endregion
@@ -148,12 +151,11 @@ namespace LawrApp.Layouts.MaterialControl
 		private DataTable Condition_Table()
 		{
 			DataTable _dt = new DataTable();
-
 			_dt.Columns.Add("Codigo", typeof(string));
 			_dt.Columns.Add("Descripcion", typeof(string));
 
 			object[] estados = new object[3] { "Buen estado", "Reg.Reparacion", "En Mal estado" };
-			String[] letras = new string[3] { "A", "B", "C" };
+			string[] letras  = new string[3] { "A", "B", "C" };
 			
 			for(int i=0; i < estados.Length; i ++ )
 			{
@@ -170,7 +172,6 @@ namespace LawrApp.Layouts.MaterialControl
 			return _dt;
 		}
 
-
 		private void frmInformeInventario_Load(object sender, EventArgs e)
 		{
 			this.AgregarColumnDatatableGlobal();
@@ -178,12 +179,6 @@ namespace LawrApp.Layouts.MaterialControl
 			this._hilo = new Thread(new ThreadStart(this.DataAulas));
 
 			this._hilo.Start();
-			//this.dgvListado.Rows.Add();
-			//this.dgvListado.Rows[0].Cells[1].Value = "hola";
-			//this.dgvListado.Rows.Add();
-			//this.dgvListado.Rows[1].Cells[1].Value = "hola2";
-		    
-			//int index = this.dgvListado.Rows.Add();
 
 		}
 	}

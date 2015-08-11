@@ -67,7 +67,7 @@
 			this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelMain.Location = new System.Drawing.Point(30, 70);
 			this.panelMain.Name = "panelMain";
-			this.panelMain.Size = new System.Drawing.Size(590, 406);
+			this.panelMain.Size = new System.Drawing.Size(740, 406);
 			this.panelMain.TabIndex = 0;
 			// 
 			// spcAsignacion
@@ -99,13 +99,13 @@
 			// 
 			this.spcAsignacion.Panel2.Controls.Add(this.btnEliminar);
 			this.spcAsignacion.Panel2.Controls.Add(this.dgvListado);
-			this.spcAsignacion.Size = new System.Drawing.Size(590, 406);
-			this.spcAsignacion.SplitterDistance = 244;
+			this.spcAsignacion.Size = new System.Drawing.Size(740, 406);
+			this.spcAsignacion.SplitterDistance = 306;
 			this.spcAsignacion.TabIndex = 0;
 			// 
 			// pgsLoad
 			// 
-			this.pgsLoad.Location = new System.Drawing.Point(210, 14);
+			this.pgsLoad.Location = new System.Drawing.Point(282, 14);
 			this.pgsLoad.Maximum = 100;
 			this.pgsLoad.Name = "pgsLoad";
 			this.pgsLoad.Size = new System.Drawing.Size(21, 19);
@@ -117,7 +117,7 @@
 			// 
 			// btnSalir
 			// 
-			this.btnSalir.Location = new System.Drawing.Point(10, 372);
+			this.btnSalir.Location = new System.Drawing.Point(3, 372);
 			this.btnSalir.Name = "btnSalir";
 			this.btnSalir.Size = new System.Drawing.Size(75, 31);
 			this.btnSalir.TabIndex = 14;
@@ -128,7 +128,7 @@
 			// btnAgregar
 			// 
 			this.btnAgregar.Enabled = false;
-			this.btnAgregar.Location = new System.Drawing.Point(156, 372);
+			this.btnAgregar.Location = new System.Drawing.Point(228, 372);
 			this.btnAgregar.Name = "btnAgregar";
 			this.btnAgregar.Size = new System.Drawing.Size(75, 31);
 			this.btnAgregar.TabIndex = 13;
@@ -139,9 +139,9 @@
 			// nudCantidad
 			// 
 			this.nudCantidad.Enabled = false;
-			this.nudCantidad.Location = new System.Drawing.Point(12, 310);
+			this.nudCantidad.Location = new System.Drawing.Point(3, 310);
 			this.nudCantidad.Name = "nudCantidad";
-			this.nudCantidad.Size = new System.Drawing.Size(218, 29);
+			this.nudCantidad.Size = new System.Drawing.Size(300, 29);
 			this.nudCantidad.TabIndex = 3;
 			this.nudCantidad.Value = new decimal(new int[] {
             1,
@@ -152,7 +152,7 @@
 			// metroLabel6
 			// 
 			this.metroLabel6.AutoSize = true;
-			this.metroLabel6.Location = new System.Drawing.Point(10, 288);
+			this.metroLabel6.Location = new System.Drawing.Point(1, 288);
 			this.metroLabel6.Name = "metroLabel6";
 			this.metroLabel6.Size = new System.Drawing.Size(62, 19);
 			this.metroLabel6.TabIndex = 11;
@@ -161,15 +161,15 @@
 			// txtModelo
 			// 
 			this.txtModelo.Enabled = false;
-			this.txtModelo.Location = new System.Drawing.Point(13, 252);
+			this.txtModelo.Location = new System.Drawing.Point(3, 252);
 			this.txtModelo.Name = "txtModelo";
-			this.txtModelo.Size = new System.Drawing.Size(217, 29);
+			this.txtModelo.Size = new System.Drawing.Size(300, 29);
 			this.txtModelo.TabIndex = 10;
 			// 
 			// metroLabel5
 			// 
 			this.metroLabel5.AutoSize = true;
-			this.metroLabel5.Location = new System.Drawing.Point(10, 230);
+			this.metroLabel5.Location = new System.Drawing.Point(0, 230);
 			this.metroLabel5.Name = "metroLabel5";
 			this.metroLabel5.Size = new System.Drawing.Size(55, 19);
 			this.metroLabel5.TabIndex = 9;
@@ -178,15 +178,15 @@
 			// txtCategoria
 			// 
 			this.txtCategoria.Enabled = false;
-			this.txtCategoria.Location = new System.Drawing.Point(13, 198);
+			this.txtCategoria.Location = new System.Drawing.Point(1, 198);
 			this.txtCategoria.Name = "txtCategoria";
-			this.txtCategoria.Size = new System.Drawing.Size(217, 29);
+			this.txtCategoria.Size = new System.Drawing.Size(302, 29);
 			this.txtCategoria.TabIndex = 8;
 			// 
 			// metroLabel4
 			// 
 			this.metroLabel4.AutoSize = true;
-			this.metroLabel4.Location = new System.Drawing.Point(9, 176);
+			this.metroLabel4.Location = new System.Drawing.Point(-2, 176);
 			this.metroLabel4.Name = "metroLabel4";
 			this.metroLabel4.Size = new System.Drawing.Size(67, 19);
 			this.metroLabel4.TabIndex = 7;
@@ -195,15 +195,15 @@
 			// txtMarca
 			// 
 			this.txtMarca.Enabled = false;
-			this.txtMarca.Location = new System.Drawing.Point(13, 144);
+			this.txtMarca.Location = new System.Drawing.Point(3, 144);
 			this.txtMarca.Name = "txtMarca";
-			this.txtMarca.Size = new System.Drawing.Size(217, 29);
+			this.txtMarca.Size = new System.Drawing.Size(300, 29);
 			this.txtMarca.TabIndex = 6;
 			// 
 			// metroLabel3
 			// 
 			this.metroLabel3.AutoSize = true;
-			this.metroLabel3.Location = new System.Drawing.Point(10, 122);
+			this.metroLabel3.Location = new System.Drawing.Point(3, 122);
 			this.metroLabel3.Name = "metroLabel3";
 			this.metroLabel3.Size = new System.Drawing.Size(46, 19);
 			this.metroLabel3.TabIndex = 5;
@@ -212,7 +212,7 @@
 			// btnbuscar
 			// 
 			this.btnbuscar.Enabled = false;
-			this.btnbuscar.Location = new System.Drawing.Point(185, 90);
+			this.btnbuscar.Location = new System.Drawing.Point(258, 90);
 			this.btnbuscar.Name = "btnbuscar";
 			this.btnbuscar.Size = new System.Drawing.Size(45, 29);
 			this.btnbuscar.TabIndex = 2;
@@ -223,16 +223,16 @@
 			// txtDescripcion
 			// 
 			this.txtDescripcion.Enabled = false;
-			this.txtDescripcion.Location = new System.Drawing.Point(13, 90);
+			this.txtDescripcion.Location = new System.Drawing.Point(3, 90);
 			this.txtDescripcion.Name = "txtDescripcion";
-			this.txtDescripcion.Size = new System.Drawing.Size(166, 29);
+			this.txtDescripcion.Size = new System.Drawing.Size(249, 29);
 			this.txtDescripcion.TabIndex = 3;
 			this.txtDescripcion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMarca_KeyDown);
 			// 
 			// metroLabel2
 			// 
 			this.metroLabel2.AutoSize = true;
-			this.metroLabel2.Location = new System.Drawing.Point(10, 68);
+			this.metroLabel2.Location = new System.Drawing.Point(3, 68);
 			this.metroLabel2.Name = "metroLabel2";
 			this.metroLabel2.Size = new System.Drawing.Size(57, 19);
 			this.metroLabel2.TabIndex = 2;
@@ -241,9 +241,9 @@
 			// cboSalones
 			// 
 			this.cboSalones.FormattingEnabled = true;
-			this.cboSalones.Location = new System.Drawing.Point(13, 36);
+			this.cboSalones.Location = new System.Drawing.Point(3, 36);
 			this.cboSalones.Name = "cboSalones";
-			this.cboSalones.Size = new System.Drawing.Size(217, 29);
+			this.cboSalones.Size = new System.Drawing.Size(300, 29);
 			this.cboSalones.TabIndex = 1;
 			this.cboSalones.SelectionChangeCommitted += new System.EventHandler(this.cboSalones_SelectionChangeCommitted);
 			this.cboSalones.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMarca_KeyDown);
@@ -251,7 +251,7 @@
 			// metroLabel1
 			// 
 			this.metroLabel1.AutoSize = true;
-			this.metroLabel1.Location = new System.Drawing.Point(10, 14);
+			this.metroLabel1.Location = new System.Drawing.Point(1, 14);
 			this.metroLabel1.Name = "metroLabel1";
 			this.metroLabel1.Size = new System.Drawing.Size(41, 19);
 			this.metroLabel1.TabIndex = 0;
@@ -260,7 +260,7 @@
 			// btnEliminar
 			// 
 			this.btnEliminar.Enabled = false;
-			this.btnEliminar.Location = new System.Drawing.Point(257, 372);
+			this.btnEliminar.Location = new System.Drawing.Point(355, 372);
 			this.btnEliminar.Name = "btnEliminar";
 			this.btnEliminar.Size = new System.Drawing.Size(75, 31);
 			this.btnEliminar.TabIndex = 15;
@@ -303,7 +303,7 @@
 			this.dgvListado.ShowCellToolTips = false;
 			this.dgvListado.ShowEditingIcon = false;
 			this.dgvListado.ShowRowErrors = false;
-			this.dgvListado.Size = new System.Drawing.Size(322, 317);
+			this.dgvListado.Size = new System.Drawing.Size(417, 303);
 			this.dgvListado.StandardTab = true;
 			this.dgvListado.TabIndex = 4;
 			this.dgvListado.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellDoubleClick);
@@ -340,7 +340,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(650, 508);
+			this.ClientSize = new System.Drawing.Size(800, 508);
 			this.Controls.Add(this.panelMain);
 			this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);

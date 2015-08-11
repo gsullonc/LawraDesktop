@@ -18,23 +18,25 @@ namespace LawrApp.Layouts.MaterialControl
 {
 	public partial class mdlSolucionarMaterial : MetroForm
 	{
-		private int _codigo;
+		private int _codigoMaterial;
 		private string _name;
+		private int _codAula;
 	
 		SolucionarMaterial _cSolucionarMaterial = new SolucionarMaterial();
 		Materiales _cMaterial = new Materiales();
 		tSolucionarMaterial _objSolucionMatrial = new tSolucionarMaterial();
 
+		public delegate void getCondicionMaterial(int CodigoMaterial);
+		public event getCondicionMaterial UpdateCondicionMaterial;
+
 		private Thread _hilo;
 		private bool _gotoModify = false;
 
-		DataTable _dt = new DataTable();
-
-		public mdlSolucionarMaterial(int codigo, string name, DataTable dt)
+		public mdlSolucionarMaterial( int CodigoAula, int CodigoMaterial, string name)
 		{
-			this._dt = dt;
 			InitializeComponent();
-			this._codigo = codigo;
+			this._codAula = CodigoAula;
+			this._codigoMaterial = CodigoMaterial;
 			this._name = name;
 		}
  
@@ -44,7 +46,7 @@ namespace LawrApp.Layouts.MaterialControl
 		{
 			CheckForIllegalCrossThreadCalls = false;
 
-			if (this._codigo > 0)
+			if (this._codigoMaterial > 0)
 			{
 				this.txtDescripcion.Text = _name;
 
@@ -60,26 +62,23 @@ namespace LawrApp.Layouts.MaterialControl
 			this._hilo.Abort();
 		}
 
-		private void SubmitInsert()
+		private void SubmitUpdate()
 		{
 			CheckForIllegalCrossThreadCalls = false;
 
 			if (!this._gotoModify)
 			{
-				int codigo = this._cSolucionarMaterial.Insert();
 
-				if (codigo > 0)
+				if ( this._cSolucionarMaterial.Update(this._codAula,this._codAula))
 				{
-			
-					DataRow[] datos = this._dt.Select("Codigo=" + this._codigo );
-					DataRow row = datos[0];
-					this._dt.Rows[this._dt.Rows.IndexOf(row)][3] = "En Buen Estado";
-				
+					UpdateCondicionMaterial(_codigoMaterial);
+
 					this.pgsLoad.Visible = false;
 					MetroMessageBox.Show(this, "Material Solucionado", "Correcto",
 					MessageBoxButtons.OK, MessageBoxIcon.Question);
 
 					this.ResetControls();
+					this.Close();
 				}
 				else
 				{
@@ -105,7 +104,7 @@ namespace LawrApp.Layouts.MaterialControl
 
 		void JoinData()
 		{
-			this._objSolucionMatrial.CodigoMaterial = this._codigo;
+			this._objSolucionMatrial.CodigoMaterial = this._codigoMaterial;
 			this._objSolucionMatrial.DateSolucion   = this.dtpF_Solucion.Text;
 			this._objSolucionMatrial.Obsevation     = this.txtObervacion.Text;
   
@@ -124,7 +123,7 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void btngGuardar_Click(object sender, EventArgs e)
 		{
-			this._hilo = new Thread(new ThreadStart(this.SubmitInsert));
+			this._hilo = new Thread(new ThreadStart(this.SubmitUpdate));
 
 			this.JoinData();
 			this.panelMain.Enabled = false;

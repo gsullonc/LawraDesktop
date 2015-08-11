@@ -220,6 +220,83 @@ namespace Access
             }
         }
 
+		public DataSet ListaSalones(DataSet dts)
+		{
+			Query query = new Query("api/salones/index");
+
+			try
+			{
+				query.SendRequestGET();
+
+				dts.Tables["ListaSalones"].Clear();
+
+				if (query.ResponseStatusCode != HttpStatusCode.OK)
+				{
+					throw new ArgumentNullException("No se ha podido acceder a los datos", "Informacion de Salones");
+				}
+
+				List<lSalon> tipo = JsonConvert.DeserializeObject<List<lSalon>>(query.ResponseContent);
+
+				foreach (lSalon Item in tipo)
+				{
+					object[] td = new object[3] { Item.Codigo, Item.Description, Item.ModifiedDate};
+
+					dts.Tables["ListaSalones"].Rows.Add(td);
+				}
+
+				return dts;
+
+			}
+			catch (Exception e)
+			{
+				this._exceptionUbigeo = e.Message;
+				return null;
+			}
+		}
+
+		public DataSet ListaMateriales(DataSet dts)
+		{
+			Query query = new Query("api/material/index");
+
+			try
+			{
+				query.SendRequestGET();
+
+				dts.Tables["ListaMaterial"].Clear();
+
+				if (query.ResponseStatusCode != HttpStatusCode.OK)
+				{
+					throw new ArgumentNullException("No se ha podido acceder a los datos", "Informacion de Materiales");
+				}
+
+				List<lMaterial> tipo = JsonConvert.DeserializeObject<List<lMaterial>>(query.ResponseContent);
+
+				foreach (lMaterial Item in tipo)
+				{
+					object[] td = new object[5] 
+					{ 
+						Item.Codigo, 
+						Item.Description + "" + "_" + 
+						Item.Marca + "" + "_" +
+						Item.Model, 
+						Item.Category,
+						Item.Condicion,
+						Item.ModifiedDate 
+					};
+
+					dts.Tables["ListaMaterial"].Rows.Add(td);
+				}
+
+				return dts;
+
+			}
+			catch (Exception e)
+			{
+				this._exceptionUbigeo = e.Message;
+				return null;
+			}
+		}
+
 		public DataSet ListaStudents( DataSet dts )
 		{
 			Query query = new Query( "api/students" );

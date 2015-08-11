@@ -46,6 +46,15 @@ namespace LawrApp
 			this.lblLoadInfo.Text = "Asignando Periodos...";
 			this._preload.AsignYear( cboPeriodos.SelectedValue.ToString() );
 
+			this._preload.ListaSalones(this._data);
+
+			if (this._data.Tables["ListaSalones"].Rows.Count > 0)
+				this.lblLoadInfo.Text = "Cargando: Salones...";
+
+			this._preload.ListaMateriales(this._data);
+			if (this._data.Tables["ListaMaterial"].Rows.Count > 0)
+				this.lblLoadInfo.Text = "Cargando: Materiales...";
+
 			if ( this._data.Tables["Departamentos"].Rows.Count == 0 )
 			{
 				this.lblLoadInfo.Text = "Cargando: Departamentos, Provincias, Distritos...";
@@ -235,20 +244,6 @@ namespace LawrApp
 			this.Close();
 		}
 
-		private void registroDeAdquisicionToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			Layouts.MaterialControl.frmIngresos Ingresos = new Layouts.MaterialControl.frmIngresos(this._data);
-			Ingresos.Show();
-			this.Close();
-		}
-
-		private void inventarioDeAulaToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			Layouts.MaterialControl.frmAsignarMaterial Asignar = new Layouts.MaterialControl.frmAsignarMaterial(this._data);
-			Asignar.Show();
-			this.Close();
-		}
-
 		private void reportarMaterialesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Layouts.MaterialControl.frmReportar ReportarMaterial = new Layouts.MaterialControl.frmReportar(this._data);
@@ -261,6 +256,31 @@ namespace LawrApp
 			Layouts.MaterialControl.frmInformeInventario RegInformeInventario = new Layouts.MaterialControl.frmInformeInventario(this._data);
 			RegInformeInventario.Show();
 			this.Close();
+		}
+
+		private void regisroDeIngresosDeMaterialesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Layouts.MaterialControl.frmIngresos Ingresos = new Layouts.MaterialControl.frmIngresos(this._data);
+			Ingresos.Show();
+			this.Close();
+		}
+
+		private void listadoDeIngresoPorMaterialToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Layouts.MaterialControl.frmInformeIngresosPorMaterial Listado = new Layouts.MaterialControl.frmInformeIngresosPorMaterial(this._data);
+			Listado.Show();
+			this.Close();
+		}
+
+		private void listadoMaterialPorAulaToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Layouts.MaterialControl.frmAsignarMaterial Asignar = new Layouts.MaterialControl.frmAsignarMaterial(this._data);
+			Asignar.Show();
+			this.Close();
+		}
+
+		private void listadoToolStripMenuItem_Click(object sender, EventArgs e)
+		{
 		}
 	}
 }

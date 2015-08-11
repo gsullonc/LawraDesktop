@@ -30,15 +30,17 @@
 		{
 			this.panelMain = new System.Windows.Forms.Panel();
 			this.dgvListado = new System.Windows.Forms.DataGridView();
+			this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colKeys = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colCategorias = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ColCondicion1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colCondicion = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.btnSalir = new MetroFramework.Controls.MetroButton();
 			this.btnGuardar = new MetroFramework.Controls.MetroButton();
 			this.cboSalon = new System.Windows.Forms.ComboBox();
 			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
 			this.pgsLoad = new MetroFramework.Controls.MetroProgressSpinner();
-			this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colCategorias = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colCondicion = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.panelMain.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvListado)).BeginInit();
 			this.SuspendLayout();
@@ -53,7 +55,7 @@
 			this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelMain.Location = new System.Drawing.Point(30, 97);
 			this.panelMain.Name = "panelMain";
-			this.panelMain.Size = new System.Drawing.Size(540, 471);
+			this.panelMain.Size = new System.Drawing.Size(740, 471);
 			this.panelMain.TabIndex = 0;
 			// 
 			// dgvListado
@@ -69,10 +71,12 @@
 			this.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.dgvListado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCodigo,
+            this.colKeys,
             this.colDescripcion,
             this.colCategorias,
+            this.ColCondicion1,
             this.colCondicion});
-			this.dgvListado.Location = new System.Drawing.Point(3, 57);
+			this.dgvListado.Location = new System.Drawing.Point(3, 58);
 			this.dgvListado.MultiSelect = false;
 			this.dgvListado.Name = "dgvListado";
 			this.dgvListado.RowHeadersVisible = false;
@@ -84,12 +88,50 @@
 			this.dgvListado.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
 			this.dgvListado.RowTemplate.Height = 30;
 			this.dgvListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvListado.Size = new System.Drawing.Size(534, 345);
+			this.dgvListado.Size = new System.Drawing.Size(734, 355);
 			this.dgvListado.TabIndex = 7;
+			// 
+			// colCodigo
+			// 
+			this.colCodigo.HeaderText = "Codigo";
+			this.colCodigo.Name = "colCodigo";
+			this.colCodigo.Visible = false;
+			// 
+			// colKeys
+			// 
+			this.colKeys.FillWeight = 80F;
+			this.colKeys.HeaderText = "Keys";
+			this.colKeys.Name = "colKeys";
+			// 
+			// colDescripcion
+			// 
+			this.colDescripcion.FillWeight = 120F;
+			this.colDescripcion.HeaderText = "Descripcion";
+			this.colDescripcion.Name = "colDescripcion";
+			// 
+			// colCategorias
+			// 
+			this.colCategorias.FillWeight = 60F;
+			this.colCategorias.HeaderText = "Categoria";
+			this.colCategorias.Name = "colCategorias";
+			// 
+			// ColCondicion1
+			// 
+			this.ColCondicion1.HeaderText = "Condicion";
+			this.ColCondicion1.Name = "ColCondicion1";
+			this.ColCondicion1.Visible = false;
+			// 
+			// colCondicion
+			// 
+			this.colCondicion.DataPropertyName = "Idcondicion";
+			this.colCondicion.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+			this.colCondicion.FillWeight = 70F;
+			this.colCondicion.HeaderText = "Condicionc";
+			this.colCondicion.Name = "colCondicion";
 			// 
 			// btnSalir
 			// 
-			this.btnSalir.Location = new System.Drawing.Point(381, 432);
+			this.btnSalir.Location = new System.Drawing.Point(3, 432);
 			this.btnSalir.Name = "btnSalir";
 			this.btnSalir.Size = new System.Drawing.Size(75, 36);
 			this.btnSalir.TabIndex = 6;
@@ -98,7 +140,7 @@
 			// 
 			// btnGuardar
 			// 
-			this.btnGuardar.Location = new System.Drawing.Point(462, 432);
+			this.btnGuardar.Location = new System.Drawing.Point(662, 432);
 			this.btnGuardar.Name = "btnGuardar";
 			this.btnGuardar.Size = new System.Drawing.Size(75, 36);
 			this.btnGuardar.TabIndex = 5;
@@ -110,7 +152,7 @@
 			this.cboSalon.FormattingEnabled = true;
 			this.cboSalon.Location = new System.Drawing.Point(3, 22);
 			this.cboSalon.Name = "cboSalon";
-			this.cboSalon.Size = new System.Drawing.Size(534, 29);
+			this.cboSalon.Size = new System.Drawing.Size(548, 29);
 			this.cboSalon.TabIndex = 1;
 			this.cboSalon.SelectionChangeCommitted += new System.EventHandler(this.cboSalon_SelectionChangeCommitted);
 			this.cboSalon.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cboSalon_KeyDown);
@@ -137,36 +179,11 @@
 			this.pgsLoad.Value = 50;
 			this.pgsLoad.Visible = false;
 			// 
-			// colCodigo
-			// 
-			this.colCodigo.HeaderText = "Codigo";
-			this.colCodigo.Name = "colCodigo";
-			this.colCodigo.Visible = false;
-			// 
-			// colDescripcion
-			// 
-			this.colDescripcion.FillWeight = 120F;
-			this.colDescripcion.HeaderText = "Descripcion";
-			this.colDescripcion.Name = "colDescripcion";
-			// 
-			// colCategorias
-			// 
-			this.colCategorias.FillWeight = 60F;
-			this.colCategorias.HeaderText = "Categoria";
-			this.colCategorias.Name = "colCategorias";
-			// 
-			// colCondicion
-			// 
-			this.colCondicion.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-			this.colCondicion.FillWeight = 70F;
-			this.colCondicion.HeaderText = "Condicion";
-			this.colCondicion.Name = "colCondicion";
-			// 
 			// frmInformeInventario
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(600, 600);
+			this.ClientSize = new System.Drawing.Size(800, 600);
 			this.Controls.Add(this.pgsLoad);
 			this.Controls.Add(this.panelMain);
 			this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -195,8 +212,10 @@
 		private MetroFramework.Controls.MetroProgressSpinner pgsLoad;
 		private System.Windows.Forms.DataGridView dgvListado;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colCodigo;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colKeys;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colDescripcion;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colCategorias;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColCondicion1;
 		private System.Windows.Forms.DataGridViewComboBoxColumn colCondicion;
 	}
 }

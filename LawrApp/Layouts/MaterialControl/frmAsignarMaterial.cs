@@ -119,27 +119,17 @@ namespace LawrApp.Layouts.MaterialControl
 		private void DataAulas()
 		{
 			CheckForIllegalCrossThreadCalls = false;
-		
-			string[] Aulas = new string[3] { "Semillitas del saber", "Nº 1", "Nº 2" };
-
-			for (int i = 0; i < Aulas.Length; i++)
-			{
-				object[] d = new object[2]
-				{
-					( i + 1 ),
-					Aulas[i]
-				};
-
-				this._data.Tables["ListaSalones"].Rows.Add(d);
-				this.pgsLoad.Visible = false;
-				this.cboSalones.Enabled = true;
-			}
 
 			this.cboSalones.ValueMember = "Codigo";
-			this.cboSalones.DisplayMember = "Descripcion";
+			this.cboSalones.DisplayMember = "Description";
 			this.cboSalones.DataSource = this._data.Tables["ListaSalones"];
+			
 			this.cboSalones.SelectedIndex = -1;
 			this.cboSalones.Text = "Seleccione...";
+
+			this.pgsLoad.Visible = false;
+			this.cboSalones.Enabled = true;
+
 			this._hilo.Abort();
 		}
 
