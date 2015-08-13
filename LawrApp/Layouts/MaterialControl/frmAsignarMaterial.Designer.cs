@@ -49,6 +49,7 @@
 			this.btnEliminar = new MetroFramework.Controls.MetroButton();
 			this.dgvListado = new System.Windows.Forms.DataGridView();
 			this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colKeyMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colCodMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -282,6 +283,7 @@
 			this.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvListado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCodigo,
+            this.colKeyMaterial,
             this.colCodMaterial,
             this.colDescripcion,
             this.colCategoria});
@@ -314,6 +316,13 @@
 			this.colCodigo.Name = "colCodigo";
 			this.colCodigo.ReadOnly = true;
 			this.colCodigo.Visible = false;
+			// 
+			// colKeyMaterial
+			// 
+			this.colKeyMaterial.FillWeight = 50F;
+			this.colKeyMaterial.HeaderText = "Key";
+			this.colKeyMaterial.Name = "colKeyMaterial";
+			this.colKeyMaterial.ReadOnly = true;
 			// 
 			// colCodMaterial
 			// 
@@ -387,6 +396,7 @@
 		private System.Windows.Forms.DataGridView dgvListado;
 		private MetroFramework.Controls.MetroProgressSpinner pgsLoad;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colCodigo;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colKeyMaterial;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colCodMaterial;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colDescripcion;
 		private System.Windows.Forms.DataGridViewTextBoxColumn colCategoria;

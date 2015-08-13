@@ -32,7 +32,7 @@
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btneliminardd = new MetroFramework.Controls.MetroButton();
 			this.btnSeleccionar = new MetroFramework.Controls.MetroButton();
-			this.metroButton1 = new MetroFramework.Controls.MetroButton();
+			this.btnimprimir = new MetroFramework.Controls.MetroButton();
 			this.btnSalir = new MetroFramework.Controls.MetroButton();
 			this.btnSolucionar = new MetroFramework.Controls.MetroButton();
 			this.btnReportar = new MetroFramework.Controls.MetroButton();
@@ -49,6 +49,7 @@
 			this.tsmItemSolucionar = new System.Windows.Forms.ToolStripMenuItem();
 			this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.metroButton1 = new MetroFramework.Controls.MetroButton();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvListado)).BeginInit();
 			this.cmsOptions.SuspendLayout();
@@ -56,9 +57,10 @@
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.metroButton1);
 			this.panel1.Controls.Add(this.btneliminardd);
 			this.panel1.Controls.Add(this.btnSeleccionar);
-			this.panel1.Controls.Add(this.metroButton1);
+			this.panel1.Controls.Add(this.btnimprimir);
 			this.panel1.Controls.Add(this.btnSalir);
 			this.panel1.Controls.Add(this.btnSolucionar);
 			this.panel1.Controls.Add(this.btnReportar);
@@ -77,7 +79,7 @@
 			// 
 			// btneliminardd
 			// 
-			this.btneliminardd.Location = new System.Drawing.Point(213, 437);
+			this.btneliminardd.Location = new System.Drawing.Point(302, 437);
 			this.btneliminardd.Name = "btneliminardd";
 			this.btneliminardd.Size = new System.Drawing.Size(75, 31);
 			this.btneliminardd.TabIndex = 21;
@@ -87,22 +89,22 @@
 			// 
 			// btnSeleccionar
 			// 
-			this.btnSeleccionar.Location = new System.Drawing.Point(104, 437);
+			this.btnSeleccionar.Location = new System.Drawing.Point(84, 437);
 			this.btnSeleccionar.Name = "btnSeleccionar";
 			this.btnSeleccionar.Size = new System.Drawing.Size(103, 31);
 			this.btnSeleccionar.TabIndex = 20;
-			this.btnSeleccionar.Text = "Seleccionar todo";
+			this.btnSeleccionar.Text = "Marcar todos";
 			this.btnSeleccionar.UseSelectable = true;
-			this.btnSeleccionar.Click += new System.EventHandler(this.btnElimnar_Click);
+			this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
 			// 
-			// metroButton1
+			// btnimprimir
 			// 
-			this.metroButton1.Location = new System.Drawing.Point(500, 437);
-			this.metroButton1.Name = "metroButton1";
-			this.metroButton1.Size = new System.Drawing.Size(75, 31);
-			this.metroButton1.TabIndex = 19;
-			this.metroButton1.Text = "Imprimir";
-			this.metroButton1.UseSelectable = true;
+			this.btnimprimir.Location = new System.Drawing.Point(500, 437);
+			this.btnimprimir.Name = "btnimprimir";
+			this.btnimprimir.Size = new System.Drawing.Size(75, 31);
+			this.btnimprimir.TabIndex = 19;
+			this.btnimprimir.Text = "Imprimir";
+			this.btnimprimir.UseSelectable = true;
 			// 
 			// btnSalir
 			// 
@@ -122,6 +124,7 @@
 			this.btnSolucionar.TabIndex = 17;
 			this.btnSolucionar.Text = "Solucionar";
 			this.btnSolucionar.UseSelectable = true;
+			this.btnSolucionar.Click += new System.EventHandler(this.btnSolucionar_Click);
 			// 
 			// btnReportar
 			// 
@@ -131,6 +134,7 @@
 			this.btnReportar.TabIndex = 16;
 			this.btnReportar.Text = "Reportar";
 			this.btnReportar.UseSelectable = true;
+			this.btnReportar.Click += new System.EventHandler(this.btnReportar_Click);
 			// 
 			// dgvListado
 			// 
@@ -162,9 +166,9 @@
 			this.dgvListado.Size = new System.Drawing.Size(734, 349);
 			this.dgvListado.StandardTab = true;
 			this.dgvListado.TabIndex = 8;
+			this.dgvListado.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellClick);
 			this.dgvListado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellContentClick);
 			this.dgvListado.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellContentClick);
-			this.dgvListado.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgvListado_CurrentCellDirtyStateChanged);
 			this.dgvListado.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvListado_MouseDown);
 			// 
 			// metroLabel3
@@ -272,6 +276,16 @@
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
 			this.toolStripSeparator1.Size = new System.Drawing.Size(127, 6);
 			// 
+			// metroButton1
+			// 
+			this.metroButton1.Location = new System.Drawing.Point(193, 437);
+			this.metroButton1.Name = "metroButton1";
+			this.metroButton1.Size = new System.Drawing.Size(103, 31);
+			this.metroButton1.TabIndex = 22;
+			this.metroButton1.Text = "Desmarcar todo";
+			this.metroButton1.UseSelectable = true;
+			this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
+			// 
 			// frmReportar
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -316,8 +330,9 @@
 		private System.Windows.Forms.ToolStripMenuItem tsmItemSolucionar;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
-		private MetroFramework.Controls.MetroButton metroButton1;
+		private MetroFramework.Controls.MetroButton btnimprimir;
 		private MetroFramework.Controls.MetroButton btnSeleccionar;
 		private MetroFramework.Controls.MetroButton btneliminardd;
+		private MetroFramework.Controls.MetroButton metroButton1;
 	}
 }

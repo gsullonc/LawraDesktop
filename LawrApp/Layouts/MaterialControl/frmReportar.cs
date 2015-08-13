@@ -21,7 +21,9 @@ namespace LawrApp.Layouts.MaterialControl
 		private Thread _hilo;
 		private Materiales _cMaterial = new Materiales();
 
-		private int _codAula;
+		private int _codMaterial,_codSalon;
+		private string _nameMaterial;
+		private string _key;
 		public frmReportar(DataGeneral dts)
 		{
 			this._data = dts;
@@ -34,14 +36,10 @@ namespace LawrApp.Layouts.MaterialControl
 		{
 			CheckForIllegalCrossThreadCalls = false;
 
-			List<lMaterial> lista = this._cMaterial.ListforAula(this._codAula);
+			List<lMaterial> lista = this._cMaterial.ListforAula(this._codSalon);
 		
 			if (lista != null && lista.Any())
 			{
-				DataGridViewCheckBoxColumn d = new DataGridViewCheckBoxColumn();
-				d.Name = "Seleccion";
-				d.HeaderText = "Seleccion";
-
 				foreach (lMaterial item in lista)
 				{
 					string conditionString = string.Empty;
@@ -53,13 +51,14 @@ namespace LawrApp.Layouts.MaterialControl
 						case "C": conditionString = "En Pesimo Estado"; break;
 					}
 
-					object[] obj = new object[6] 
+					object[] obj = new object[7] 
 					{
 						item.Codigo,
 						item.Key,
 						item.Description + " " + "_" + item.Marca + " " + "_" + item.Model,
 						item.Category,
 						conditionString,
+						false,
 						item.Condicion
 					};
 
@@ -67,28 +66,35 @@ namespace LawrApp.Layouts.MaterialControl
 				}
 
 				this.dgvListado.DataSource = this._dt;
-				this.dgvListado.Columns.Add(d);
+
+				this.dgvListado.Columns[1].ReadOnly = true;
+				this.dgvListado.Columns[2].ReadOnly = true;
+				this.dgvListado.Columns[3].ReadOnly = true;
+				this.dgvListado.Columns[4].ReadOnly = true;
 
 				this.dgvListado.Columns["Codigo"].Visible  = false;
 				this.dgvListado.Columns["C_Value"].Visible = false;
 
-				this.dgvListado.Columns[1].FillWeight			= 40;
-				this.dgvListado.Columns[6].FillWeight			= 40;
-				this.dgvListado.Columns["Key"].FillWeight       = 60;
-				this.dgvListado.Columns["Categoria"].FillWeight = 50;
-				this.dgvListado.Columns["Condicion"].FillWeight = 52;
+				this.dgvListado.Columns["Key"].FillWeight         = 60;
+				this.dgvListado.Columns["Descripcion"].FillWeight = 100;
+				this.dgvListado.Columns["Categoria"].FillWeight   = 50;
+				this.dgvListado.Columns["Condicion"].FillWeight   = 52;
+				this.dgvListado.Columns["Seleccion"].FillWeight   = 50;
 
 				this.pgsLoad.Visible    = false;
 				this.dgvListado.Enabled = true;
 
-				this.cboTipoBusqueda.ValueMember = "Codigo";
+				this.cboTipoBusqueda.ValueMember   = "Codigo";
 				this.cboTipoBusqueda.DisplayMember = "Nombre";
 
 				this.cboTipoBusqueda.DataSource = this.TempEstadoMaterial();
 
 				this.cboTipoBusqueda.SelectedValue = "All";
-				this.cboTipoBusqueda.Enabled = true;
-				this.txtfiltro.Enabled = true;
+				this.cboTipoBusqueda.Enabled       = true;
+				this.txtfiltro.Enabled			   = true;
+				this.btnimprimir.Enabled		   = true;
+				this.btnSeleccionar.Enabled		   = true;
+				this.btneliminardd.Enabled		   = true;
 			}
 			else
 			{
@@ -109,6 +115,34 @@ namespace LawrApp.Layouts.MaterialControl
 
 		#region METODOS
 
+		private void solucionar()
+		{
+			this._codMaterial = Convert.ToInt32(this.dgvListado.CurrentRow.Cells[0].Value);
+			this._key = Convert.ToString(this.dgvListado.CurrentRow.Cells[1].Value);
+			this._nameMaterial = Convert.ToString(this.dgvListado.CurrentRow.Cells[2].Value);
+
+			mdlSolucionarMaterial solucionar = new mdlSolucionarMaterial(this._codSalon, _codMaterial, _nameMaterial, _key);
+			solucionar.UpdateCondicionMaterial += new mdlSolucionarMaterial.getCondicionMaterial(this.UpdateCondicionSolucionIndividual);
+			solucionar.ShowDialog();
+		}
+
+		private void reportar()
+		{
+			if (this.dgvListado.CurrentRow.Selected)
+			{
+				this._codMaterial = Convert.ToInt32(this.dgvListado.CurrentRow.Cells[0].Value);
+				this._key = Convert.ToString(this.dgvListado.CurrentRow.Cells[1].Value);
+				this._nameMaterial = Convert.ToString(this.dgvListado.CurrentRow.Cells[2].Value);
+				string condicion = Convert.ToString(this.dgvListado.CurrentRow.Cells[4].Value);
+
+				mdlReporte reporte = new mdlReporte(this._codMaterial, _codSalon, this._nameMaterial, condicion, this._key);
+				reporte.UpdateCondicionMaterial += new mdlReporte.getCondicionMaterial(this.UpdateCondicionReportIndividual);
+				reporte.ShowDialog();
+			}
+			else
+				return;
+		}
+
 		private void AgregarColumnDatatableGlobal()
 		{
 			this._dt.Columns.Add("Codigo",		typeof(int));
@@ -116,23 +150,26 @@ namespace LawrApp.Layouts.MaterialControl
 			this._dt.Columns.Add("Descripcion", typeof(string));
 			this._dt.Columns.Add("Categoria",	typeof(string));
 			this._dt.Columns.Add("Condicion",   typeof(string));
+			this._dt.Columns.Add("Seleccion",	typeof(bool));
 			this._dt.Columns.Add("C_Value",		typeof(string));
 		}
 
 		//Actualiza la condicion de un material que se ha reportado individualmente
-		private void UpdateCondicionReportIndividual(int codMaterial, string condicion)
+		private void UpdateCondicionReportIndividual(string condicion)
 		{
-			DataRow[] datos = this._dt.Select("Codigo=" + codMaterial);
+			DataRow[] datos = this._dt.Select("Codigo=" + this._codMaterial + "AND Key='" + this._key + "'"); ;
 			DataRow row = datos[0];
-			this._dt.Rows[this._dt.Rows.IndexOf(row)][3] = condicion;
+			this._dt.Rows[this._dt.Rows.IndexOf(row)][4] = condicion;
 			
 			switch(condicion)
 			{
 				case "Reg.Reparacion":
-					this._dt.Rows[this._dt.Rows.IndexOf(row)][4] = "B";
+					this._dt.Rows[this._dt.Rows.IndexOf(row)][6] = "B";
+					this.btnReportar.Enabled = true;
 					break;
 				case "En Pesimo Estado":
-					this._dt.Rows[this._dt.Rows.IndexOf(row)][4] = "C";
+					this._dt.Rows[this._dt.Rows.IndexOf(row)][6] = "C";
+					this.btnReportar.Enabled = false;
 					break;
 			}
 			
@@ -140,19 +177,20 @@ namespace LawrApp.Layouts.MaterialControl
 		}
 
 		//Actualiza la condicion de un material que se ha solucionado
-		private void UpdateCondicionSolucionIndividual(int codMaterial)
+		private void UpdateCondicionSolucionIndividual()
 		{
-			DataRow[] datos = this._dt.Select("Codigo=" + codMaterial);
+			DataRow[] datos = this._dt.Select("Codigo=" + this._codMaterial + "AND Key='" + this._key + "'");
+			
 			DataRow row = datos[0];
-			this._dt.Rows[this._dt.Rows.IndexOf(row)][3] = "En Buen Estado";
-			this._dt.Rows[this._dt.Rows.IndexOf(row)][4] = "A";
+			this._dt.Rows[this._dt.Rows.IndexOf(row)][4] = "En Buen Estado";
+			this._dt.Rows[this._dt.Rows.IndexOf(row)][5] = "A";
 			this.pgsLoad.Visible = false;
 		}
 
 		private void GetMaterialesOneAula()
 		{
 			this._hilo = new Thread(new ThreadStart(this.LoadMaterialOfAula));
-			this._codAula = Convert.ToInt32(this.cboSalon.SelectedValue);
+			this._codSalon = Convert.ToInt32(this.cboSalon.SelectedValue);
 			this.pgsLoad.Visible = true;
 			this.panel1.Enabled = false;
 
@@ -196,16 +234,22 @@ namespace LawrApp.Layouts.MaterialControl
 			this.cboSalon.SelectedIndex  = -1; 
 			this.cboSalon.Text           = "Seleccione...";
 
-			this.dgvListado.Enabled = false;
-			this.btnSolucionar.Enabled = false;
-			this.btnReportar.Enabled = false;
+			this.dgvListado.Enabled		 = false;
+			this.btnSeleccionar.Enabled  = false;
+			this.btneliminardd.Enabled   = false;
+			this.btnReportar.Enabled	 = false;
+			this.btnimprimir.Enabled	 = false;
+			this.btnSolucionar.Enabled	 = false;
+			this.btnReportar.Enabled	 = false;
 		}
 
 		private void cboSalon_SelectionChangeCommitted(object sender, EventArgs e)
 		{
 			if(this.dgvListado.Rows.Count > 0)
 			{
+				this._dt.DefaultView.RowFilter = String.Empty;
 				this._dt.Rows.Clear();
+
 			}
 			this.GetMaterialesOneAula();
 		}
@@ -253,39 +297,29 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void rEPORTARToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			int    codigoSalon		= Convert.ToInt32(this._codAula);
-			int    codigoMaterial	= Convert.ToInt32(this.dgvListado.CurrentRow.Cells[0].Value);
-			string nombreMaterial   = Convert.ToString(this.dgvListado.CurrentRow.Cells[2].Value);
-			string condicion	    = Convert.ToString(this.dgvListado.CurrentRow.Cells[4].Value);
-
-			mdlReporte reporte = new mdlReporte(codigoSalon,codigoMaterial,nombreMaterial,condicion);
-			reporte.UpdateCondicionMaterial += new mdlReporte.getCondicionMaterial(this.UpdateCondicionReportIndividual);
-			reporte.ShowDialog();
+			this.reportar();
 		}
 
 		private void tsmItemSolucionar_Click(object sender, EventArgs e)
 		{
-			int codigoMaterial = Convert.ToInt32(this.dgvListado.CurrentRow.Cells[0].Value);
-			string nombreMaterial = Convert.ToString(this.dgvListado.CurrentRow.Cells[2].Value);
-
-			mdlSolucionarMaterial solucionar = new mdlSolucionarMaterial(this._codAula,codigoMaterial,nombreMaterial);
-			solucionar.UpdateCondicionMaterial += new mdlSolucionarMaterial.getCondicionMaterial(this.UpdateCondicionSolucionIndividual);
-			solucionar.ShowDialog();
+			this.solucionar();
 		}
 
 		private void txtfiltro_TextChanged(object sender, EventArgs e)
 		{
 				if( this.cboTipoBusqueda.SelectedValue.ToString() == "All" )
 				{
-					this._dt.DefaultView.RowFilter = ("Descripcion + ' ' + Categoria like '%" + this.txtfiltro.Text + "%'");
+					this._dt.DefaultView.RowFilter = ("Key + ' ' + Descripcion + ' ' + Categoria like '%" + this.txtfiltro.Text + "%'");
 					this.dgvListado.DataSource = this._dt.DefaultView;
 				}
 				else
 				{
-					this._dt.DefaultView.RowFilter = ("Descripcion + ' ' + Categoria like '%" + this.txtfiltro.Text + "%' AND C_Value='" + 
-					 this.cboTipoBusqueda.SelectedValue.ToString() + "'");
 					this.dgvListado.DataSource = this._dt.DefaultView;
+					this._dt.DefaultView.RowFilter = ("Key + ' ' + Descripcion + ' ' + Categoria like '%" + this.txtfiltro.Text + "%' AND C_Value='" + 
+					 this.cboTipoBusqueda.SelectedValue.ToString() + "'");
+					
 				}
+			    
 		}
 
 		private void cboTipoBusqueda_KeyDown(object sender, KeyEventArgs e)
@@ -323,35 +357,26 @@ namespace LawrApp.Layouts.MaterialControl
 				e.SuppressKeyPress = true;
 		}
 
-		private void btnElimnar_Click(object sender, EventArgs e)
-		{	
-			foreach (DataGridViewRow row in this.dgvListado.Rows)
-			{
-				DataGridViewCheckBoxCell oCell = row.Cells["Seleccion"] as DataGridViewCheckBoxCell;
-				oCell.Value = true;
-				if((bool)oCell.Value)
-				{
-					row.Cells["key"].Style.BackColor = Color.Red;
-					row.Cells["Descripcion"].Style.BackColor = Color.Red;
-					row.Cells["Categoria"].Style.BackColor = Color.Red;
-					row.Cells["Condicion"].Style.BackColor = Color.Red;
-					row.Cells["Seleccion"].Style.BackColor = Color.Red;
-				}
-			}
-		}
-
 		private void btneliminardd_Click(object sender, EventArgs e)
 		{
+			List<DataGridViewRow> CantidadRowsChekeadas = (from item in this.dgvListado.Rows.Cast<DataGridViewRow>()
+														  let valor = Convert.ToBoolean(item.Cells["Seleccion"].Value)
+														  where valor select item).ToList();
+			if (CantidadRowsChekeadas.Count() < 0)
+				return;
+
 			DataGridViewRow row = new DataGridViewRow();
-			for (int i = 0; i < this.dgvListado.Rows.Count; i ++ )
+
+			for (int i = 0; i < this.dgvListado.Rows.Count; i++)
 			{
 				row = this.dgvListado.Rows[i];
-				if(Convert.ToBoolean(row.Cells[6].Value) == true)
+				if (Convert.ToBoolean(row.Cells[5].Value) == true)
 				{
 					int id = Convert.ToInt32(row.Cells[0].Value);
 					this.dgvListado.Rows.Remove(row);
 					i--;
 				}
+
 			}
 		}
 
@@ -359,7 +384,6 @@ namespace LawrApp.Layouts.MaterialControl
 		{
 			if (e.RowIndex == -1)
 				return;
-
 			
 			if (this.dgvListado.Columns[e.ColumnIndex].Name == "Seleccion")
 			{
@@ -367,10 +391,10 @@ namespace LawrApp.Layouts.MaterialControl
 				for(int i = 0 ; i < this.dgvListado.Rows.Count; i ++ )
 				{
 					row = this.dgvListado.Rows[i];
-					if(row.Cells[6].Value == null)
-						Convert.ToBoolean(row.Cells[6].Value = false);
+					if(row.Cells[5].Value == null)
+						Convert.ToBoolean(row.Cells[5].Value = false);
 
-					if(Convert.ToBoolean(row.Cells[6].Value) == true)
+					if(Convert.ToBoolean(row.Cells[5].Value) == true)
 					{
 						row.Cells["key"].Style.BackColor = Color.Red;
 						row.Cells["Descripcion"].Style.BackColor = Color.Red;
@@ -392,7 +416,66 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void dgvListado_CurrentCellDirtyStateChanged(object sender, EventArgs e)
 		{
-			//MessageBox.Show(""+this.dgvListado.CommitEdit(DataGridViewDataErrorContexts.Commit));
+			MessageBox.Show(""+this.dgvListado.CommitEdit(DataGridViewDataErrorContexts.Commit));
+		}
+
+		private void btnSeleccionar_Click(object sender, EventArgs e)
+		{
+			foreach (DataGridViewRow row in this.dgvListado.Rows)
+			{
+				DataGridViewCheckBoxCell oCell = row.Cells["Seleccion"] as DataGridViewCheckBoxCell;
+				oCell.Value = true;
+				if ((bool)oCell.Value)
+				{
+					row.Cells["key"].Style.BackColor = Color.Red;
+					row.Cells["Descripcion"].Style.BackColor = Color.Red;
+					row.Cells["Categoria"].Style.BackColor = Color.Red;
+					row.Cells["Condicion"].Style.BackColor = Color.Red;
+					row.Cells["Seleccion"].Style.BackColor = Color.Red;
+				}
+			}
+		}
+
+		private void btnSolucionar_Click(object sender, EventArgs e)
+		{
+			this.solucionar();
+		}
+
+		private void btnReportar_Click(object sender, EventArgs e)
+		{
+			this.reportar();
+		}
+
+		private void dgvListado_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+			if (this.dgvListado.CurrentRow.Cells[4].Value.ToString() == "Req. Reparacion")
+			{
+				this.btnReportar.Enabled   = true;
+				this.btnSolucionar.Enabled = false;
+			}
+			if (this.dgvListado.CurrentRow.Cells[4].Value.ToString() == "En Pesimo Estado")
+			{
+				this.btnSolucionar.Enabled = true;
+				this.btnReportar.Enabled   = false;
+			}
+			
+		}
+
+		private void metroButton1_Click(object sender, EventArgs e)
+		{
+			foreach (DataGridViewRow row in this.dgvListado.Rows)
+			{
+				DataGridViewCheckBoxCell oCell = row.Cells["Seleccion"] as DataGridViewCheckBoxCell;
+				oCell.Value = false;
+				if (!(bool)oCell.Value)
+				{
+					row.Cells["key"].Style.BackColor		 = Color.White;
+					row.Cells["Descripcion"].Style.BackColor = Color.White;
+					row.Cells["Categoria"].Style.BackColor   = Color.White;
+					row.Cells["Condicion"].Style.BackColor   = Color.White;
+					row.Cells["Seleccion"].Style.BackColor   = Color.White;
+				}
+			}
 		}
 	}
 }

@@ -84,7 +84,7 @@ namespace MaterialControl.ControlMaterial
 
 		public DataSet List(DataSet dts)
 		{
-			Query query = new Query("api/students");
+			Query query = new Query("api/material");
 
 			try
 			{
@@ -99,12 +99,14 @@ namespace MaterialControl.ControlMaterial
 
 				foreach (lMaterial Items in MaterialData)
 				{
-					object[] temp = new object[5] { 
-						
+					object[] temp = new object[7] { 
+
 						Items.Codigo, 
+						Items.Key,
 						Items.Description + " " + "_" + Items.Marca + " " + "_"  + Items.Model,
 						Items.Category,
 						Items.Condicion,
+						"En Buen Estado",
 						Items.ModifiedDate
 					};
 

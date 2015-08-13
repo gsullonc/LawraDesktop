@@ -81,6 +81,25 @@ namespace MaterialControl.ControlMaterial
 				return null;
 			}
 		}
+		public List<lIngresos> ListIngresos()
+		{
+			Query query = new Query("api/ingresos");
+
+			try
+			{
+				query.SendRequestGET();
+
+				if (query.ResponseStatusCode != HttpStatusCode.OK)
+					throw new ArgumentNullException("No se encontro ninguna Informacion", "Informacion de Ingresos");
+
+				return JsonConvert.DeserializeObject<List<lIngresos>>(query.ResponseContent);
+			}
+			catch (Exception ex)
+			{
+				this._msgException = ex.Message;
+				return null;
+			}
+		}
 
 		public bool UpdateQuantityIngresosOfMaterial(int CodigoMaterial, int CodigoIngreso)
 		{

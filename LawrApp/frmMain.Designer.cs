@@ -362,7 +362,7 @@
 			// 
 			this.reportarMaterialesToolStripMenuItem.Name = "reportarMaterialesToolStripMenuItem";
 			this.reportarMaterialesToolStripMenuItem.Size = new System.Drawing.Size(284, 24);
-			this.reportarMaterialesToolStripMenuItem.Text = "Reportar Materiales";
+			this.reportarMaterialesToolStripMenuItem.Text = "Materiales Asiganos por Aula";
 			this.reportarMaterialesToolStripMenuItem.Click += new System.EventHandler(this.reportarMaterialesToolStripMenuItem_Click);
 			// 
 			// registroDeInformeInventarioToolStripMenuItem

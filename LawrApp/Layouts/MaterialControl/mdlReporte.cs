@@ -21,9 +21,10 @@ namespace LawrApp.Layouts.MaterialControl
 		private string _nombreMaterial;
 		private int	   _codigoSalon;
 		private string _condicion;
+		private string _key;
 		private Materiales _cMaterial = new Materiales();
 
-		public delegate void getCondicionMaterial(int CodigoMaterial, string Condicion);
+		public delegate void getCondicionMaterial(string condicion);
 		public event getCondicionMaterial UpdateCondicionMaterial;
 
 		private ReportarMaterial _cReportarMaterial = new ReportarMaterial();
@@ -34,7 +35,11 @@ namespace LawrApp.Layouts.MaterialControl
 
 		DataTable _dt = new DataTable();
 
-		public mdlReporte( int CodigoSalon,int CodigoMaterial , string nombre, string condicion)
+		public mdlReporte( int CodigoSalon,
+						   int CodigoMaterial , 
+						   string nombre, 
+						   string condicion ,
+						   string key)
 		{
 			InitializeComponent();
 
@@ -42,6 +47,7 @@ namespace LawrApp.Layouts.MaterialControl
 			this._nombreMaterial = nombre;
 			this._codigoSalon    = CodigoSalon;
 			this._condicion      = condicion;
+			this._key			 = key;
 		}
 
 		#region HILOS
@@ -79,7 +85,7 @@ namespace LawrApp.Layouts.MaterialControl
 				MetroMessageBox.Show(this, "Reporte creado Satisfactoriamente", "Correcto",
 				MessageBoxButtons.OK, MessageBoxIcon.Question);
 
-				UpdateCondicionMaterial(_codigoMaterial,this.cboCondicion.Text);
+				UpdateCondicionMaterial(this._condicion);
 
 				this.ResetControls();
 				this.Close();
@@ -133,7 +139,7 @@ namespace LawrApp.Layouts.MaterialControl
 		private void btnguardar_Click(object sender, EventArgs e)
 		{
 			this._hilo = new Thread(new ThreadStart(this.SubmitUpdate));
-
+			this._condicion = this.cboCondicion.Text;
 			this.JoinData();
 			this.panelMain.Enabled = false;
 			this.pgsLoad.Visible   = true;

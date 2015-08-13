@@ -18,7 +18,9 @@ namespace LawrApp.Layouts.MaterialControl
 	{
 		DataGeneral _data = new DataGeneral();
 		Adquisicion _cAdquisicion = new Adquisicion();
+
 		DataTable _dt = new DataTable();
+		DataTable _dt2 = new DataTable();
 
 		private int _codMaterial;
 		private int _codIngreso;
@@ -37,17 +39,21 @@ namespace LawrApp.Layouts.MaterialControl
 			CheckForIllegalCrossThreadCalls = false;
 
 			List<lIngresos> _listIngresos  = this._cAdquisicion.ListDetalleOfIngresosForMaterial(this._codMaterial);
+
 			if (_listIngresos.Count > 0)
-			{				
+			{
+				this._dt.Rows.Clear();
+			
 				foreach (lIngresos item in _listIngresos)
 				{
-					object[] d = new object[6]
+					object[] d = new object[7]
 					{
 						item.Codigo,
+						item.CodigoMaterial,
 						item.Type,
-						item.InsertDate,
-						(string.IsNullOrEmpty(item.DocumentNumber))?"-": item.DocumentNumber,
+						item.EntryDate,
 						item.Quantity,
+						(string.IsNullOrEmpty(item.DocumentNumber))?"-": item.DocumentNumber,
 						item.Price
 					};
 
@@ -57,7 +63,8 @@ namespace LawrApp.Layouts.MaterialControl
 
 				this.dgvListadoDetalle.DataSource = this._dt;
 
-				this.dgvListadoDetalle.Columns[0].Visible = false;
+				this.dgvListadoDetalle.Columns[1].Visible = false;
+
 				this.dgvListadoDetalle.Columns[1].FillWeight = 80;
 				this.dgvListadoDetalle.Columns[2].FillWeight = 80;
 				this.dgvListadoDetalle.Columns[3].FillWeight = 95;
@@ -73,18 +80,45 @@ namespace LawrApp.Layouts.MaterialControl
 
 		#endregion
 
-		
-
 		#region METODOS
 
 		private void LLenarColumn()
 		{
-			this._dt.Columns.Add("Codigo", typeof(string));
-			this._dt.Columns.Add("Tipo Ingreso",typeof(string));
-			this._dt.Columns.Add("Fecha Ingreso", typeof(string));
+			this._dt.Columns.Add("Codigo",          typeof(string));
+			this._dt.Columns.Add("Codigo Material" ,typeof(string));
+			this._dt.Columns.Add("Tipo",			typeof(string));
+			this._dt.Columns.Add("Fecha_Ingreso",   typeof(string));
+			this._dt.Columns.Add("Cantidad",		typeof(string));
 			this._dt.Columns.Add("Numero Documento",typeof(string));
-			this._dt.Columns.Add("Cantidad",typeof(string));
-			this._dt.Columns.Add("Costo",typeof(string));
+			this._dt.Columns.Add("Costo",           typeof(string));
+		}
+
+		private void ColumnListIngresos()
+		{
+			this._dt2.Columns.Add("Codigo",          typeof(string));
+			this._dt2.Columns.Add("Codigo_Material", typeof(string));
+			this._dt2.Columns.Add("Key",		     typeof(string));
+			this._dt2.Columns.Add("Descripcion",	 typeof(string));
+			this._dt2.Columns.Add("Categoria",		 typeof(string));
+			this._dt2.Columns.Add("Tipo Ingreso",	 typeof(string));
+			this._dt2.Columns.Add("Fecha_Ingreso",   typeof(string));
+			this._dt2.Columns.Add("Cantidad",		 typeof(string));
+			this._dt2.Columns.Add("Nº.Numero",		 typeof(string));
+			this._dt2.Columns.Add("Costo",			 typeof(string));
+		}
+
+		private void DetallarIngresos()
+		{
+			this._hilo = new Thread(new ThreadStart(this.LoadDetalleIngresos));
+
+			this._codMaterial = Convert.ToInt32(this.dgvListadoMaterial.CurrentRow.Cells[1].Value);
+			this.panelDetalle.Enabled = true;
+			this._dt.Rows.Clear();
+
+			this.pgsLoad.Visible = true;
+			this.tabcontrolMain.SelectedTab = this.tabDetalleIngresos;
+
+			this._hilo.Start();
 		}
 
 		#endregion
@@ -102,43 +136,84 @@ namespace LawrApp.Layouts.MaterialControl
 			this.Close();
 		}
 
+		private void LoadDataIngresos()
+		{
+			CheckForIllegalCrossThreadCalls = false;
+
+			 List<lIngresos> lingreso = this._cAdquisicion.ListIngresos();
+
+			 if (lingreso.Count > 0)
+			 {
+				 foreach (lIngresos item in lingreso)
+				 {
+					 object[] dataMaterial = this._data.Tables["ListaMaterial"].Select("Codigo=" + item.CodigoMaterial)[0].ItemArray;
+					 string Key			= Convert.ToString(dataMaterial[1]);
+					 string Descripcion = Convert.ToString(dataMaterial[2]);
+					 string Categoria	= Convert.ToString(dataMaterial[3]); 
+
+					 object[] ingresos = new object[10]
+					 {
+						item.Codigo,
+						item.CodigoMaterial,
+						Key,
+						Descripcion,
+						Categoria,
+						item.Type,
+						item.EntryDate,
+						item.Quantity,
+						item.DocumentNumber,
+						item.Price
+					 };
+
+					 this._dt2.Rows.Add(ingresos);
+				 }
+
+				 this.dgvListadoMaterial.DataSource = _dt2;
+
+				 this.dgvListadoMaterial.Columns[0].Visible = true;
+				 this.dgvListadoMaterial.Columns[1].Visible = false;
+
+				 this.dgvListadoMaterial.Columns[0].FillWeight = 50;
+				 this.dgvListadoMaterial.Columns[2].FillWeight = 60;
+				 this.dgvListadoMaterial.Columns[3].FillWeight = 110;
+				 this.dgvListadoMaterial.Columns[4].FillWeight = 60;
+				 this.dgvListadoMaterial.Columns[5].FillWeight = 50;
+				 this.dgvListadoMaterial.Columns[6].FillWeight = 60;
+				 this.dgvListadoMaterial.Columns[7].FillWeight = 55;
+				 this.dgvListadoMaterial.Columns[8].FillWeight = 70;
+				 this.dgvListadoMaterial.Columns[9].FillWeight = 45;
+
+				 this.txtFiltroFecha.Enabled    = true;
+				 this.txtFiltroIngreso.Enabled  = true;
+				 this.txtFiltroMaterial.Enabled = true;
+
+				 this.panelListado.Enabled      = true;
+				 this.btnListar.Enabled         = true;
+				 this.pgsLoad.Visible			= false;
+			 }
+			 else
+				 MetroMessageBox.Show(this,"No se ha encontrado Informacion ","lISTA INGRESOS ",MessageBoxButtons.OK,MessageBoxIcon.Information);
+		}
 		private void frmInformeIngresosPorMaterial_Load(object sender, EventArgs e)
 		{
 			this.tabcontrolMain.SelectedTab = this.tabpagListadoIngreso;
 			this.panelDetalle.Enabled = false;
 
 			this.LLenarColumn();
-			this.dgvListadoMaterial.DataSource = this._data.Tables["ListaMaterial"];
+			this.ColumnListIngresos();
 
-			this.dgvListadoMaterial.Columns[2].FillWeight = 45;
+			this._hilo = new Thread(new ThreadStart(this.LoadDataIngresos));
 
-			this.dgvListadoMaterial.Columns[0].Visible = false;
-			this.dgvListadoMaterial.Columns[3].Visible = false;
-			this.dgvListadoMaterial.Columns[4].Visible = false;
+			this.panelListado.Enabled = false;
+			this.pgsLoad.Visible = true;
 
-			if (this.dgvListadoMaterial.Rows.Count > 0)
-			{
-				this.dgvListadoMaterial.Enabled = true;
-				this.txtFiltro.Enabled = true;
-				this.btnListar.Enabled = true;
-			}
-			else
-				MetroMessageBox.Show(this, "No se ha encontrado Informacion de los materiales","Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			this._hilo.Start();
 
 		}
 
 		private void dgvListadoMaterial_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
-			this._hilo = new Thread(new ThreadStart(this.LoadDetalleIngresos));
-			
-			this._codMaterial = Convert.ToInt32( this.dgvListadoMaterial.CurrentRow.Cells[0].Value);
-			this.panelDetalle.Enabled = true;
-			this._dt.Rows.Clear();
-
-			this.pgsLoad.Visible= true;
-			this.tabcontrolMain.SelectedTab = this.tabDetalleIngresos;
-
-			this._hilo.Start();
+			this.DetallarIngresos();
 		}
 
 		private void txtFiltrarIngreso_TextChanged(object sender, EventArgs e)
@@ -151,8 +226,18 @@ namespace LawrApp.Layouts.MaterialControl
 		private void txtFiltro_TextChanged_1(object sender, EventArgs e)
 		{
 			TextBox txt = (TextBox)sender;
-			this._data.Tables["ListaMaterial"].DefaultView.RowFilter = ("Description + ' ' + Category Like '%" + this.txtFiltro.Text + "%'");
-			this.dgvListadoMaterial.DataSource = this._data.Tables["ListaMaterial"].DefaultView;
+			if (this.dgvListadoMaterial.DataSource != string.Empty)
+			{
+				if (!string.IsNullOrEmpty(this.txtFiltroFecha.Text) && !string.IsNullOrEmpty(this.txtFiltroIngreso.Text))
+				{
+					this._dt2.DefaultView.RowFilter = ("Key + ' ' + Descripcion + ' ' + Categoria like '%" + this.txtFiltroMaterial.Text +
+						"%' AND Fecha_Ingreso='" + this.txtFiltroFecha.Text +
+						"%' AND Codigo='" + this.txtFiltroIngreso + "'");
+					this.dgvListadoDetalle.DataSource = this._dt2.DefaultView;
+				}
+			}
+			else
+				return;
 		}
 
 		private void btnCerrar_Click(object sender, EventArgs e)
@@ -162,20 +247,51 @@ namespace LawrApp.Layouts.MaterialControl
 			this.Close();
 		}
 
-		private void dgvListadoDetalle_KeyDown(object sender, KeyEventArgs e)
+		private void txtFiltroFecha_TextChanged(object sender, EventArgs e)
 		{
-			if(e.KeyData == Keys.Enter)
+			TextBox txt = (TextBox)sender;
+			this._dt2.DefaultView.RowFilter = ("Fecha_Ingreso Like '%" + this.txtFiltroFecha.Text + "%'");
+			this.dgvListadoMaterial.DataSource = this._dt2.DefaultView;
+		}
+
+		private void txtFiltroIngreso_TextChanged(object sender, EventArgs e)
+		{
+			TextBox txt = (TextBox)sender;
+			if ((!string.IsNullOrEmpty(this.txtFiltroFecha.Text)))
 			{
-				if(this.dgvListadoDetalle.Rows.Count > 0)
+				this._dt.DefaultView.RowFilter = ("Codigo Like '%" + this.txtFiltroIngreso.Text + "%'AND Fecha_Ingreso='" +
+						 this.txtFiltroFecha + "'");
+				this.dgvListadoDetalle.DataSource = this._dt2.DefaultView;
+			}
+		}
+
+		private void btnCancelar_Click(object sender, EventArgs e)
+		{
+			this.panelDetalle.Enabled = false;
+			this.tabcontrolMain.SelectedTab = this.tabpagListadoIngreso;
+			this._dt.Rows.Clear();
+
+		}
+
+		private void btnListar_Click(object sender, EventArgs e)
+		{
+			this.DetallarIngresos();
+		}
+
+		private void btnModificar_Click(object sender, EventArgs e)
+		{
+			if (this.dgvListadoMaterial.Rows.Count > 0)
+			{
+				if (this.dgvListadoMaterial.CurrentRow.Selected)
 				{
-					if(this.dgvListadoDetalle.CurrentRow.Selected)
-					{
-						frmDetalleIngresos detalle = new frmDetalleIngresos(this._codIngreso,this._codMaterial,this._dt);
-						detalle.ShowDialog();
-					}
-					else
-						return;
+					this._codIngreso = Convert.ToInt32(this.dgvListadoMaterial.CurrentRow.Cells[0].Value);
+					this._codMaterial = Convert.ToInt32(this.dgvListadoMaterial.CurrentRow.Cells[1].Value);
+
+					frmDetalleIngresos detalle = new frmDetalleIngresos(this._codIngreso, this._codMaterial, this._dt2);
+					detalle.ShowDialog();
 				}
+				else
+					return;
 			}
 		}
 

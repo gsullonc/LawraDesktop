@@ -6486,9 +6486,13 @@ namespace LawrApp {
             
             private global::System.Data.DataColumn columnCodigo;
             
+            private global::System.Data.DataColumn columnKey;
+            
             private global::System.Data.DataColumn columnDescription;
             
             private global::System.Data.DataColumn columnCategory;
+            
+            private global::System.Data.DataColumn columnC_value;
             
             private global::System.Data.DataColumn columnCondicion;
             
@@ -6537,6 +6541,14 @@ namespace LawrApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn KeyColumn {
+                get {
+                    return this.columnKey;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn DescriptionColumn {
                 get {
                     return this.columnDescription;
@@ -6548,6 +6560,14 @@ namespace LawrApp {
             public global::System.Data.DataColumn CategoryColumn {
                 get {
                     return this.columnCategory;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn C_valueColumn {
+                get {
+                    return this.columnC_value;
                 }
             }
             
@@ -6604,12 +6624,14 @@ namespace LawrApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ListaMaterialRow AddListaMaterialRow(string Codigo, string Description, string Category, string Condicion, string Modifieddate) {
+            public ListaMaterialRow AddListaMaterialRow(string Codigo, string Key, string Description, string Category, string C_value, string Condicion, string Modifieddate) {
                 ListaMaterialRow rowListaMaterialRow = ((ListaMaterialRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Codigo,
+                        Key,
                         Description,
                         Category,
+                        C_value,
                         Condicion,
                         Modifieddate};
                 rowListaMaterialRow.ItemArray = columnValuesArray;
@@ -6635,8 +6657,10 @@ namespace LawrApp {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnCodigo = base.Columns["Codigo"];
+                this.columnKey = base.Columns["Key"];
                 this.columnDescription = base.Columns["Description"];
                 this.columnCategory = base.Columns["Category"];
+                this.columnC_value = base.Columns["C_value"];
                 this.columnCondicion = base.Columns["Condicion"];
                 this.columnModifieddate = base.Columns["Modifieddate"];
             }
@@ -6646,10 +6670,14 @@ namespace LawrApp {
             private void InitClass() {
                 this.columnCodigo = new global::System.Data.DataColumn("Codigo", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCodigo);
+                this.columnKey = new global::System.Data.DataColumn("Key", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnKey);
                 this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDescription);
                 this.columnCategory = new global::System.Data.DataColumn("Category", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCategory);
+                this.columnC_value = new global::System.Data.DataColumn("C_value", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnC_value);
                 this.columnCondicion = new global::System.Data.DataColumn("Condicion", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCondicion);
                 this.columnModifieddate = new global::System.Data.DataColumn("Modifieddate", typeof(string), null, global::System.Data.MappingType.Element);
@@ -10383,6 +10411,22 @@ namespace LawrApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Key {
+                get {
+                    try {
+                        return ((string)(this[this.tableListaMaterial.KeyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Key\' de la tabla \'ListaMaterial\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableListaMaterial.KeyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Description {
                 get {
                     try {
@@ -10410,6 +10454,22 @@ namespace LawrApp {
                 }
                 set {
                     this[this.tableListaMaterial.CategoryColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string C_value {
+                get {
+                    try {
+                        return ((string)(this[this.tableListaMaterial.C_valueColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'C_value\' de la tabla \'ListaMaterial\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableListaMaterial.C_valueColumn] = value;
                 }
             }
             
@@ -10459,6 +10519,18 @@ namespace LawrApp {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsKeyNull() {
+                return this.IsNull(this.tableListaMaterial.KeyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetKeyNull() {
+                this[this.tableListaMaterial.KeyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDescriptionNull() {
                 return this.IsNull(this.tableListaMaterial.DescriptionColumn);
             }
@@ -10479,6 +10551,18 @@ namespace LawrApp {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetCategoryNull() {
                 this[this.tableListaMaterial.CategoryColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsC_valueNull() {
+                return this.IsNull(this.tableListaMaterial.C_valueColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetC_valueNull() {
+                this[this.tableListaMaterial.C_valueColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

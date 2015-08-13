@@ -18,26 +18,27 @@ namespace LawrApp.Layouts.MaterialControl
 {
 	public partial class mdlSolucionarMaterial : MetroForm
 	{
-		private int _codigoMaterial;
+		private int _codigoMaterial, _codAula;
 		private string _name;
-		private int _codAula;
+		private string _key;
 	
 		SolucionarMaterial _cSolucionarMaterial = new SolucionarMaterial();
 		Materiales _cMaterial = new Materiales();
 		tSolucionarMaterial _objSolucionMatrial = new tSolucionarMaterial();
 
-		public delegate void getCondicionMaterial(int CodigoMaterial);
+		public delegate void getCondicionMaterial();
 		public event getCondicionMaterial UpdateCondicionMaterial;
 
 		private Thread _hilo;
 		private bool _gotoModify = false;
 
-		public mdlSolucionarMaterial( int CodigoAula, int CodigoMaterial, string name)
+		public mdlSolucionarMaterial( int CodigoAula, int CodigoMaterial, string nameMaterial, string key)
 		{
 			InitializeComponent();
 			this._codAula = CodigoAula;
 			this._codigoMaterial = CodigoMaterial;
-			this._name = name;
+			this._name = nameMaterial;
+			this._key = key; 
 		}
  
 		#region HILOS
@@ -71,7 +72,7 @@ namespace LawrApp.Layouts.MaterialControl
 
 				if ( this._cSolucionarMaterial.Update(this._codAula,this._codAula))
 				{
-					UpdateCondicionMaterial(_codigoMaterial);
+					UpdateCondicionMaterial();
 
 					this.pgsLoad.Visible = false;
 					MetroMessageBox.Show(this, "Material Solucionado", "Correcto",

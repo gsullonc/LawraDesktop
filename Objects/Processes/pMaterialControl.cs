@@ -34,11 +34,11 @@ namespace Objects.Processes
 	public class lIngresos
 	{
 		public int Codigo			 { get; set; }
+		public int CodigoMaterial	 { get; set; }
 		public string Type			 { get; set; }
-		public string DocumentNumber { get; set; }
-		public string InsertDate	 { get; set; }
+		public string EntryDate		 { get; set; }
 		public int Quantity			 { get; set; }
+		public string DocumentNumber { get; set; }
 		public int Price			 { get; set; }
 	}
-
 }

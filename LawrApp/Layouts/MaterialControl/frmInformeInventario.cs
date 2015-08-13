@@ -181,5 +181,12 @@ namespace LawrApp.Layouts.MaterialControl
 			this._hilo.Start();
 
 		}
+
+		private void btnSalir_Click(object sender, EventArgs e)
+		{
+			frmMain frmMain = new frmMain(this._data);
+			frmMain.Show();
+			this.Close();
+		}
 	}
 }

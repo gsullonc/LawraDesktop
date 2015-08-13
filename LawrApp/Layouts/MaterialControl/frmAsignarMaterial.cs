@@ -24,6 +24,7 @@ namespace LawrApp.Layouts.MaterialControl
 		private Thread _hilo;
 		private bool _gotoModify;
 		private int _codMaterial;
+		private string _key;
 
 		public frmAsignarMaterial( DataGeneral dts)
 		{
@@ -54,9 +55,10 @@ namespace LawrApp.Layouts.MaterialControl
 
 					this.dgvListado.Rows.Add();
 					this.dgvListado.Rows[0].Cells[0].Value = this.cboSalones.SelectedValue;
-					this.dgvListado.Rows[0].Cells[1].Value = this._codMaterial;
-					this.dgvListado.Rows[0].Cells[2].Value = this.txtDescripcion.Text;
-					this.dgvListado.Rows[0].Cells[3].Value = this.nudCantidad.Value;
+					this.dgvListado.Rows[0].Cells[1].Value = this._key;
+					this.dgvListado.Rows[0].Cells[2].Value = this._codMaterial;
+					this.dgvListado.Rows[0].Cells[3].Value = this.txtDescripcion.Text;
+					this.dgvListado.Rows[0].Cells[4].Value = this.nudCantidad.Value;
 					
 					this.ResetControls();
 
@@ -76,13 +78,17 @@ namespace LawrApp.Layouts.MaterialControl
 			{
 				if (this._cAsignarMaterial.Update(this._codMaterial, Convert.ToInt32(this.dgvListado.Rows[0].Cells[0].Value)))
 				{
-					this.dgvListado.CurrentRow.Cells[3].Value = this.nudCantidad.Value;
+					this.dgvListado.CurrentRow.Cells[4].Value = this.nudCantidad.Value;
+
 					this.pgsLoad.Visible = false;
 
 					MetroMessageBox.Show(this, "El Material a sido Modificado correctamente", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Question);
+
 					this.panelMain.Enabled = true;
 					this.nudCantidad.Value = 1;
+
 					this.ResetControls();
+					this.btnbuscar.Enabled = true;
 				}
 				else
 				{
@@ -147,7 +153,7 @@ namespace LawrApp.Layouts.MaterialControl
 				this.txtMarca.Text			  = this._objMaterialofAula.Marca.Name;
 				this.txtModelo.Text           = this._objMaterialofAula.Model;
 
-				this.nudCantidad.Value = Convert.ToInt32(this.dgvListado.CurrentRow.Cells[3].Value); 
+				this.nudCantidad.Value = Convert.ToInt32(this.dgvListado.CurrentRow.Cells[4].Value); 
 
 				this.pgsLoad.Visible = false;
 				this.cboSalones.Enabled = false;
@@ -200,9 +206,10 @@ namespace LawrApp.Layouts.MaterialControl
 				return;
 		}
 
-		private void ObtenerDataOfMaterial(int Codigo, string Descripcion, string Categoria, string Marca, string Modelo)
+		private void ObtenerDataOfMaterial(int Codigo, string Descripcion, string Categoria, string Marca, string Modelo, string key)
 		{
 			this._codMaterial		 = Convert.ToInt32(Codigo);
+			this._key				 = key;
 			this.txtDescripcion.Text = Descripcion;
 			this.txtMarca.Text       = Marca;
 			this.txtCategoria.Text   = Categoria;

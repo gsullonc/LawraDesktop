@@ -20,6 +20,7 @@ namespace LawrApp.Layouts.MaterialControl
 		private Thread _hilo;
 
 		private  int   _codMaterial;
+		private string _key;
 
 		public frmIngresos(DataGeneral dts)
 		{
@@ -71,14 +72,14 @@ namespace LawrApp.Layouts.MaterialControl
 
 		#region METODOS QUE USA DELEGADOS
 
-		private void ObtenerDataOfMaterial(int Codigo, string Descripcion, string Categoria, string Marca, string Modelo)
+		private void ObtenerDataOfMaterial(int Codigo, string Descripcion, string Categoria, string Marca, string Modelo , string Key)
 		{
 			this._codMaterial           = Codigo;
 			this.txtDescripcion.Text    = Descripcion;
 			this.txtMarca.Text          = Marca;
 			this.txtCategoria.Text      = Categoria;
 			this.txtModelo.Text         = Modelo;
-
+			this._key					= Key;
 			this.cboTipoIngreso.Text = "Seleccione...";
 
 			this.txtDescripcion.Enabled = true;

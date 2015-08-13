@@ -26,16 +26,15 @@ namespace LawrApp.Layouts.MaterialControl
 
 		#region HILOS
 
-		private void UpdateCostoIngreso()
+		private void UpdateCantidadIngreso()
 		{
 			CheckForIllegalCrossThreadCalls = false;
 			if (this._cAdquisicion.UpdateQuantityIngresosOfMaterial(this._codigoMaterial, this._codigoIngreso))
 			{
-				MessageBox.Show("Cantidad Actualizada");
-
-				DataRow[] datos = this._dt.Select("Codigo=" + _codigoMaterial);
+				DataRow[] datos = this._dt.Select("Codigo_Material=" + _codigoMaterial);
 				DataRow row = datos[0];
-				this._dt.Rows[this._dt.Rows.IndexOf(row)][4] = this.nudCantidad.Value;
+				this._dt.Rows[this._dt.Rows.IndexOf(row)][7] = this.nudCantidad.Value;
+
 				this.Close();
 			}
 			else
@@ -106,7 +105,7 @@ namespace LawrApp.Layouts.MaterialControl
 		private void btnModificar_Click(object sender, EventArgs e)
 		{
 
-			this._hilo = new Thread(new ThreadStart(this.UpdateCostoIngreso));
+			this._hilo = new Thread(new ThreadStart(this.UpdateCantidadIngreso));
 			if (nudCantidad.Value == 0)
 				this.toolTipValidacion.Show("Minimo un Material", this.nudCantidad, 300);
 			else

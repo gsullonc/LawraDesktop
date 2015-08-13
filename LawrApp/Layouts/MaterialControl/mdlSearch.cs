@@ -21,7 +21,13 @@ namespace LawrApp.Layouts.MaterialControl
 		lMaterial _ListadoMaterial = new lMaterial();
 		private Thread _hilo;
 
-		public delegate void getMaterial(int Codigo, string Descripcion, string Categoria, string Marca, string Modelo);
+		public delegate void getMaterial(int Codigo,
+										 string Descripcion,
+										 string Categoria, 
+										 string Marca,
+										 string Modelo,
+										 string Key);
+
 		public event getMaterial SendMaterial;
 
 		public mdlSearch(DataGeneral dts)
@@ -39,20 +45,21 @@ namespace LawrApp.Layouts.MaterialControl
 
 			this.dgvListado.DataSource = this._dts.Tables["ListaMaterial"];
 
-			this.dgvListado.Columns["Codigo"].Visible = false;
+			this.dgvListado.Columns["Codigo"].Visible       = false;
+			this.dgvListado.Columns["Condicion"].Visible    = false;
+			this.dgvListado.Columns["C_value"].Visible		= false;
 			this.dgvListado.Columns["Modifieddate"].Visible = false;
 
 			this.dgvListado.Columns["Description"].HeaderText = "Descripcion";
-			this.dgvListado.Columns["Category"].HeaderText = "Categoria";
-					
+			this.dgvListado.Columns["Category"].HeaderText    = "Categoria";
 
 			this.dgvListado.Columns["Description"].FillWeight = 120;
-			this.dgvListado.Columns["Category"].FillWeight = 60;
-			this.dgvListado.Columns["Condicion"].FillWeight = 60;
-					
+			this.dgvListado.Columns["Key"].FillWeight         = 40;
+			this.dgvListado.Columns["Category"].FillWeight    = 60;
+			this.dgvListado.Columns["Condicion"].FillWeight   = 60;
 
 			this.panelMain.Enabled = true;
-			this.pgsLoad.Visible = false;
+			this.pgsLoad.Visible   = false;
 		}
 				
 		private void SendToAdquisicion()
@@ -116,7 +123,6 @@ namespace LawrApp.Layouts.MaterialControl
 						this._hilo = new Thread(new ThreadStart(this.SendToAdquisicion));
 						this._hilo.Start();
 					}
-			
 				}
 			}
 
@@ -129,12 +135,13 @@ namespace LawrApp.Layouts.MaterialControl
 				int index = this.dgvListado.CurrentCell.RowIndex;
 
 				int codigo = Convert.ToInt32(this.dgvListado.Rows[index].Cells[0].Value);
-				string descripcion = Convert.ToString(this.dgvListado.Rows[index].Cells[1].Value);
+				string key = Convert.ToString(this.dgvListado.Rows[index].Cells[1].Value);
+				string descripcion = Convert.ToString(this.dgvListado.Rows[index].Cells[2].Value);
 				string Marca = "d";
-				string categoria = Convert.ToString(this.dgvListado.Rows[index].Cells[2].Value);
+				string categoria = Convert.ToString(this.dgvListado.Rows[index].Cells[3].Value);
 				string Modelo = "Ovalada";
 
-				this.SendMaterial(codigo, descripcion, categoria, Marca, Modelo);
+				this.SendMaterial(codigo, descripcion, categoria, Marca, Modelo,key);
 
 				this.Dispose();
 			}
