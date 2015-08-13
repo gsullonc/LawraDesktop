@@ -95,6 +95,7 @@ namespace LawrApp.Layouts.MaterialControl
 				this.btnimprimir.Enabled		   = true;
 				this.btnSeleccionar.Enabled		   = true;
 				this.btneliminardd.Enabled		   = true;
+				this.btnDesmarcar.Enabled		   = true;
 			}
 			else
 			{
@@ -458,10 +459,10 @@ namespace LawrApp.Layouts.MaterialControl
 				this.btnSolucionar.Enabled = true;
 				this.btnReportar.Enabled   = false;
 			}
-			
+
 		}
 
-		private void metroButton1_Click(object sender, EventArgs e)
+		private void btnDesmarcar_Click(object sender, EventArgs e)
 		{
 			foreach (DataGridViewRow row in this.dgvListado.Rows)
 			{
@@ -469,11 +470,11 @@ namespace LawrApp.Layouts.MaterialControl
 				oCell.Value = false;
 				if (!(bool)oCell.Value)
 				{
-					row.Cells["key"].Style.BackColor		 = Color.White;
+					row.Cells["key"].Style.BackColor = Color.White;
 					row.Cells["Descripcion"].Style.BackColor = Color.White;
-					row.Cells["Categoria"].Style.BackColor   = Color.White;
-					row.Cells["Condicion"].Style.BackColor   = Color.White;
-					row.Cells["Seleccion"].Style.BackColor   = Color.White;
+					row.Cells["Categoria"].Style.BackColor = Color.White;
+					row.Cells["Condicion"].Style.BackColor = Color.White;
+					row.Cells["Seleccion"].Style.BackColor = Color.White;
 				}
 			}
 		}

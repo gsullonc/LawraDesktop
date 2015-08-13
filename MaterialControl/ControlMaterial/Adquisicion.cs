@@ -12,7 +12,6 @@ using Options;
 
 using Newtonsoft.Json;
 
-
 namespace MaterialControl.ControlMaterial
 {
 	public class Adquisicion
@@ -141,6 +140,26 @@ namespace MaterialControl.ControlMaterial
 			{
 				this.MsExecpcion = ex.Message;
 				return null;
+			}
+		}
+
+		public bool Delete(int CodigoIngreso, int CodigoMaterial)
+		{
+			Query query = new Query("api/material/"+CodigoMaterial+ "/entry/"+ CodigoMaterial);
+
+			try
+			{
+				query.SendRequestDELETE();
+
+				if (query.ResponseStatusCode != HttpStatusCode.OK)
+					throw new ArgumentException(query.MsgExceptionQuery, "ERROR AL ELIMINAR ESTE INGRESO");
+
+				return Convert.ToBoolean(query.ResponseContent);
+			}
+			catch (Exception e)
+			{
+				this._msgException = e.Message;
+				return false;
 			}
 		}
 	}

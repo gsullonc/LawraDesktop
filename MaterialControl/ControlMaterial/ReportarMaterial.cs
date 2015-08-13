@@ -11,7 +11,7 @@ namespace MaterialControl.ControlMaterial
 	public class ReportarMaterial
 	{
 		private tMaterialSalon _data = new tMaterialSalon();
-
+		private tReportarMaterial _reportar = new tReportarMaterial();
 		private string _msgException;
 
 
@@ -35,29 +35,27 @@ namespace MaterialControl.ControlMaterial
 
 		#region METODOS
 
-		public bool Update(int CodigoMaterial, int CodigoSalon)
+		public int InsertReporteIndividual(int codigoMaterial, int codigoAula)
 		{
-			Query query = new Query("api/students/update/"+ CodigoMaterial);
+			Query query = new Query("api/material/"+ codigoMaterial+ "/aula/"+ codigoAula + "/report");
 
-			query.RequestParameters = this._data;
-
+			query.RequestParameters = this._reportar;
+			 
 			try
 			{
-				query.SendRequestPUT();
+				query.SendRequestPOST();
 
-				if (query.ResponseStatusCode != HttpStatusCode.OK)
+				if (query.ResponseStatusCode != HttpStatusCode.Created)
 					throw new ArgumentNullException(query.MsgExceptionQuery, "ERROR");
 
-				return Convert.ToBoolean(query.ResponseContent);
-
+				return Convert.ToInt32(query.ResponseContent); ;
 			}
 			catch (Exception e)
 			{
 				this._msgException = e.Message;
-				return false;
+				return 0;
 			}
 		}
-
 
 		#endregion
 	}

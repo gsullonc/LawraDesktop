@@ -111,7 +111,7 @@ namespace LawrApp.Layouts.MaterialControl
 				this.pgsLoad.Visible = false;
 				this.dgvListado.Rows.RemoveAt(this.dgvListado.CurrentRow.Index);
 				this.btnEliminar.Enabled = false;
-				MetroMessageBox.Show(this, "El Material a sido Eliminado", "CORRECTO", MessageBoxButtons.OK, MessageBoxIcon.Question);
+				MetroMessageBox.Show(this, "La Asignacion del Material ha sifo Eliminado", "CORRECTO", MessageBoxButtons.OK, MessageBoxIcon.Question);
 			}
 			else
 			{

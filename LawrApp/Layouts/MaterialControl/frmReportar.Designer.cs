@@ -30,6 +30,7 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.btnDesmarcar = new MetroFramework.Controls.MetroButton();
 			this.btneliminardd = new MetroFramework.Controls.MetroButton();
 			this.btnSeleccionar = new MetroFramework.Controls.MetroButton();
 			this.btnimprimir = new MetroFramework.Controls.MetroButton();
@@ -49,7 +50,6 @@
 			this.tsmItemSolucionar = new System.Windows.Forms.ToolStripMenuItem();
 			this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.metroButton1 = new MetroFramework.Controls.MetroButton();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvListado)).BeginInit();
 			this.cmsOptions.SuspendLayout();
@@ -57,7 +57,7 @@
 			// 
 			// panel1
 			// 
-			this.panel1.Controls.Add(this.metroButton1);
+			this.panel1.Controls.Add(this.btnDesmarcar);
 			this.panel1.Controls.Add(this.btneliminardd);
 			this.panel1.Controls.Add(this.btnSeleccionar);
 			this.panel1.Controls.Add(this.btnimprimir);
@@ -76,6 +76,17 @@
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(740, 471);
 			this.panel1.TabIndex = 0;
+			// 
+			// btnDesmarcar
+			// 
+			this.btnDesmarcar.Enabled = false;
+			this.btnDesmarcar.Location = new System.Drawing.Point(193, 437);
+			this.btnDesmarcar.Name = "btnDesmarcar";
+			this.btnDesmarcar.Size = new System.Drawing.Size(103, 31);
+			this.btnDesmarcar.TabIndex = 22;
+			this.btnDesmarcar.Text = "Desmarcar todo";
+			this.btnDesmarcar.UseSelectable = true;
+			this.btnDesmarcar.Click += new System.EventHandler(this.btnDesmarcar_Click);
 			// 
 			// btneliminardd
 			// 
@@ -276,16 +287,6 @@
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
 			this.toolStripSeparator1.Size = new System.Drawing.Size(127, 6);
 			// 
-			// metroButton1
-			// 
-			this.metroButton1.Location = new System.Drawing.Point(193, 437);
-			this.metroButton1.Name = "metroButton1";
-			this.metroButton1.Size = new System.Drawing.Size(103, 31);
-			this.metroButton1.TabIndex = 22;
-			this.metroButton1.Text = "Desmarcar todo";
-			this.metroButton1.UseSelectable = true;
-			this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
-			// 
 			// frmReportar
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -333,6 +334,6 @@
 		private MetroFramework.Controls.MetroButton btnimprimir;
 		private MetroFramework.Controls.MetroButton btnSeleccionar;
 		private MetroFramework.Controls.MetroButton btneliminardd;
-		private MetroFramework.Controls.MetroButton metroButton1;
+		private MetroFramework.Controls.MetroButton btnDesmarcar;
 	}
 }

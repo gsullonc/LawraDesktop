@@ -33,6 +33,9 @@
 			this.tabcontrolMain = new MetroFramework.Controls.MetroTabControl();
 			this.tabpagListadoIngreso = new MetroFramework.Controls.MetroTabPage();
 			this.panelListado = new System.Windows.Forms.Panel();
+			this.btnImprimir = new MetroFramework.Controls.MetroButton();
+			this.btnEliminar = new MetroFramework.Controls.MetroButton();
+			this.btnModificar = new MetroFramework.Controls.MetroButton();
 			this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
 			this.txtFiltroIngreso = new System.Windows.Forms.TextBox();
 			this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
@@ -41,7 +44,7 @@
 			this.txtFiltroMaterial = new System.Windows.Forms.TextBox();
 			this.dgvListadoMaterial = new System.Windows.Forms.DataGridView();
 			this.btnCerrar = new MetroFramework.Controls.MetroButton();
-			this.btnListar = new MetroFramework.Controls.MetroButton();
+			this.btnDetalle = new MetroFramework.Controls.MetroButton();
 			this.tabDetalleIngresos = new MetroFramework.Controls.MetroTabPage();
 			this.panelDetalle = new System.Windows.Forms.Panel();
 			this.btmImprimir = new MetroFramework.Controls.MetroButton();
@@ -49,8 +52,6 @@
 			this.btnCancelar = new MetroFramework.Controls.MetroButton();
 			this.txtFiltrarIngreso = new System.Windows.Forms.TextBox();
 			this.dgvListadoDetalle = new System.Windows.Forms.DataGridView();
-			this.btnModificar = new MetroFramework.Controls.MetroButton();
-			this.btnEliminar = new MetroFramework.Controls.MetroButton();
 			this.panelMain.SuspendLayout();
 			this.tabcontrolMain.SuspendLayout();
 			this.tabpagListadoIngreso.SuspendLayout();
@@ -114,6 +115,7 @@
 			// panelListado
 			// 
 			this.panelListado.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+			this.panelListado.Controls.Add(this.btnImprimir);
 			this.panelListado.Controls.Add(this.btnEliminar);
 			this.panelListado.Controls.Add(this.btnModificar);
 			this.panelListado.Controls.Add(this.metroLabel4);
@@ -124,11 +126,40 @@
 			this.panelListado.Controls.Add(this.txtFiltroMaterial);
 			this.panelListado.Controls.Add(this.dgvListadoMaterial);
 			this.panelListado.Controls.Add(this.btnCerrar);
-			this.panelListado.Controls.Add(this.btnListar);
+			this.panelListado.Controls.Add(this.btnDetalle);
 			this.panelListado.Location = new System.Drawing.Point(0, 0);
 			this.panelListado.Name = "panelListado";
 			this.panelListado.Size = new System.Drawing.Size(700, 427);
 			this.panelListado.TabIndex = 16;
+			// 
+			// btnImprimir
+			// 
+			this.btnImprimir.Location = new System.Drawing.Point(339, 387);
+			this.btnImprimir.Name = "btnImprimir";
+			this.btnImprimir.Size = new System.Drawing.Size(85, 37);
+			this.btnImprimir.TabIndex = 28;
+			this.btnImprimir.Text = "Imprimir";
+			this.btnImprimir.UseSelectable = true;
+			// 
+			// btnEliminar
+			// 
+			this.btnEliminar.Location = new System.Drawing.Point(430, 387);
+			this.btnEliminar.Name = "btnEliminar";
+			this.btnEliminar.Size = new System.Drawing.Size(85, 37);
+			this.btnEliminar.TabIndex = 27;
+			this.btnEliminar.Text = "Eliminar";
+			this.btnEliminar.UseSelectable = true;
+			this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+			// 
+			// btnModificar
+			// 
+			this.btnModificar.Location = new System.Drawing.Point(521, 387);
+			this.btnModificar.Name = "btnModificar";
+			this.btnModificar.Size = new System.Drawing.Size(85, 37);
+			this.btnModificar.TabIndex = 26;
+			this.btnModificar.Text = "Modificar";
+			this.btnModificar.UseSelectable = true;
+			this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
 			// 
 			// metroLabel4
 			// 
@@ -229,16 +260,16 @@
 			this.btnCerrar.UseSelectable = true;
 			this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
 			// 
-			// btnListar
+			// btnDetalle
 			// 
-			this.btnListar.Enabled = false;
-			this.btnListar.Location = new System.Drawing.Point(612, 387);
-			this.btnListar.Name = "btnListar";
-			this.btnListar.Size = new System.Drawing.Size(85, 37);
-			this.btnListar.TabIndex = 14;
-			this.btnListar.Text = "Listar";
-			this.btnListar.UseSelectable = true;
-			this.btnListar.Click += new System.EventHandler(this.btnListar_Click);
+			this.btnDetalle.Enabled = false;
+			this.btnDetalle.Location = new System.Drawing.Point(612, 387);
+			this.btnDetalle.Name = "btnDetalle";
+			this.btnDetalle.Size = new System.Drawing.Size(85, 37);
+			this.btnDetalle.TabIndex = 14;
+			this.btnDetalle.Text = "Detalle ";
+			this.btnDetalle.UseSelectable = true;
+			this.btnDetalle.Click += new System.EventHandler(this.btnDetalle_Click);
 			// 
 			// tabDetalleIngresos
 			// 
@@ -338,25 +369,6 @@
 			this.dgvListadoDetalle.StandardTab = true;
 			this.dgvListadoDetalle.TabIndex = 7;
 			// 
-			// btnModificar
-			// 
-			this.btnModificar.Location = new System.Drawing.Point(521, 387);
-			this.btnModificar.Name = "btnModificar";
-			this.btnModificar.Size = new System.Drawing.Size(85, 37);
-			this.btnModificar.TabIndex = 26;
-			this.btnModificar.Text = "Modificar";
-			this.btnModificar.UseSelectable = true;
-			this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-			// 
-			// btnEliminar
-			// 
-			this.btnEliminar.Location = new System.Drawing.Point(430, 387);
-			this.btnEliminar.Name = "btnEliminar";
-			this.btnEliminar.Size = new System.Drawing.Size(85, 37);
-			this.btnEliminar.TabIndex = 27;
-			this.btnEliminar.Text = "Eliminar";
-			this.btnEliminar.UseSelectable = true;
-			// 
 			// frmInformeIngresosPorMaterial
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -401,7 +413,7 @@
 		private System.Windows.Forms.TextBox txtFiltrarIngreso;
 		private System.Windows.Forms.DataGridView dgvListadoDetalle;
 		private MetroFramework.Controls.MetroButton btnCerrar;
-		private MetroFramework.Controls.MetroButton btnListar;
+		private MetroFramework.Controls.MetroButton btnDetalle;
 		private MetroFramework.Controls.MetroButton btnCancelar;
 		private System.Windows.Forms.Panel panelDetalle;
 		private System.Windows.Forms.Panel panelListado;
@@ -412,5 +424,6 @@
 		private System.Windows.Forms.TextBox txtFiltroFecha;
 		private MetroFramework.Controls.MetroButton btnEliminar;
 		private MetroFramework.Controls.MetroButton btnModificar;
+		private MetroFramework.Controls.MetroButton btnImprimir;
 	}
 }

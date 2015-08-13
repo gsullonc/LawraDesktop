@@ -28,9 +28,7 @@ namespace LawrApp.Layouts.MaterialControl
 		public event getCondicionMaterial UpdateCondicionMaterial;
 
 		private ReportarMaterial _cReportarMaterial = new ReportarMaterial();
-
-		private lMaterial _ListReportMaterial = new lMaterial();
-
+		tReportarMaterial _objreportMaterial = new tReportarMaterial();
 		private Thread _hilo;
 
 		DataTable _dt = new DataTable();
@@ -74,11 +72,11 @@ namespace LawrApp.Layouts.MaterialControl
 			this._hilo.Abort();
 		}
 
-		private void SubmitUpdate()
+		private void Registrar()
 		{
 			CheckForIllegalCrossThreadCalls = false;
 
-			if (this._cReportarMaterial.Update(this._codigoMaterial,this._codigoSalon))
+			if (this._cReportarMaterial.InsertReporteIndividual(this._codigoMaterial,this._codigoSalon) > 0)
 			{
 				this.pgsLoad.Visible = false;
 
@@ -115,7 +113,11 @@ namespace LawrApp.Layouts.MaterialControl
 
 		void JoinData()
 		{
-			this._ListReportMaterial.Condicion = this.cboCondicion.Text;
+			this._objreportMaterial.codigoAula		= _codigoSalon;
+			this._objreportMaterial.CodigoMaterial  = _codigoMaterial;
+			this._objreportMaterial.Condicion		= this.cboCondicion.Text;
+			this._objreportMaterial.Responsable		= this.txtResponsable.Text;
+			this._objreportMaterial.Detalle         = this.txtDetalle.Text;
 		}
 
 		#endregion
@@ -138,7 +140,10 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void btnguardar_Click(object sender, EventArgs e)
 		{
-			this._hilo = new Thread(new ThreadStart(this.SubmitUpdate));
+			if(string.IsNullOrEmpty(this.txtResponsable.Text))
+				return;
+
+			this._hilo = new Thread(new ThreadStart(this.Registrar));
 			this._condicion = this.cboCondicion.Text;
 			this.JoinData();
 			this.panelMain.Enabled = false;

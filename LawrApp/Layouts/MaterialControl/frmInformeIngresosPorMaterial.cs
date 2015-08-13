@@ -33,7 +33,35 @@ namespace LawrApp.Layouts.MaterialControl
 		}
 
 		#region Hilo
-			
+
+		private void SubmitDelete()
+		{
+			CheckForIllegalCrossThreadCalls = false;
+
+			if (this._cAdquisicion.Delete(this._codIngreso, this._codMaterial))
+			{
+				this.pgsLoad.Visible = false;
+				this.dgvListadoMaterial.Rows.RemoveAt(this.dgvListadoMaterial.CurrentRow.Index);
+				MetroMessageBox.Show(this, "El Ingreso a sido Eliminado", "CORRECTO", MessageBoxButtons.OK, MessageBoxIcon.Question);
+
+				if (this.dgvListadoMaterial.Rows.Count > 0)
+				{
+					this.panelListado.Enabled = true;
+					this.btmImprimir.Enabled = true;
+					this.btnModificar.Enabled = true;
+					this.btnEliminar.Enabled = true;
+				}
+				else
+					this.panelListado.Enabled = true;
+			}
+			else
+			{
+				this.pgsLoad.Visible = false;
+				MetroMessageBox.Show(this, this._cAdquisicion.MsExecpcion, "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+
+			this._hilo.Abort();
+		}
 		private void LoadDetalleIngresos()
 		{
 			CheckForIllegalCrossThreadCalls = false;
@@ -58,7 +86,6 @@ namespace LawrApp.Layouts.MaterialControl
 					};
 
 					this._dt.Rows.Add(d);
-
 				}
 
 				this.dgvListadoDetalle.DataSource = this._dt;
@@ -71,11 +98,10 @@ namespace LawrApp.Layouts.MaterialControl
 				this.dgvListadoDetalle.Columns[4].FillWeight = 55;
 				this.dgvListadoDetalle.Columns[5].FillWeight = 50;
 
-				this.pgsLoad.Visible = false;
+				this.pgsLoad.Visible      = false;
 				this.btnModificar.Enabled = true;
-				this.btnEliminar.Enabled = true;
+				this.btnEliminar.Enabled  = true;
 			}
-			
 		}
 
 		#endregion
@@ -91,6 +117,36 @@ namespace LawrApp.Layouts.MaterialControl
 			this._dt.Columns.Add("Cantidad",		typeof(string));
 			this._dt.Columns.Add("Numero Documento",typeof(string));
 			this._dt.Columns.Add("Costo",           typeof(string));
+		}
+		private void ActionForDelete()
+		{
+			if (this.dgvListadoMaterial.CurrentRow.Selected)
+			{
+				DialogResult result = MetroMessageBox.Show(
+					this,
+					"Realmente Deseas Eliminar Este Ingreso seleccionado?\nPresiona Ok para Eliminar...",
+					"ADVERTENCIA",
+					MessageBoxButtons.OKCancel,
+					MessageBoxIcon.Warning
+				);
+
+				if (result == DialogResult.OK)
+				{
+					this._hilo = new Thread(new ThreadStart(SubmitDelete));
+
+					this.panelListado.Enabled = false;
+					this.btmImprimir.Enabled  = false;
+					this.btnModificar.Enabled = false;
+					this.btnEliminar.Enabled  = false;
+					this.pgsLoad.Visible = true;
+
+					this._codMaterial = Convert.ToInt32(this.dgvListadoMaterial.CurrentRow.Cells[0].Value);
+
+					this._hilo.Start();
+				}
+			}
+			else
+				return;
 		}
 
 		private void ColumnListIngresos()
@@ -170,15 +226,16 @@ namespace LawrApp.Layouts.MaterialControl
 
 				 this.dgvListadoMaterial.DataSource = _dt2;
 
-				 this.dgvListadoMaterial.Columns[0].Visible = true;
+				 this.dgvListadoMaterial.Columns[0].Visible = false;
 				 this.dgvListadoMaterial.Columns[1].Visible = false;
+				 this.dgvListadoMaterial.Columns[2].Visible = false;
 
 				 this.dgvListadoMaterial.Columns[0].FillWeight = 50;
 				 this.dgvListadoMaterial.Columns[2].FillWeight = 60;
-				 this.dgvListadoMaterial.Columns[3].FillWeight = 110;
+				 this.dgvListadoMaterial.Columns[3].FillWeight = 130;
 				 this.dgvListadoMaterial.Columns[4].FillWeight = 60;
 				 this.dgvListadoMaterial.Columns[5].FillWeight = 50;
-				 this.dgvListadoMaterial.Columns[6].FillWeight = 60;
+				 this.dgvListadoMaterial.Columns[6].FillWeight = 75;
 				 this.dgvListadoMaterial.Columns[7].FillWeight = 55;
 				 this.dgvListadoMaterial.Columns[8].FillWeight = 70;
 				 this.dgvListadoMaterial.Columns[9].FillWeight = 45;
@@ -188,12 +245,13 @@ namespace LawrApp.Layouts.MaterialControl
 				 this.txtFiltroMaterial.Enabled = true;
 
 				 this.panelListado.Enabled      = true;
-				 this.btnListar.Enabled         = true;
+				 this.btnDetalle.Enabled         = true;
 				 this.pgsLoad.Visible			= false;
 			 }
 			 else
 				 MetroMessageBox.Show(this,"No se ha encontrado Informacion ","lISTA INGRESOS ",MessageBoxButtons.OK,MessageBoxIcon.Information);
 		}
+
 		private void frmInformeIngresosPorMaterial_Load(object sender, EventArgs e)
 		{
 			this.tabcontrolMain.SelectedTab = this.tabpagListadoIngreso;
@@ -208,7 +266,6 @@ namespace LawrApp.Layouts.MaterialControl
 			this.pgsLoad.Visible = true;
 
 			this._hilo.Start();
-
 		}
 
 		private void dgvListadoMaterial_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -219,25 +276,20 @@ namespace LawrApp.Layouts.MaterialControl
 		private void txtFiltrarIngreso_TextChanged(object sender, EventArgs e)
 		{
 			TextBox txt = (TextBox)sender;
-			 this._dt.DefaultView.RowFilter = ("Codigo Like '%" + this.txtFiltrarIngreso.Text + "%'");
+
+			this._dt.DefaultView.RowFilter = ("Codigo Like '%" + this.txtFiltrarIngreso.Text + "%'");
 			this.dgvListadoDetalle.DataSource = this._dt.DefaultView;
 		}
 
 		private void txtFiltro_TextChanged_1(object sender, EventArgs e)
-		{
+		 {
 			TextBox txt = (TextBox)sender;
-			if (this.dgvListadoMaterial.DataSource != string.Empty)
+			if (!string.IsNullOrEmpty(this.txtFiltroFecha.Text) && !string.IsNullOrEmpty(this.txtFiltroIngreso.Text))
 			{
-				if (!string.IsNullOrEmpty(this.txtFiltroFecha.Text) && !string.IsNullOrEmpty(this.txtFiltroIngreso.Text))
-				{
-					this._dt2.DefaultView.RowFilter = ("Key + ' ' + Descripcion + ' ' + Categoria like '%" + this.txtFiltroMaterial.Text +
-						"%' AND Fecha_Ingreso='" + this.txtFiltroFecha.Text +
-						"%' AND Codigo='" + this.txtFiltroIngreso + "'");
-					this.dgvListadoDetalle.DataSource = this._dt2.DefaultView;
-				}
+				this._dt2.DefaultView.RowFilter = ("Fecha_Ingreso like '%" + this.txtFiltroFecha.Text + "%' AND Codigo='" + 
+									this.txtFiltroIngreso.Text + "' AND Descripcion like '%" + this.txtFiltroMaterial.Text + "%'");
+				this.dgvListadoMaterial.DataSource = this._dt2.DefaultView;
 			}
-			else
-				return;
 		}
 
 		private void btnCerrar_Click(object sender, EventArgs e)
@@ -250,18 +302,42 @@ namespace LawrApp.Layouts.MaterialControl
 		private void txtFiltroFecha_TextChanged(object sender, EventArgs e)
 		{
 			TextBox txt = (TextBox)sender;
-			this._dt2.DefaultView.RowFilter = ("Fecha_Ingreso Like '%" + this.txtFiltroFecha.Text + "%'");
-			this.dgvListadoMaterial.DataSource = this._dt2.DefaultView;
+			if (string.IsNullOrEmpty(this.txtFiltroIngreso.Text))
+			{
+				this._dt2.DefaultView.RowFilter = ("Fecha_Ingreso Like '%" + this.txtFiltroFecha.Text + "%'");
+				this.dgvListadoMaterial.DataSource = this._dt2.DefaultView;
+			}
+			else
+			{
+				this._dt2.DefaultView.RowFilter = ("Codigo='" + this.txtFiltroIngreso.Text + "' AND Fecha_Ingreso like'%" + this.txtFiltroFecha.Text + "%'");
+				this.dgvListadoMaterial.DataSource = this._dt2.DefaultView;
+			}
 		}
 
 		private void txtFiltroIngreso_TextChanged(object sender, EventArgs e)
 		{
 			TextBox txt = (TextBox)sender;
-			if ((!string.IsNullOrEmpty(this.txtFiltroFecha.Text)))
+			if ((!string.IsNullOrEmpty(this.txtFiltroFecha.Text)) && (!string.IsNullOrEmpty(this.txtFiltroIngreso.Text)))
 			{
-				this._dt.DefaultView.RowFilter = ("Codigo Like '%" + this.txtFiltroIngreso.Text + "%'AND Fecha_Ingreso='" +
-						 this.txtFiltroFecha + "'");
+				this._dt2.DefaultView.RowFilter = ("Fecha_Ingreso like '%" + this.txtFiltroFecha.Text + "%' AND Codigo='" + this.txtFiltroIngreso.Text + "'");
+				this.dgvListadoMaterial .DataSource = this._dt2.DefaultView;
+			}
+			if( !string.IsNullOrEmpty(this.txtFiltroFecha.Text) && string.IsNullOrEmpty(this.txtFiltroIngreso.Text))
+			{
+				this._dt2.DefaultView.RowFilter = ("Fecha_Ingreso Like '%" + this.txtFiltroFecha.Text + "%'");
+				this.dgvListadoMaterial.DataSource = this._dt2.DefaultView;
+			}
+			else
+			{
+				this._dt2.DefaultView.RowFilter = ("Codigo Like '%" + this.txtFiltroIngreso.Text + "%'");
 				this.dgvListadoDetalle.DataSource = this._dt2.DefaultView;
+				foreach (DataGridViewRow d in this.dgvListadoMaterial.Rows)
+				{
+					if (d.Index >= 0)
+						this.txtFiltroFecha.Text = d.Cells[6].Value.ToString();
+					else
+						this.txtFiltroFecha.Clear();
+				}
 			}
 		}
 
@@ -270,12 +346,6 @@ namespace LawrApp.Layouts.MaterialControl
 			this.panelDetalle.Enabled = false;
 			this.tabcontrolMain.SelectedTab = this.tabpagListadoIngreso;
 			this._dt.Rows.Clear();
-
-		}
-
-		private void btnListar_Click(object sender, EventArgs e)
-		{
-			this.DetallarIngresos();
 		}
 
 		private void btnModificar_Click(object sender, EventArgs e)
@@ -293,6 +363,17 @@ namespace LawrApp.Layouts.MaterialControl
 				else
 					return;
 			}
+		}
+
+		private void btnEliminar_Click(object sender, EventArgs e)
+		{
+			if (this.dgvListadoMaterial.Rows.Count > 0)
+				this.ActionForDelete();
+		}
+
+		private void btnDetalle_Click(object sender, EventArgs e)
+		{
+			this.DetallarIngresos();
 		}
 
 	}

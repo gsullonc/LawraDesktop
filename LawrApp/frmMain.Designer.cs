@@ -60,7 +60,6 @@
 			this.listadoDeIngresoPorMaterialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.inventarioDeAulaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.listadoMaterialPorAulaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.listadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.reportarMaterialesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.registroDeInformeInventarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.procesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -338,8 +337,7 @@
 			// inventarioDeAulaToolStripMenuItem
 			// 
 			this.inventarioDeAulaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.listadoMaterialPorAulaToolStripMenuItem,
-            this.listadoToolStripMenuItem});
+            this.listadoMaterialPorAulaToolStripMenuItem});
 			this.inventarioDeAulaToolStripMenuItem.Name = "inventarioDeAulaToolStripMenuItem";
 			this.inventarioDeAulaToolStripMenuItem.Size = new System.Drawing.Size(284, 24);
 			this.inventarioDeAulaToolStripMenuItem.Text = "Inventario de Aula";
@@ -347,16 +345,9 @@
 			// listadoMaterialPorAulaToolStripMenuItem
 			// 
 			this.listadoMaterialPorAulaToolStripMenuItem.Name = "listadoMaterialPorAulaToolStripMenuItem";
-			this.listadoMaterialPorAulaToolStripMenuItem.Size = new System.Drawing.Size(302, 24);
+			this.listadoMaterialPorAulaToolStripMenuItem.Size = new System.Drawing.Size(195, 24);
 			this.listadoMaterialPorAulaToolStripMenuItem.Text = "Nuevo Inventario ";
 			this.listadoMaterialPorAulaToolStripMenuItem.Click += new System.EventHandler(this.listadoMaterialPorAulaToolStripMenuItem_Click);
-			// 
-			// listadoToolStripMenuItem
-			// 
-			this.listadoToolStripMenuItem.Name = "listadoToolStripMenuItem";
-			this.listadoToolStripMenuItem.Size = new System.Drawing.Size(302, 24);
-			this.listadoToolStripMenuItem.Text = "Listado de los Materiales del Aula";
-			this.listadoToolStripMenuItem.Click += new System.EventHandler(this.listadoToolStripMenuItem_Click);
 			// 
 			// reportarMaterialesToolStripMenuItem
 			// 
@@ -1101,7 +1092,6 @@
 		private System.Windows.Forms.ToolStripMenuItem regisroDeIngresosDeMaterialesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem listadoDeIngresoPorMaterialToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem listadoMaterialPorAulaToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem listadoToolStripMenuItem;
 
     }
 }
