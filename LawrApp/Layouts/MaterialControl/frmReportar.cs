@@ -79,7 +79,7 @@ namespace LawrApp.Layouts.MaterialControl
 				this.dgvListado.Columns["Descripcion"].FillWeight = 100;
 				this.dgvListado.Columns["Categoria"].FillWeight   = 50;
 				this.dgvListado.Columns["Condicion"].FillWeight   = 52;
-				this.dgvListado.Columns["Seleccion"].FillWeight   = 50;
+				this.dgvListado.Columns["Seleccion"].FillWeight   = 45;
 
 				this.pgsLoad.Visible    = false;
 				this.dgvListado.Enabled = true;
@@ -229,6 +229,7 @@ namespace LawrApp.Layouts.MaterialControl
 			this.AgregarColumnDatatableGlobal();
 
 			//DENTRO DEL HLO TENGO QUE PONERLO Y TEGO QUE CONVERTIR TODAS LOS ETDOS QUE SE COMUNICAN CON EL SERVIDOR EN HILOS
+
 			this.cboSalon.ValueMember    = "Codigo";
 			this.cboSalon.DisplayMember  = "Description";
 			this.cboSalon.DataSource     = this._data.Tables["ListaSalones"];
@@ -381,40 +382,6 @@ namespace LawrApp.Layouts.MaterialControl
 			}
 		}
 
-		private void dgvListado_CellContentClick(object sender, DataGridViewCellEventArgs e)
-		{
-			if (e.RowIndex == -1)
-				return;
-			
-			if (this.dgvListado.Columns[e.ColumnIndex].Name == "Seleccion")
-			{
-				DataGridViewRow row = new DataGridViewRow();
-				for(int i = 0 ; i < this.dgvListado.Rows.Count; i ++ )
-				{
-					row = this.dgvListado.Rows[i];
-					if(row.Cells[5].Value == null)
-						Convert.ToBoolean(row.Cells[5].Value = false);
-
-					if(Convert.ToBoolean(row.Cells[5].Value) == true)
-					{
-						row.Cells["key"].Style.BackColor = Color.Red;
-						row.Cells["Descripcion"].Style.BackColor = Color.Red;
-						row.Cells["Categoria"].Style.BackColor = Color.Red;
-						row.Cells["Condicion"].Style.BackColor = Color.Red;
-						row.Cells["Seleccion"].Style.BackColor = Color.Red;
-					}
-					else
-					{
-						row.Cells["key"].Style.BackColor = Color.White;
-						row.Cells["Descripcion"].Style.BackColor = Color.White;
-						row.Cells["Categoria"].Style.BackColor = Color.White;
-						row.Cells["Condicion"].Style.BackColor = Color.White;
-						row.Cells["Seleccion"].Style.BackColor = Color.White;
-					}
-				}
-			}
-		}
-
 		private void dgvListado_CurrentCellDirtyStateChanged(object sender, EventArgs e)
 		{
 			MessageBox.Show(""+this.dgvListado.CommitEdit(DataGridViewDataErrorContexts.Commit));
@@ -447,21 +414,6 @@ namespace LawrApp.Layouts.MaterialControl
 			this.reportar();
 		}
 
-		private void dgvListado_CellClick(object sender, DataGridViewCellEventArgs e)
-		{
-			if (this.dgvListado.CurrentRow.Cells[4].Value.ToString() == "Req. Reparacion")
-			{
-				this.btnReportar.Enabled   = true;
-				this.btnSolucionar.Enabled = false;
-			}
-			if (this.dgvListado.CurrentRow.Cells[4].Value.ToString() == "En Pesimo Estado")
-			{
-				this.btnSolucionar.Enabled = true;
-				this.btnReportar.Enabled   = false;
-			}
-
-		}
-
 		private void btnDesmarcar_Click(object sender, EventArgs e)
 		{
 			foreach (DataGridViewRow row in this.dgvListado.Rows)
@@ -479,11 +431,58 @@ namespace LawrApp.Layouts.MaterialControl
 			}
 		}
 
+		private void dgvListado_CurrentCellDirtyStateChanged_1(object sender, EventArgs e)
+		{
+			if (this.dgvListado.IsCurrentCellDirty)
+			{
+				this.dgvListado.CommitEdit(DataGridViewDataErrorContexts.Commit);
+			}
+		}
+
 		private void dgvListado_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
-			if(this.dgvListado.CurrentRow.Cells[6].Value.ToString() == "Seleccion")
+			if (e.RowIndex == -1)
+				return;
+
+			if (this.dgvListado.Columns[e.ColumnIndex].Name == "Seleccion")
 			{
-				MessageBox.Show("Estado: " + this.dgvListado.Columns[6].ValueType);
+
+				DataGridViewRow row = new DataGridViewRow();
+				for (int i = 0; i < this.dgvListado.Rows.Count; i++)
+				{
+					row = this.dgvListado.Rows[i];
+					if (row.Cells[e.ColumnIndex].Value == null)
+						Convert.ToBoolean(row.Cells[e.ColumnIndex].Value = false);
+
+					if ((bool)row.Cells[e.ColumnIndex].Value == true)
+					{
+						row.Cells["key"].Style.BackColor		 = Color.Red;
+						row.Cells["Descripcion"].Style.BackColor = Color.Red;
+						row.Cells["Categoria"].Style.BackColor   = Color.Red;
+						row.Cells["Condicion"].Style.BackColor   = Color.Red;
+						row.Cells["Seleccion"].Style.BackColor	 = Color.Red;
+
+						row.Cells["key"].Style.ForeColor		 = Color.White;
+						row.Cells["Descripcion"].Style.ForeColor = Color.White;
+						row.Cells["Categoria"].Style.ForeColor	 = Color.White;
+						row.Cells["Condicion"].Style.ForeColor	 = Color.White;
+						row.Cells["Seleccion"].Style.ForeColor   = Color.White;
+					}
+					else
+					{
+						row.Cells["key"].Style.BackColor		 = Color.White;
+						row.Cells["Descripcion"].Style.BackColor = Color.White;
+						row.Cells["Categoria"].Style.BackColor   = Color.White;
+						row.Cells["Condicion"].Style.BackColor   = Color.White;
+						row.Cells["Seleccion"].Style.BackColor   = Color.White;
+
+						row.Cells["key"].Style.ForeColor		 = Color.FromArgb(90,92,93) ;
+						row.Cells["Descripcion"].Style.ForeColor = Color.FromArgb(90, 92, 93);
+						row.Cells["Categoria"].Style.ForeColor   = Color.FromArgb(90, 92, 93);
+						row.Cells["Condicion"].Style.ForeColor   = Color.FromArgb(90, 92, 93);
+						row.Cells["Seleccion"].Style.ForeColor   = Color.FromArgb(90, 92, 93);
+					}
+				}
 			}
 		}
 	}
