@@ -180,6 +180,7 @@
 			this.dgvListado.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellClick);
 			this.dgvListado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellContentClick);
 			this.dgvListado.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellContentClick);
+			this.dgvListado.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellValueChanged);
 			this.dgvListado.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvListado_MouseDown);
 			// 
 			// metroLabel3

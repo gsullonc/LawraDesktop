@@ -203,6 +203,7 @@ namespace LawrApp.Layouts.MaterialControl
 				 foreach (lIngresos item in lingreso)
 				 {
 					 object[] dataMaterial = this._data.Tables["ListaMaterial"].Select("Codigo=" + item.CodigoMaterial)[0].ItemArray;
+
 					 string Key			= Convert.ToString(dataMaterial[1]);
 					 string Descripcion = Convert.ToString(dataMaterial[2]);
 					 string Categoria	= Convert.ToString(dataMaterial[3]); 

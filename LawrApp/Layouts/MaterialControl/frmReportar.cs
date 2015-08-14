@@ -478,5 +478,13 @@ namespace LawrApp.Layouts.MaterialControl
 				}
 			}
 		}
+
+		private void dgvListado_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+		{
+			if(this.dgvListado.CurrentRow.Cells[6].Value.ToString() == "Seleccion")
+			{
+				MessageBox.Show("Estado: " + this.dgvListado.Columns[6].ValueType);
+			}
+		}
 	}
 }
