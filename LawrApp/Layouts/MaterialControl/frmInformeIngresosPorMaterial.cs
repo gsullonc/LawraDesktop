@@ -284,11 +284,34 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void txtFiltro_TextChanged_1(object sender, EventArgs e)
 		 {
-			TextBox txt = (TextBox)sender;
-			if (!string.IsNullOrEmpty(this.txtFiltroFecha.Text) && !string.IsNullOrEmpty(this.txtFiltroIngreso.Text))
+			if(string.IsNullOrEmpty(this.txtFiltroFecha.Text) && (string.IsNullOrEmpty(this.txtFiltroIngreso.Text)))
 			{
-				this._dt2.DefaultView.RowFilter = ("Fecha_Ingreso like '%" + this.txtFiltroFecha.Text + "%' AND Codigo='" + 
-									this.txtFiltroIngreso.Text + "' AND Descripcion like '%" + this.txtFiltroMaterial.Text + "%'");
+				TextBox txt = (TextBox)sender;
+
+				this._dt2.DefaultView.RowFilter = ("Descripcion like '%" + this.txtFiltroMaterial.Text + "%'");
+				this.dgvListadoMaterial.DataSource = this._dt2.DefaultView;
+
+				this.txtFiltroFecha.Enabled   = false;
+				this.txtFiltroIngreso.Enabled = false;
+
+				if(string.IsNullOrEmpty(this.txtFiltroMaterial.Text))
+				{
+					this.txtFiltroFecha.Enabled   = true;
+					this.txtFiltroIngreso.Enabled = true;
+				}
+			}
+			if(!string.IsNullOrEmpty(this.txtFiltroFecha.Text) && (string.IsNullOrEmpty(this.txtFiltroIngreso.Text)))
+			{
+				this._dt2.DefaultView.RowFilter = ("Fecha_Ingreso Like '%" + this.txtFiltroFecha.Text +
+													"%' AND Descripcion like '%" + this.txtFiltroMaterial.Text + "%'");
+				this.dgvListadoMaterial.DataSource = this._dt2.DefaultView;
+			}
+			if(!string.IsNullOrEmpty(this.txtFiltroFecha.Text) && (!string.IsNullOrEmpty(this.txtFiltroIngreso.Text)))
+			{
+				this._dt2.DefaultView.RowFilter = ("Fecha_Ingreso Like '%" + this.txtFiltroFecha.Text
+													+ "%' AND Codigo='" + this.txtFiltroIngreso.Text +
+													"' AND Descripcion like '%" + this.txtFiltroMaterial.Text + "%'");
+
 				this.dgvListadoMaterial.DataSource = this._dt2.DefaultView;
 			}
 		}
@@ -308,7 +331,7 @@ namespace LawrApp.Layouts.MaterialControl
 				this._dt2.DefaultView.RowFilter = ("Fecha_Ingreso Like '%" + this.txtFiltroFecha.Text + "%'");
 				this.dgvListadoMaterial.DataSource = this._dt2.DefaultView;
 			}
-			else
+			if(!string.IsNullOrEmpty(txtFiltroIngreso.Text) && string.IsNullOrEmpty(this.txtFiltroMaterial.Text))
 			{
 				this._dt2.DefaultView.RowFilter = ("Codigo='" + this.txtFiltroIngreso.Text + "' AND Fecha_Ingreso like'%" + this.txtFiltroFecha.Text + "%'");
 				this.dgvListadoMaterial.DataSource = this._dt2.DefaultView;
@@ -323,22 +346,16 @@ namespace LawrApp.Layouts.MaterialControl
 				this._dt2.DefaultView.RowFilter = ("Fecha_Ingreso like '%" + this.txtFiltroFecha.Text + "%' AND Codigo='" + this.txtFiltroIngreso.Text + "'");
 				this.dgvListadoMaterial .DataSource = this._dt2.DefaultView;
 			}
+
 			if( !string.IsNullOrEmpty(this.txtFiltroFecha.Text) && string.IsNullOrEmpty(this.txtFiltroIngreso.Text))
 			{
 				this._dt2.DefaultView.RowFilter = ("Fecha_Ingreso Like '%" + this.txtFiltroFecha.Text + "%'");
 				this.dgvListadoMaterial.DataSource = this._dt2.DefaultView;
 			}
-			else
+			if( string.IsNullOrEmpty(this.txtFiltroFecha.Text))
 			{
 				this._dt2.DefaultView.RowFilter = ("Codigo Like '%" + this.txtFiltroIngreso.Text + "%'");
 				this.dgvListadoDetalle.DataSource = this._dt2.DefaultView;
-				foreach (DataGridViewRow d in this.dgvListadoMaterial.Rows)
-				{
-					if (d.Index >= 0)
-						this.txtFiltroFecha.Text = d.Cells[6].Value.ToString();
-					else
-						this.txtFiltroFecha.Clear();
-				}
 			}
 		}
 

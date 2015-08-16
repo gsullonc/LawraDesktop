@@ -42,6 +42,7 @@ namespace LawrApp.Layouts.MaterialControl
 
 			if (lista != null && lista.Any())
 			{
+				ComboBox d = new ComboBox();
 				foreach (lMaterial item in lista)
 
 				{
@@ -68,7 +69,6 @@ namespace LawrApp.Layouts.MaterialControl
 					 this.colCondicion.DataSource = this.Condition_Table();
 					 this.colCondicion.ValueMember = "Codigo";
 					 this.colCondicion.DisplayMember = "Descripcion";
-					
 				}
 				
 				this.pgsLoad.Visible = false;
@@ -126,7 +126,7 @@ namespace LawrApp.Layouts.MaterialControl
 			this._dt.Columns.Add("Keys",	    typeof(string));
 			this._dt.Columns.Add("Descripcion", typeof(string));
 			this._dt.Columns.Add("Categoria",   typeof(string));
-			this._dt.Columns.Add("Condicion",   typeof(string));
+			this._dt.Columns.Add("Condicion", typeof(string));
 		}
 
 		#endregion

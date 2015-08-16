@@ -137,7 +137,7 @@
 			this.btnImprimir.Location = new System.Drawing.Point(339, 387);
 			this.btnImprimir.Name = "btnImprimir";
 			this.btnImprimir.Size = new System.Drawing.Size(85, 37);
-			this.btnImprimir.TabIndex = 28;
+			this.btnImprimir.TabIndex = 6;
 			this.btnImprimir.Text = "Imprimir";
 			this.btnImprimir.UseSelectable = true;
 			// 
@@ -146,7 +146,7 @@
 			this.btnEliminar.Location = new System.Drawing.Point(430, 387);
 			this.btnEliminar.Name = "btnEliminar";
 			this.btnEliminar.Size = new System.Drawing.Size(85, 37);
-			this.btnEliminar.TabIndex = 27;
+			this.btnEliminar.TabIndex = 7;
 			this.btnEliminar.Text = "Eliminar";
 			this.btnEliminar.UseSelectable = true;
 			this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
@@ -156,7 +156,7 @@
 			this.btnModificar.Location = new System.Drawing.Point(521, 387);
 			this.btnModificar.Name = "btnModificar";
 			this.btnModificar.Size = new System.Drawing.Size(85, 37);
-			this.btnModificar.TabIndex = 26;
+			this.btnModificar.TabIndex = 8;
 			this.btnModificar.Text = "Modificar";
 			this.btnModificar.UseSelectable = true;
 			this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -176,7 +176,7 @@
 			this.txtFiltroIngreso.Location = new System.Drawing.Point(181, 40);
 			this.txtFiltroIngreso.Name = "txtFiltroIngreso";
 			this.txtFiltroIngreso.Size = new System.Drawing.Size(111, 29);
-			this.txtFiltroIngreso.TabIndex = 19;
+			this.txtFiltroIngreso.TabIndex = 2;
 			this.txtFiltroIngreso.TextChanged += new System.EventHandler(this.txtFiltroIngreso_TextChanged);
 			// 
 			// metroLabel3
@@ -194,7 +194,7 @@
 			this.txtFiltroFecha.Location = new System.Drawing.Point(3, 40);
 			this.txtFiltroFecha.Name = "txtFiltroFecha";
 			this.txtFiltroFecha.Size = new System.Drawing.Size(172, 29);
-			this.txtFiltroFecha.TabIndex = 17;
+			this.txtFiltroFecha.TabIndex = 1;
 			this.txtFiltroFecha.TextChanged += new System.EventHandler(this.txtFiltroFecha_TextChanged);
 			// 
 			// metroLabel1
@@ -212,7 +212,7 @@
 			this.txtFiltroMaterial.Location = new System.Drawing.Point(298, 40);
 			this.txtFiltroMaterial.Name = "txtFiltroMaterial";
 			this.txtFiltroMaterial.Size = new System.Drawing.Size(399, 29);
-			this.txtFiltroMaterial.TabIndex = 13;
+			this.txtFiltroMaterial.TabIndex = 3;
 			this.txtFiltroMaterial.TextChanged += new System.EventHandler(this.txtFiltro_TextChanged_1);
 			// 
 			// dgvListadoMaterial
@@ -255,7 +255,7 @@
 			this.btnCerrar.Location = new System.Drawing.Point(3, 387);
 			this.btnCerrar.Name = "btnCerrar";
 			this.btnCerrar.Size = new System.Drawing.Size(85, 37);
-			this.btnCerrar.TabIndex = 15;
+			this.btnCerrar.TabIndex = 5;
 			this.btnCerrar.Text = "Salir";
 			this.btnCerrar.UseSelectable = true;
 			this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
@@ -266,7 +266,7 @@
 			this.btnDetalle.Location = new System.Drawing.Point(612, 387);
 			this.btnDetalle.Name = "btnDetalle";
 			this.btnDetalle.Size = new System.Drawing.Size(85, 37);
-			this.btnDetalle.TabIndex = 14;
+			this.btnDetalle.TabIndex = 9;
 			this.btnDetalle.Text = "Detalle ";
 			this.btnDetalle.UseSelectable = true;
 			this.btnDetalle.Click += new System.EventHandler(this.btnDetalle_Click);

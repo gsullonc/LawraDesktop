@@ -30,17 +30,17 @@
 		{
 			this.panelMain = new System.Windows.Forms.Panel();
 			this.dgvListado = new System.Windows.Forms.DataGridView();
-			this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colKeys = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colCategorias = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ColCondicion1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colCondicion = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.btnSalir = new MetroFramework.Controls.MetroButton();
 			this.btnGuardar = new MetroFramework.Controls.MetroButton();
 			this.cboSalon = new System.Windows.Forms.ComboBox();
 			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
 			this.pgsLoad = new MetroFramework.Controls.MetroProgressSpinner();
+			this.colCondicion = new System.Windows.Forms.DataGridViewComboBoxColumn();
+			this.ColCondicion1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colCategorias = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colKeys = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.panelMain.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvListado)).BeginInit();
 			this.SuspendLayout();
@@ -90,44 +90,6 @@
 			this.dgvListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvListado.Size = new System.Drawing.Size(734, 355);
 			this.dgvListado.TabIndex = 7;
-			// 
-			// colCodigo
-			// 
-			this.colCodigo.HeaderText = "Codigo";
-			this.colCodigo.Name = "colCodigo";
-			this.colCodigo.Visible = false;
-			// 
-			// colKeys
-			// 
-			this.colKeys.FillWeight = 80F;
-			this.colKeys.HeaderText = "Keys";
-			this.colKeys.Name = "colKeys";
-			// 
-			// colDescripcion
-			// 
-			this.colDescripcion.FillWeight = 120F;
-			this.colDescripcion.HeaderText = "Descripcion";
-			this.colDescripcion.Name = "colDescripcion";
-			// 
-			// colCategorias
-			// 
-			this.colCategorias.FillWeight = 60F;
-			this.colCategorias.HeaderText = "Categoria";
-			this.colCategorias.Name = "colCategorias";
-			// 
-			// ColCondicion1
-			// 
-			this.ColCondicion1.HeaderText = "Condicion";
-			this.ColCondicion1.Name = "ColCondicion1";
-			this.ColCondicion1.Visible = false;
-			// 
-			// colCondicion
-			// 
-			this.colCondicion.DataPropertyName = "Idcondicion";
-			this.colCondicion.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-			this.colCondicion.FillWeight = 70F;
-			this.colCondicion.HeaderText = "Condicionc";
-			this.colCondicion.Name = "colCondicion";
 			// 
 			// btnSalir
 			// 
@@ -179,6 +141,44 @@
 			this.pgsLoad.UseSelectable = true;
 			this.pgsLoad.Value = 50;
 			this.pgsLoad.Visible = false;
+			// 
+			// colCondicion
+			// 
+			this.colCondicion.DataPropertyName = "(ninguno)";
+			this.colCondicion.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+			this.colCondicion.FillWeight = 70F;
+			this.colCondicion.HeaderText = "Condicionc";
+			this.colCondicion.Name = "colCondicion";
+			// 
+			// ColCondicion1
+			// 
+			this.ColCondicion1.HeaderText = "Condicion";
+			this.ColCondicion1.Name = "ColCondicion1";
+			this.ColCondicion1.Visible = false;
+			// 
+			// colCategorias
+			// 
+			this.colCategorias.FillWeight = 60F;
+			this.colCategorias.HeaderText = "Categoria";
+			this.colCategorias.Name = "colCategorias";
+			// 
+			// colDescripcion
+			// 
+			this.colDescripcion.FillWeight = 120F;
+			this.colDescripcion.HeaderText = "Descripcion";
+			this.colDescripcion.Name = "colDescripcion";
+			// 
+			// colKeys
+			// 
+			this.colKeys.FillWeight = 80F;
+			this.colKeys.HeaderText = "Keys";
+			this.colKeys.Name = "colKeys";
+			// 
+			// colCodigo
+			// 
+			this.colCodigo.HeaderText = "Codigo";
+			this.colCodigo.Name = "colCodigo";
+			this.colCodigo.Visible = false;
 			// 
 			// frmInformeInventario
 			// 
