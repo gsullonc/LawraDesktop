@@ -25,8 +25,8 @@ namespace LawrApp.Layouts.MaterialControl
 										 string Descripcion,
 										 string Categoria, 
 										 string Marca,
-										 string Modelo,
-										 string Key);
+										 string Modelo
+										 );
 
 		public event getMaterial SendMaterial;
 
@@ -46,17 +46,13 @@ namespace LawrApp.Layouts.MaterialControl
 			this.dgvListado.DataSource = this._dts.Tables["ListaMaterial"];
 
 			this.dgvListado.Columns["Codigo"].Visible       = false;
-			this.dgvListado.Columns["Condicion"].Visible    = false;
-			this.dgvListado.Columns["C_value"].Visible		= false;
 			this.dgvListado.Columns["Modifieddate"].Visible = false;
 
 			this.dgvListado.Columns["Description"].HeaderText = "Descripcion";
 			this.dgvListado.Columns["Category"].HeaderText    = "Categoria";
 
 			this.dgvListado.Columns["Description"].FillWeight = 120;
-			this.dgvListado.Columns["Key"].FillWeight         = 40;
 			this.dgvListado.Columns["Category"].FillWeight    = 60;
-			this.dgvListado.Columns["Condicion"].FillWeight   = 60;
 
 			this.panelMain.Enabled = true;
 			this.pgsLoad.Visible   = false;
@@ -88,6 +84,26 @@ namespace LawrApp.Layouts.MaterialControl
 		#endregion
 
 		#region METODOS
+		private void PasarMaterial()
+		{
+
+			if (dgvListado.CurrentRow.Selected)
+			{
+				int index = this.dgvListado.CurrentCell.RowIndex;
+
+				int codigo = Convert.ToInt32(this.dgvListado.Rows[index].Cells[0].Value);
+				string descripcion = Convert.ToString(this.dgvListado.Rows[index].Cells[1].Value);
+				string categoria = Convert.ToString(this.dgvListado.Rows[index].Cells[2].Value);
+				string Marca = "d";
+				string Modelo = "Ovalada";
+
+				this.SendMaterial(codigo, descripcion, categoria, Marca, Modelo);
+
+				this.Dispose();
+			}
+			else
+				return;
+		}
 		void GetMateriales()
 		{
 			this._hilo = new Thread(new ThreadStart(this.LoadDataMaterial));
@@ -130,23 +146,12 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void dgvListado_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
-			if (dgvListado.CurrentRow.Selected)
-			{
-				int index = this.dgvListado.CurrentCell.RowIndex;
+			this.PasarMaterial();
+		}
 
-				int codigo = Convert.ToInt32(this.dgvListado.Rows[index].Cells[0].Value);
-				string key = Convert.ToString(this.dgvListado.Rows[index].Cells[1].Value);
-				string descripcion = Convert.ToString(this.dgvListado.Rows[index].Cells[2].Value);
-				string Marca = "d";
-				string categoria = Convert.ToString(this.dgvListado.Rows[index].Cells[3].Value);
-				string Modelo = "Ovalada";
-
-				this.SendMaterial(codigo, descripcion, categoria, Marca, Modelo,key);
-
-				this.Dispose();
-			}
-			else
-				return;
+		private void btnAgregar_Click(object sender, EventArgs e)
+		{
+			this.PasarMaterial();
 		}
 	}
 }

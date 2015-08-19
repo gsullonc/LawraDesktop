@@ -29,7 +29,6 @@
 		private void InitializeComponent()
 		{
 			this.panelMain = new System.Windows.Forms.Panel();
-			this.btnSalir = new MetroFramework.Controls.MetroButton();
 			this.btnAgregar = new MetroFramework.Controls.MetroButton();
 			this.dgvListado = new System.Windows.Forms.DataGridView();
 			this.btnbuscar = new MetroFramework.Controls.MetroButton();
@@ -42,7 +41,6 @@
 			// 
 			// panelMain
 			// 
-			this.panelMain.Controls.Add(this.btnSalir);
 			this.panelMain.Controls.Add(this.btnAgregar);
 			this.panelMain.Controls.Add(this.dgvListado);
 			this.panelMain.Controls.Add(this.btnbuscar);
@@ -54,15 +52,6 @@
 			this.panelMain.Size = new System.Drawing.Size(450, 298);
 			this.panelMain.TabIndex = 0;
 			// 
-			// btnSalir
-			// 
-			this.btnSalir.Location = new System.Drawing.Point(290, 264);
-			this.btnSalir.Name = "btnSalir";
-			this.btnSalir.Size = new System.Drawing.Size(75, 31);
-			this.btnSalir.TabIndex = 5;
-			this.btnSalir.Text = "Salir";
-			this.btnSalir.UseSelectable = true;
-			// 
 			// btnAgregar
 			// 
 			this.btnAgregar.Location = new System.Drawing.Point(371, 264);
@@ -71,6 +60,7 @@
 			this.btnAgregar.TabIndex = 4;
 			this.btnAgregar.Text = "Agregar";
 			this.btnAgregar.UseSelectable = true;
+			this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
 			// 
 			// dgvListado
 			// 
@@ -174,7 +164,6 @@
 		private MetroFramework.Controls.MetroLabel metroLabel1;
 		private System.Windows.Forms.TextBox txtfiltro;
 		private System.Windows.Forms.DataGridView dgvListado;
-		private MetroFramework.Controls.MetroButton btnSalir;
 		private MetroFramework.Controls.MetroButton btnAgregar;
 		private MetroFramework.Controls.MetroProgressSpinner pgsLoad;
 	}

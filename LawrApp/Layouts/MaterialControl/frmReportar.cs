@@ -36,11 +36,11 @@ namespace LawrApp.Layouts.MaterialControl
 		{
 			CheckForIllegalCrossThreadCalls = false;
 
-			List<lMaterial> lista = this._cMaterial.ListforAula(this._codSalon);
+			List<lMaterialOfAula> lista = this._cMaterial.ListforAula(this._codSalon);
 		
 			if (lista != null && lista.Any())
 			{
-				foreach (lMaterial item in lista)
+				foreach (lMaterialOfAula item in lista)
 				{
 					string conditionString = string.Empty;
 
@@ -91,11 +91,13 @@ namespace LawrApp.Layouts.MaterialControl
 
 				this.cboTipoBusqueda.SelectedValue = "All";
 				this.cboTipoBusqueda.Enabled       = true;
+
+				this.dgvListado.ClearSelection();
+
 				this.txtfiltro.Enabled			   = true;
 				this.btnimprimir.Enabled		   = true;
 				this.btnSeleccionar.Enabled		   = true;
 				this.btneliminardd.Enabled		   = true;
-				this.btnDesmarcar.Enabled		   = true;
 			}
 			else
 			{
@@ -160,20 +162,27 @@ namespace LawrApp.Layouts.MaterialControl
 		{
 			DataRow[] datos = this._dt.Select("Codigo=" + this._codMaterial + "AND Key='" + this._key + "'"); ;
 			DataRow row = datos[0];
+
 			this._dt.Rows[this._dt.Rows.IndexOf(row)][4] = condicion;
-			
+
 			switch(condicion)
 			{
-				case "Reg.Reparacion":
+				case "Req. Reparacion":
+
 					this._dt.Rows[this._dt.Rows.IndexOf(row)][6] = "B";
+
 					this.btnReportar.Enabled = true;
-					break;
+					this.btnSolucionar.Enabled = false;
+				break;
+
 				case "En Pesimo Estado":
 					this._dt.Rows[this._dt.Rows.IndexOf(row)][6] = "C";
+
 					this.btnReportar.Enabled = false;
+					this.btnSolucionar.Enabled = true;
 					break;
 			}
-			
+		
 			this.pgsLoad.Visible = false;
 		}
 
@@ -184,7 +193,7 @@ namespace LawrApp.Layouts.MaterialControl
 			
 			DataRow row = datos[0];
 			this._dt.Rows[this._dt.Rows.IndexOf(row)][4] = "En Buen Estado";
-			this._dt.Rows[this._dt.Rows.IndexOf(row)][5] = "A";
+			this._dt.Rows[this._dt.Rows.IndexOf(row)][6] = "A";
 			this.pgsLoad.Visible = false;
 		}
 
@@ -400,6 +409,8 @@ namespace LawrApp.Layouts.MaterialControl
 					row.Cells["Categoria"].Style.BackColor = Color.Red;
 					row.Cells["Condicion"].Style.BackColor = Color.Red;
 					row.Cells["Seleccion"].Style.BackColor = Color.Red;
+
+					this.btnDesmarcar.Enabled = true;
 				}
 			}
 		}
@@ -484,6 +495,30 @@ namespace LawrApp.Layouts.MaterialControl
 					}
 				}
 			}
+		}
+
+		private void dgvListado_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+			if (this.dgvListado.Columns[4].Name == "Condicion")
+			{
+				if (this.dgvListado.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "En Pesimo Estado")
+				{
+					this.btnSolucionar.Enabled = true;
+					this.btnReportar.Enabled   = false;
+				}
+				if(this.dgvListado.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "En Buen Estado")
+				{
+					this.btnSolucionar.Enabled = false;
+					this.btnReportar.Enabled   = true;
+				}
+				if(this.dgvListado.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "Req. Reparacion")
+				{
+					this.btnSolucionar.Enabled  = false;
+					this.btnReportar.Enabled	= true;
+				}
+			}
+			else
+				return;
 		}
 	}
 }

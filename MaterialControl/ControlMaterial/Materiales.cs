@@ -99,14 +99,11 @@ namespace MaterialControl.ControlMaterial
 
 				foreach (lMaterial Items in MaterialData)
 				{
-					object[] temp = new object[7] { 
+					object[] temp = new object[4] { 
 
 						Items.Codigo, 
-						Items.Key,
 						Items.Description + " " + "_" + Items.Marca + " " + "_"  + Items.Model,
 						Items.Category,
-						Items.Condicion,
-						"En Buen Estado",
 						Items.ModifiedDate
 					};
 
@@ -122,9 +119,9 @@ namespace MaterialControl.ControlMaterial
 			}
 		}
 
-		public List<lMaterial>ListforAula(int codAula)
+		public List<lMaterialOfAula>ListforAula(int codAula)
 		{
-			Query query = new Query("api/students/"+ codAula + "/parents");
+			Query query = new Query("api/material/aula/" + codAula);
 
 			try
 			{
@@ -133,7 +130,7 @@ namespace MaterialControl.ControlMaterial
 				if (query.ResponseStatusCode != HttpStatusCode.OK)
 					throw new ArgumentNullException("No se encontraron datos", "Materiales");
 
-				return JsonConvert.DeserializeObject<List<lMaterial>>(query.ResponseContent);
+				return JsonConvert.DeserializeObject<List<lMaterialOfAula>>(query.ResponseContent);
 			}
 			catch (Exception ex)
 			{

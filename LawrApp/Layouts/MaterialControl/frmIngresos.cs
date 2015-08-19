@@ -43,6 +43,19 @@ namespace LawrApp.Layouts.MaterialControl
 					MessageBoxButtons.OK, MessageBoxIcon.Question);
 
 					this.ResetControls();
+
+					this.txtCategoria.Enabled = false;
+					this.txtMarca.Enabled	  = false;
+					this.txtModelo.Enabled	  = false;
+
+					this.panelMain.Enabled		 = true;
+					this.btnbuscar.Enabled		 = true;
+					this.nudCantidad.Enabled	 = false;
+					this.txtNªDocumento.Enabled  = false;
+					this.txtCosto.Enabled = false;
+					this.txtDescripcion.Enabled	 = false; 
+					this.dtpFecha_Compra.Enabled = false; 
+					this.cboTipoIngreso.Enabled  = false;
 				}
 				else
 				{
@@ -72,21 +85,20 @@ namespace LawrApp.Layouts.MaterialControl
 
 		#region METODOS QUE USA DELEGADOS
 
-		private void ObtenerDataOfMaterial(int Codigo, string Descripcion, string Categoria, string Marca, string Modelo , string Key)
+		private void ObtenerDataOfMaterial(int Codigo, string Descripcion, string Categoria, string Marca, string Modelo)
 		{
 			this._codMaterial           = Codigo;
 			this.txtDescripcion.Text    = Descripcion;
 			this.txtMarca.Text          = Marca;
 			this.txtCategoria.Text      = Categoria;
-			this.txtModelo.Text         = Modelo;
-			this._key					= Key;
+			this.txtModelo.Text			= Modelo;
 			this.cboTipoIngreso.Text = "Seleccione...";
 
 			this.txtDescripcion.Enabled = true;
 			this.btnGuardar.Enabled     = true;
 			this.cboTipoIngreso.Enabled = true;
 
-			
+			this.lblValidateTipoIngreso.Visible = true;
 		}
 
 		#endregion
@@ -133,17 +145,7 @@ namespace LawrApp.Layouts.MaterialControl
 				}
 			}
 
-			if (this.nudCantidad.Enabled)
-			{
-				if (this.nudCantidad.Value == 0)
-				{
-					this.toltipValid.Show("Minimo un Material requerido", this.nudCantidad, 3000);
-					this.txtCosto.Focus();
-					return false;
-				}
-			}
-
-			if (this.txtNªDocumento.Enabled)
+			if(this.cboTipoIngreso.Text == "Compra")
 			{
 				if (string.IsNullOrEmpty(this.txtNªDocumento.Text))
 				{
@@ -151,6 +153,13 @@ namespace LawrApp.Layouts.MaterialControl
 					this.txtNªDocumento.Focus();
 					return false;
 				}
+			}
+
+			if(this.nudCantidad.Value == 0)
+			{
+				this.toltipValid.Show("minimo un material", this.txtCosto, 3000);
+				this.txtNªDocumento.Focus();
+				return false;
 			}
 
 			return true;
@@ -165,7 +174,7 @@ namespace LawrApp.Layouts.MaterialControl
 			{
 				this._cAdqusicion.Data.Quantity      = Convert.ToInt32(this.nudCantidad.Value);
 				this._cAdqusicion.Data.PurchaseDate  = this.dtpFecha_Compra.Text;
-				this._cAdqusicion.Data.PurchasePrice = Convert.ToInt32(this.txtCosto.Text);
+				this._cAdqusicion.Data.PurchasePrice = Convert.ToDecimal(this.txtCosto.Text);
 				this._cAdqusicion.Data.SerialNumber  = this.txtNªDocumento.Text;
 			}
 			else
@@ -188,8 +197,10 @@ namespace LawrApp.Layouts.MaterialControl
 			this._hilo = new Thread(new ThreadStart(this.SubmitInsert));
 
 			this.JoinData();
-			this.panelMain.Enabled = false;
-			this.pgsLoad.Visible   = true;
+			this.panelMain.Enabled		= false;
+			this.btnbuscar.Enabled		= true;
+			this.cboTipoIngreso.Enabled = true;
+			this.pgsLoad.Visible        = true;
 
 			this._hilo.Start();
 		}
@@ -202,8 +213,7 @@ namespace LawrApp.Layouts.MaterialControl
 				this.nudCantidad.Enabled             = true;
 				this.dtpFecha_Compra.Enabled         = true;
 
-				this.lblValidateFecha_Compra.Visible = true;
-				this.lblValidateCantidad.Visible	 = true;
+				this.lblValidateCantidad.Visible	 = false;
 				this.lblValidateCosto.Visible		 = false;
 				this.lblValidateNº_Documento.Visible = false;
 
@@ -217,20 +227,18 @@ namespace LawrApp.Layouts.MaterialControl
 				this.txtNªDocumento.Enabled  = true;
 				this.nudCantidad.Enabled     = true;
 
-				this.nudCantidad.Value = 1;
-
 				this.lblValidateFecha_Compra.Visible = true;
 				this.lblValidateCosto.Visible        = true;
 				this.lblValidateCantidad.Visible     = true;
 				this.lblValidateNº_Documento.Visible = true;
+
+				this.lblValidateCantidad.Visible = false;
 
 			}
 		}
 
 		private void btnsalir_Click(object sender, EventArgs e)
 		{
-			frmMain main = new frmMain(this._dts);
-			main.Show();
 			this.Close();
 		}
 
@@ -264,12 +272,57 @@ namespace LawrApp.Layouts.MaterialControl
 
 		}
 
-		private void nudCantidad_ValueChanged(object sender, EventArgs e)
+		private void frmIngresos_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (this.nudCantidad.Value > 0)
-				this.lblValidateCantidad.Visible = false;
+			frmMain main = new frmMain(this._dts);
+			main.Show();
+		}
+
+		private void nudCantidad_ValueChanged_1(object sender, EventArgs e)
+		{
+			if (string.IsNullOrEmpty(this.nudCantidad.Value.ToString()) || (this.nudCantidad.Value == 0))
+				this.lblValidateCantidad.Visible = true;
 			else
-				this.lblValidateCantidad.Visible = true; 
+				this.lblValidateCantidad.Visible = false;
+		}
+
+		private void nudCantidad_Leave(object sender, EventArgs e)
+		{
+			if(this.nudCantidad.Value == 0)
+			{
+				this.nudCantidad.Value = 1;
+			}
+		}
+
+		private void txtNªDocumento_TextChanged(object sender, EventArgs e)
+		{
+			if (this.cboTipoIngreso.Text == "Compra")
+			{
+				if (string.IsNullOrEmpty(this.txtNªDocumento.Text))
+					this.lblValidateNº_Documento.Visible = true;
+				else
+					this.lblValidateNº_Documento.Visible = false;
+			}
+			else
+				this.lblValidateNº_Documento.Visible = false;
+		}
+
+		private void txtCosto_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (this.txtCosto.Text.Contains('.'))
+			{
+				if (!char.IsDigit(e.KeyChar))
+					e.Handled = true;
+				if (e.KeyChar == '\b')
+					e.Handled = false;
+			}
+			else
+			{
+				if (!char.IsDigit(e.KeyChar))
+					e.Handled = true;
+				if (e.KeyChar == '.' || e.KeyChar == '\b')
+					e.Handled = false;
+			}
 		}
 	}
 }

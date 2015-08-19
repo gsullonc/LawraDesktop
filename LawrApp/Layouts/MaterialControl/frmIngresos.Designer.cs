@@ -103,7 +103,13 @@
 			this.nudCantidad.Name = "nudCantidad";
 			this.nudCantidad.Size = new System.Drawing.Size(195, 29);
 			this.nudCantidad.TabIndex = 63;
-			this.nudCantidad.ValueChanged += new System.EventHandler(this.nudCantidad_ValueChanged);
+			this.nudCantidad.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.nudCantidad.ValueChanged += new System.EventHandler(this.nudCantidad_ValueChanged_1);
+			this.nudCantidad.Leave += new System.EventHandler(this.nudCantidad_Leave);
 			// 
 			// lblValidateCosto
 			// 
@@ -230,7 +236,7 @@
 			this.txtNªDocumento.Name = "txtNªDocumento";
 			this.txtNªDocumento.Size = new System.Drawing.Size(383, 29);
 			this.txtNªDocumento.TabIndex = 6;
-			this.txtNªDocumento.TextChanged += new System.EventHandler(this.txtCosto_TextChanged);
+			this.txtNªDocumento.TextChanged += new System.EventHandler(this.txtNªDocumento_TextChanged);
 			// 
 			// metroLabel7
 			// 
@@ -249,6 +255,7 @@
 			this.txtCosto.Size = new System.Drawing.Size(175, 29);
 			this.txtCosto.TabIndex = 4;
 			this.txtCosto.TextChanged += new System.EventHandler(this.txtCosto_TextChanged);
+			this.txtCosto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCosto_KeyPress);
 			// 
 			// metroLabel6
 			// 
@@ -387,6 +394,7 @@
 			this.ShadowType = MetroFramework.Forms.MetroFormShadowType.SystemShadow;
 			this.Style = MetroFramework.MetroColorStyle.Green;
 			this.Text = "Ingresos de Materiales";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmIngresos_FormClosing);
 			this.panelMain.ResumeLayout(false);
 			this.panelMain.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();

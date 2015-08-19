@@ -319,7 +319,7 @@
 			// 
 			// colKeyMaterial
 			// 
-			this.colKeyMaterial.FillWeight = 50F;
+			this.colKeyMaterial.FillWeight = 40F;
 			this.colKeyMaterial.HeaderText = "Key";
 			this.colKeyMaterial.Name = "colKeyMaterial";
 			this.colKeyMaterial.ReadOnly = true;
@@ -360,6 +360,7 @@
 			this.ShadowType = MetroFramework.Forms.MetroFormShadowType.SystemShadow;
 			this.Style = MetroFramework.MetroColorStyle.Green;
 			this.Text = "Asignar Material";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAsignarMaterial_FormClosing);
 			this.Load += new System.EventHandler(this.frmAsignarMaterial_Load);
 			this.panelMain.ResumeLayout(false);
 			this.spcAsignacion.Panel1.ResumeLayout(false);

@@ -273,16 +273,13 @@ namespace Access
 
 				foreach (lMaterial Item in tipo)
 				{
-					object[] td = new object[7] 
+					object[] td = new object[4] 
 					{ 
 						Item.Codigo, 
-						Item.Key,
 						Item.Description + "" + "_" + 
 						Item.Marca + "" + "_" +
 						Item.Model, 
 						Item.Category,
-						Item.Condicion,
-						"Buen Estado",
 						Item.ModifiedDate 
 					};
 

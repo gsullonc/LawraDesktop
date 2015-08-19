@@ -86,7 +86,7 @@
 			this.tabpageMain.Controls.Add(this.tabpagRegistro);
 			this.tabpageMain.Location = new System.Drawing.Point(3, 5);
 			this.tabpageMain.Name = "tabpageMain";
-			this.tabpageMain.SelectedIndex = 1;
+			this.tabpageMain.SelectedIndex = 0;
 			this.tabpageMain.Size = new System.Drawing.Size(601, 377);
 			this.tabpageMain.Style = MetroFramework.MetroColorStyle.Green;
 			this.tabpageMain.TabIndex = 0;
@@ -104,7 +104,7 @@
 			this.tabpagMaterial.Name = "tabpagMaterial";
 			this.tabpagMaterial.Size = new System.Drawing.Size(593, 335);
 			this.tabpagMaterial.TabIndex = 0;
-			this.tabpagMaterial.Text = "Material";
+			this.tabpagMaterial.Text = "Listado";
 			this.tabpagMaterial.VerticalScrollbarBarColor = true;
 			this.tabpagMaterial.VerticalScrollbarHighlightOnWheel = false;
 			this.tabpagMaterial.VerticalScrollbarSize = 1;
@@ -210,6 +210,8 @@
 			this.dgvListado.Size = new System.Drawing.Size(581, 239);
 			this.dgvListado.StandardTab = true;
 			this.dgvListado.TabIndex = 3;
+			this.dgvListado.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellDoubleClick);
+			this.dgvListado.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvListado_KeyDown);
 			// 
 			// btnbuscar
 			// 
@@ -240,7 +242,7 @@
 			this.tabpagRegistro.Name = "tabpagRegistro";
 			this.tabpagRegistro.Size = new System.Drawing.Size(593, 335);
 			this.tabpagRegistro.TabIndex = 1;
-			this.tabpagRegistro.Text = " Registro de Materiales";
+			this.tabpagRegistro.Text = " Registro ";
 			this.tabpagRegistro.VerticalScrollbarBarColor = true;
 			this.tabpagRegistro.VerticalScrollbarHighlightOnWheel = false;
 			this.tabpagRegistro.VerticalScrollbarSize = 1;
@@ -422,7 +424,7 @@
 			// 
 			// pgsLoad
 			// 
-			this.pgsLoad.Location = new System.Drawing.Point(40, 490);
+			this.pgsLoad.Location = new System.Drawing.Point(40, 481);
 			this.pgsLoad.Maximum = 100;
 			this.pgsLoad.Name = "pgsLoad";
 			this.pgsLoad.Size = new System.Drawing.Size(21, 19);
@@ -454,6 +456,7 @@
 			this.ShadowType = MetroFramework.Forms.MetroFormShadowType.SystemShadow;
 			this.Style = MetroFramework.MetroColorStyle.Green;
 			this.Text = "Registro Material";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmRegistrarMaterial_FormClosing);
 			this.Load += new System.EventHandler(this.frmRegistrarMaterial_Load_1);
 			this.panelMain.ResumeLayout(false);
 			this.tabpageMain.ResumeLayout(false);

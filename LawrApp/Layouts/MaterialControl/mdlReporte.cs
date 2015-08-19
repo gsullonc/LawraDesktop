@@ -118,6 +118,7 @@ namespace LawrApp.Layouts.MaterialControl
 			this._objreportMaterial.Condicion		= this.cboCondicion.Text;
 			this._objreportMaterial.Responsable		= this.txtResponsable.Text;
 			this._objreportMaterial.Detalle         = this.txtDetalle.Text;
+			this._objreportMaterial.Date			= DateTime.Now.ToString();
 		}
 
 		#endregion
@@ -140,8 +141,14 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void btnguardar_Click(object sender, EventArgs e)
 		{
-			if(string.IsNullOrEmpty(this.txtResponsable.Text))
+			if (string.IsNullOrEmpty(this.txtResponsable.Text))
+			{
+				this.lblValidateResponsable.Visible = true;
+				this.toltipValid.Show("Responsable Rquerido", this.txtResponsable, 3000);
+				this.txtResponsable.Focus();
 				return;
+			}
+			
 
 			this._hilo = new Thread(new ThreadStart(this.Registrar));
 			this._condicion = this.cboCondicion.Text;
@@ -150,6 +157,20 @@ namespace LawrApp.Layouts.MaterialControl
 			this.pgsLoad.Visible   = true;
 			
 			this._hilo.Start();
+		}
+
+		private void txtDescripcion_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode != Keys.Down && e.KeyCode != Keys.Up)
+				e.SuppressKeyPress = true;
+		}
+
+		private void txtResponsable_TextChanged(object sender, EventArgs e)
+		{
+			if (string.IsNullOrEmpty(this.txtResponsable.Text))
+				this.lblValidateResponsable.Visible = true;
+			else
+				this.lblValidateResponsable.Visible = false;
 		}
 	}
 }

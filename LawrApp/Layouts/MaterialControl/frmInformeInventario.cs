@@ -38,12 +38,12 @@ namespace LawrApp.Layouts.MaterialControl
 		{
 			CheckForIllegalCrossThreadCalls = false;
 	   
-			List<lMaterial> lista = this._cMaterial.ListforAula(this._codAula);
+			List<lMaterialOfAula> lista = this._cMaterial.ListforAula(this._codAula);
 
 			if (lista != null && lista.Any())
 			{
 				ComboBox d = new ComboBox();
-				foreach (lMaterial item in lista)
+				foreach (lMaterialOfAula item in lista)
 
 				{
 					string conditionString = string.Empty;
@@ -184,9 +184,13 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void btnSalir_Click(object sender, EventArgs e)
 		{
+			this.Close();
+		}
+
+		private void frmInformeInventario_FormClosing(object sender, FormClosingEventArgs e)
+		{
 			frmMain frmMain = new frmMain(this._data);
 			frmMain.Show();
-			this.Close();
 		}
 	}
 }

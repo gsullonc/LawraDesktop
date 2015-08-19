@@ -7,11 +7,11 @@ namespace Objects.Tables
 {
 	public class tReportarMaterial
 	{
-		public int codigoAula { get; set; }
+		public int codigoAula	  { get; set; }
 		public int CodigoMaterial { get; set; }
-		public string Condicion { get; set; }
+		public string Condicion   { get; set; }
 		public string Responsable { get; set; }
-		public string Detalle { get; set; }
-
+		public string Detalle	  { get; set; }
+		public string Date		  { get; set; }
 	}
 }

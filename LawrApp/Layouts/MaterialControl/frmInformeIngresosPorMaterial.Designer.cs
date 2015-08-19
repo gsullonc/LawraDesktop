@@ -35,11 +35,6 @@
 			this.panelListado = new System.Windows.Forms.Panel();
 			this.btnImprimir = new MetroFramework.Controls.MetroButton();
 			this.btnEliminar = new MetroFramework.Controls.MetroButton();
-			this.btnModificar = new MetroFramework.Controls.MetroButton();
-			this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
-			this.txtFiltroIngreso = new System.Windows.Forms.TextBox();
-			this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-			this.txtFiltroFecha = new System.Windows.Forms.TextBox();
 			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
 			this.txtFiltroMaterial = new System.Windows.Forms.TextBox();
 			this.dgvListadoMaterial = new System.Windows.Forms.DataGridView();
@@ -47,11 +42,16 @@
 			this.btnDetalle = new MetroFramework.Controls.MetroButton();
 			this.tabDetalleIngresos = new MetroFramework.Controls.MetroTabPage();
 			this.panelDetalle = new System.Windows.Forms.Panel();
+			this.btnModificar = new MetroFramework.Controls.MetroButton();
 			this.btmImprimir = new MetroFramework.Controls.MetroButton();
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.btnCancelar = new MetroFramework.Controls.MetroButton();
-			this.txtFiltrarIngreso = new System.Windows.Forms.TextBox();
 			this.dgvListadoDetalle = new System.Windows.Forms.DataGridView();
+			this.lbDescripcion = new MetroFramework.Controls.MetroLabel();
+			this.lblMarca = new MetroFramework.Controls.MetroLabel();
+			this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+			this.lblCategoria = new MetroFramework.Controls.MetroLabel();
+			this.lblc = new MetroFramework.Controls.MetroLabel();
 			this.panelMain.SuspendLayout();
 			this.tabcontrolMain.SuspendLayout();
 			this.tabpagListadoIngreso.SuspendLayout();
@@ -117,11 +117,6 @@
 			this.panelListado.BackColor = System.Drawing.SystemColors.ButtonHighlight;
 			this.panelListado.Controls.Add(this.btnImprimir);
 			this.panelListado.Controls.Add(this.btnEliminar);
-			this.panelListado.Controls.Add(this.btnModificar);
-			this.panelListado.Controls.Add(this.metroLabel4);
-			this.panelListado.Controls.Add(this.txtFiltroIngreso);
-			this.panelListado.Controls.Add(this.metroLabel3);
-			this.panelListado.Controls.Add(this.txtFiltroFecha);
 			this.panelListado.Controls.Add(this.metroLabel1);
 			this.panelListado.Controls.Add(this.txtFiltroMaterial);
 			this.panelListado.Controls.Add(this.dgvListadoMaterial);
@@ -134,7 +129,7 @@
 			// 
 			// btnImprimir
 			// 
-			this.btnImprimir.Location = new System.Drawing.Point(339, 387);
+			this.btnImprimir.Location = new System.Drawing.Point(415, 387);
 			this.btnImprimir.Name = "btnImprimir";
 			this.btnImprimir.Size = new System.Drawing.Size(85, 37);
 			this.btnImprimir.TabIndex = 6;
@@ -143,7 +138,7 @@
 			// 
 			// btnEliminar
 			// 
-			this.btnEliminar.Location = new System.Drawing.Point(430, 387);
+			this.btnEliminar.Location = new System.Drawing.Point(506, 387);
 			this.btnEliminar.Name = "btnEliminar";
 			this.btnEliminar.Size = new System.Drawing.Size(85, 37);
 			this.btnEliminar.TabIndex = 7;
@@ -151,56 +146,10 @@
 			this.btnEliminar.UseSelectable = true;
 			this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
 			// 
-			// btnModificar
-			// 
-			this.btnModificar.Location = new System.Drawing.Point(521, 387);
-			this.btnModificar.Name = "btnModificar";
-			this.btnModificar.Size = new System.Drawing.Size(85, 37);
-			this.btnModificar.TabIndex = 8;
-			this.btnModificar.Text = "Modificar";
-			this.btnModificar.UseSelectable = true;
-			this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-			// 
-			// metroLabel4
-			// 
-			this.metroLabel4.AutoSize = true;
-			this.metroLabel4.Location = new System.Drawing.Point(181, 18);
-			this.metroLabel4.Name = "metroLabel4";
-			this.metroLabel4.Size = new System.Drawing.Size(52, 19);
-			this.metroLabel4.TabIndex = 18;
-			this.metroLabel4.Text = "Ingreso";
-			// 
-			// txtFiltroIngreso
-			// 
-			this.txtFiltroIngreso.Enabled = false;
-			this.txtFiltroIngreso.Location = new System.Drawing.Point(181, 40);
-			this.txtFiltroIngreso.Name = "txtFiltroIngreso";
-			this.txtFiltroIngreso.Size = new System.Drawing.Size(111, 29);
-			this.txtFiltroIngreso.TabIndex = 2;
-			this.txtFiltroIngreso.TextChanged += new System.EventHandler(this.txtFiltroIngreso_TextChanged);
-			// 
-			// metroLabel3
-			// 
-			this.metroLabel3.AutoSize = true;
-			this.metroLabel3.Location = new System.Drawing.Point(3, 18);
-			this.metroLabel3.Name = "metroLabel3";
-			this.metroLabel3.Size = new System.Drawing.Size(43, 19);
-			this.metroLabel3.TabIndex = 16;
-			this.metroLabel3.Text = "Fecha";
-			// 
-			// txtFiltroFecha
-			// 
-			this.txtFiltroFecha.Enabled = false;
-			this.txtFiltroFecha.Location = new System.Drawing.Point(3, 40);
-			this.txtFiltroFecha.Name = "txtFiltroFecha";
-			this.txtFiltroFecha.Size = new System.Drawing.Size(172, 29);
-			this.txtFiltroFecha.TabIndex = 1;
-			this.txtFiltroFecha.TextChanged += new System.EventHandler(this.txtFiltroFecha_TextChanged);
-			// 
 			// metroLabel1
 			// 
 			this.metroLabel1.AutoSize = true;
-			this.metroLabel1.Location = new System.Drawing.Point(301, 18);
+			this.metroLabel1.Location = new System.Drawing.Point(3, 18);
 			this.metroLabel1.Name = "metroLabel1";
 			this.metroLabel1.Size = new System.Drawing.Size(61, 19);
 			this.metroLabel1.TabIndex = 11;
@@ -208,10 +157,9 @@
 			// 
 			// txtFiltroMaterial
 			// 
-			this.txtFiltroMaterial.Enabled = false;
-			this.txtFiltroMaterial.Location = new System.Drawing.Point(298, 40);
+			this.txtFiltroMaterial.Location = new System.Drawing.Point(3, 40);
 			this.txtFiltroMaterial.Name = "txtFiltroMaterial";
-			this.txtFiltroMaterial.Size = new System.Drawing.Size(399, 29);
+			this.txtFiltroMaterial.Size = new System.Drawing.Size(694, 29);
 			this.txtFiltroMaterial.TabIndex = 3;
 			this.txtFiltroMaterial.TextChanged += new System.EventHandler(this.txtFiltro_TextChanged_1);
 			// 
@@ -289,15 +237,30 @@
 			// panelDetalle
 			// 
 			this.panelDetalle.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+			this.panelDetalle.Controls.Add(this.lblCategoria);
+			this.panelDetalle.Controls.Add(this.lblc);
+			this.panelDetalle.Controls.Add(this.lblMarca);
+			this.panelDetalle.Controls.Add(this.metroLabel4);
+			this.panelDetalle.Controls.Add(this.lbDescripcion);
+			this.panelDetalle.Controls.Add(this.btnModificar);
 			this.panelDetalle.Controls.Add(this.btmImprimir);
 			this.panelDetalle.Controls.Add(this.metroLabel2);
 			this.panelDetalle.Controls.Add(this.btnCancelar);
-			this.panelDetalle.Controls.Add(this.txtFiltrarIngreso);
 			this.panelDetalle.Controls.Add(this.dgvListadoDetalle);
 			this.panelDetalle.Location = new System.Drawing.Point(3, 0);
 			this.panelDetalle.Name = "panelDetalle";
 			this.panelDetalle.Size = new System.Drawing.Size(702, 427);
 			this.panelDetalle.TabIndex = 28;
+			// 
+			// btnModificar
+			// 
+			this.btnModificar.Location = new System.Drawing.Point(523, 387);
+			this.btnModificar.Name = "btnModificar";
+			this.btnModificar.Size = new System.Drawing.Size(85, 37);
+			this.btnModificar.TabIndex = 29;
+			this.btnModificar.Text = "Modificar";
+			this.btnModificar.UseSelectable = true;
+			this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
 			// 
 			// btmImprimir
 			// 
@@ -313,9 +276,9 @@
 			this.metroLabel2.AutoSize = true;
 			this.metroLabel2.Location = new System.Drawing.Point(3, 14);
 			this.metroLabel2.Name = "metroLabel2";
-			this.metroLabel2.Size = new System.Drawing.Size(57, 19);
+			this.metroLabel2.Size = new System.Drawing.Size(68, 19);
 			this.metroLabel2.TabIndex = 24;
-			this.metroLabel2.Text = "Ingresos";
+			this.metroLabel2.Text = "Material : ";
 			// 
 			// btnCancelar
 			// 
@@ -326,14 +289,6 @@
 			this.btnCancelar.Text = "Cancelar";
 			this.btnCancelar.UseSelectable = true;
 			this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-			// 
-			// txtFiltrarIngreso
-			// 
-			this.txtFiltrarIngreso.Location = new System.Drawing.Point(3, 36);
-			this.txtFiltrarIngreso.Name = "txtFiltrarIngreso";
-			this.txtFiltrarIngreso.Size = new System.Drawing.Size(696, 29);
-			this.txtFiltrarIngreso.TabIndex = 23;
-			this.txtFiltrarIngreso.TextChanged += new System.EventHandler(this.txtFiltrarIngreso_TextChanged);
 			// 
 			// dgvListadoDetalle
 			// 
@@ -369,6 +324,50 @@
 			this.dgvListadoDetalle.StandardTab = true;
 			this.dgvListadoDetalle.TabIndex = 7;
 			// 
+			// lbDescripcion
+			// 
+			this.lbDescripcion.AutoSize = true;
+			this.lbDescripcion.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+			this.lbDescripcion.Location = new System.Drawing.Point(63, 14);
+			this.lbDescripcion.Name = "lbDescripcion";
+			this.lbDescripcion.Size = new System.Drawing.Size(0, 0);
+			this.lbDescripcion.TabIndex = 30;
+			// 
+			// lblMarca
+			// 
+			this.lblMarca.AutoSize = true;
+			this.lblMarca.Location = new System.Drawing.Point(296, 14);
+			this.lblMarca.Name = "lblMarca";
+			this.lblMarca.Size = new System.Drawing.Size(0, 0);
+			this.lblMarca.TabIndex = 32;
+			// 
+			// metroLabel4
+			// 
+			this.metroLabel4.AutoSize = true;
+			this.metroLabel4.Location = new System.Drawing.Point(296, 14);
+			this.metroLabel4.Name = "metroLabel4";
+			this.metroLabel4.Size = new System.Drawing.Size(57, 19);
+			this.metroLabel4.TabIndex = 31;
+			this.metroLabel4.Text = "Marca : ";
+			// 
+			// lblCategoria
+			// 
+			this.lblCategoria.AutoSize = true;
+			this.lblCategoria.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+			this.lblCategoria.Location = new System.Drawing.Point(566, 14);
+			this.lblCategoria.Name = "lblCategoria";
+			this.lblCategoria.Size = new System.Drawing.Size(0, 0);
+			this.lblCategoria.TabIndex = 34;
+			// 
+			// lblc
+			// 
+			this.lblc.AutoSize = true;
+			this.lblc.Location = new System.Drawing.Point(475, 14);
+			this.lblc.Name = "lblc";
+			this.lblc.Size = new System.Drawing.Size(74, 19);
+			this.lblc.TabIndex = 33;
+			this.lblc.Text = "Categoria :";
+			// 
 			// frmInformeIngresosPorMaterial
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -383,7 +382,8 @@
 			this.Resizable = false;
 			this.ShadowType = MetroFramework.Forms.MetroFormShadowType.SystemShadow;
 			this.Style = MetroFramework.MetroColorStyle.Green;
-			this.Text = "Informe de los Ingresos de un Material";
+			this.Text = " Ingresos de un Material";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmInformeIngresosPorMaterial_FormClosing);
 			this.Load += new System.EventHandler(this.frmInformeIngresosPorMaterial_Load);
 			this.panelMain.ResumeLayout(false);
 			this.tabcontrolMain.ResumeLayout(false);
@@ -410,7 +410,6 @@
 		private System.Windows.Forms.TextBox txtFiltroMaterial;
 		private MetroFramework.Controls.MetroLabel metroLabel1;
 		private MetroFramework.Controls.MetroLabel metroLabel2;
-		private System.Windows.Forms.TextBox txtFiltrarIngreso;
 		private System.Windows.Forms.DataGridView dgvListadoDetalle;
 		private MetroFramework.Controls.MetroButton btnCerrar;
 		private MetroFramework.Controls.MetroButton btnDetalle;
@@ -418,12 +417,13 @@
 		private System.Windows.Forms.Panel panelDetalle;
 		private System.Windows.Forms.Panel panelListado;
 		private MetroFramework.Controls.MetroButton btmImprimir;
-		private MetroFramework.Controls.MetroLabel metroLabel4;
-		private System.Windows.Forms.TextBox txtFiltroIngreso;
-		private MetroFramework.Controls.MetroLabel metroLabel3;
-		private System.Windows.Forms.TextBox txtFiltroFecha;
 		private MetroFramework.Controls.MetroButton btnEliminar;
-		private MetroFramework.Controls.MetroButton btnModificar;
 		private MetroFramework.Controls.MetroButton btnImprimir;
+		private MetroFramework.Controls.MetroButton btnModificar;
+		private MetroFramework.Controls.MetroLabel lbDescripcion;
+		private MetroFramework.Controls.MetroLabel lblCategoria;
+		private MetroFramework.Controls.MetroLabel lblc;
+		private MetroFramework.Controls.MetroLabel lblMarca;
+		private MetroFramework.Controls.MetroLabel metroLabel4;
 	}
 }

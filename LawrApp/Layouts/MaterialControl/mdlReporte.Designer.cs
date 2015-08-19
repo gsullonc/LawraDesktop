@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.panelMain = new System.Windows.Forms.Panel();
 			this.btnSalir = new MetroFramework.Controls.MetroButton();
 			this.btnguardar = new MetroFramework.Controls.MetroButton();
@@ -40,11 +41,14 @@
 			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
 			this.txtDescripcion = new System.Windows.Forms.TextBox();
 			this.pgsLoad = new MetroFramework.Controls.MetroProgressSpinner();
+			this.lblValidateResponsable = new System.Windows.Forms.Label();
+			this.toltipValid = new System.Windows.Forms.ToolTip(this.components);
 			this.panelMain.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panelMain
 			// 
+			this.panelMain.Controls.Add(this.lblValidateResponsable);
 			this.panelMain.Controls.Add(this.btnSalir);
 			this.panelMain.Controls.Add(this.btnguardar);
 			this.panelMain.Controls.Add(this.txtDetalle);
@@ -112,6 +116,7 @@
 			this.txtResponsable.Name = "txtResponsable";
 			this.txtResponsable.Size = new System.Drawing.Size(334, 29);
 			this.txtResponsable.TabIndex = 2;
+			this.txtResponsable.TextChanged += new System.EventHandler(this.txtResponsable_TextChanged);
 			// 
 			// cboCondicion
 			// 
@@ -149,6 +154,7 @@
 			this.txtDescripcion.Name = "txtDescripcion";
 			this.txtDescripcion.Size = new System.Drawing.Size(180, 29);
 			this.txtDescripcion.TabIndex = 0;
+			this.txtDescripcion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDescripcion_KeyDown);
 			// 
 			// pgsLoad
 			// 
@@ -162,6 +168,23 @@
 			this.pgsLoad.UseSelectable = true;
 			this.pgsLoad.Value = 50;
 			this.pgsLoad.Visible = false;
+			// 
+			// lblValidateResponsable
+			// 
+			this.lblValidateResponsable.BackColor = System.Drawing.Color.Transparent;
+			this.lblValidateResponsable.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblValidateResponsable.ForeColor = System.Drawing.Color.Red;
+			this.lblValidateResponsable.Location = new System.Drawing.Point(81, 74);
+			this.lblValidateResponsable.Name = "lblValidateResponsable";
+			this.lblValidateResponsable.Size = new System.Drawing.Size(24, 16);
+			this.lblValidateResponsable.TabIndex = 63;
+			this.lblValidateResponsable.Text = "*";
+			this.lblValidateResponsable.Visible = false;
+			// 
+			// toltipValid
+			// 
+			this.toltipValid.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+			this.toltipValid.ToolTipTitle = "Requerido";
 			// 
 			// mdlReporte
 			// 
@@ -200,5 +223,7 @@
 		private MetroFramework.Controls.MetroButton btnSalir;
 		private MetroFramework.Controls.MetroButton btnguardar;
 		private MetroFramework.Controls.MetroProgressSpinner pgsLoad;
+		private System.Windows.Forms.Label lblValidateResponsable;
+		private System.Windows.Forms.ToolTip toltipValid;
 	}
 }

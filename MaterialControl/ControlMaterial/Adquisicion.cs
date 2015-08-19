@@ -61,7 +61,7 @@ namespace MaterialControl.ControlMaterial
 			}
 		}
 
-		public List<lIngresos> ListDetalleOfIngresosForMaterial(int codMaterial)
+		public List<lDetalleIngresosOfMaterial> ListDetalleOfIngresosForMaterial(int codMaterial)
 		{
 			Query query = new Query("api/material/entry/" + codMaterial);
 
@@ -72,7 +72,7 @@ namespace MaterialControl.ControlMaterial
 				if (query.ResponseStatusCode != HttpStatusCode.OK)
 					throw new ArgumentNullException("No se encontro ninguna Informacion", "Informacion de Ingresos");
 
-				return JsonConvert.DeserializeObject<List<lIngresos>>(query.ResponseContent);
+				return JsonConvert.DeserializeObject<List<lDetalleIngresosOfMaterial>>(query.ResponseContent);
 			}
 			catch (Exception ex)
 			{

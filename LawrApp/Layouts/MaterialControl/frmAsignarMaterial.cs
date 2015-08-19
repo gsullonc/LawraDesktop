@@ -25,6 +25,7 @@ namespace LawrApp.Layouts.MaterialControl
 		private bool _gotoModify;
 		private int _codMaterial;
 		private string _key;
+		private int i =0;
 
 		public frmAsignarMaterial( DataGeneral dts)
 		{
@@ -45,37 +46,11 @@ namespace LawrApp.Layouts.MaterialControl
 		{
 			CheckForIllegalCrossThreadCalls = false;
 
-			if (!this._gotoModify)
+			if (this._gotoModify)
 			{
-				int codigo = this._cAsignarMaterial.Insert();
+				this.pgsLoad.Visible = false;
+				this.ResetControls();
 
-				if (codigo > 0)
-				{
-					this.pgsLoad.Visible = false;
-
-					this.dgvListado.Rows.Add();
-					this.dgvListado.Rows[0].Cells[0].Value = this.cboSalones.SelectedValue;
-					this.dgvListado.Rows[0].Cells[1].Value = this._key;
-					this.dgvListado.Rows[0].Cells[2].Value = this._codMaterial;
-					this.dgvListado.Rows[0].Cells[3].Value = this.txtDescripcion.Text;
-					this.dgvListado.Rows[0].Cells[4].Value = this.nudCantidad.Value;
-					
-					this.ResetControls();
-
-					if (dgvListado.Rows.Count > 0)
-						this.btnEliminar.Enabled = true;
-				}
-				else
-				{
-					this.pgsLoad.Visible = false;
-					MetroMessageBox.Show(this, "Error al intentar registrar al Material", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-	
-					this.panelMain.Enabled = true;
-					this._cAsignarMaterial.Data = new tMaterialSalon();
-				}
-			}
-			else
-			{
 				if (this._cAsignarMaterial.Update(this._codMaterial, Convert.ToInt32(this.dgvListado.Rows[0].Cells[0].Value)))
 				{
 					this.dgvListado.CurrentRow.Cells[4].Value = this.nudCantidad.Value;
@@ -86,7 +61,6 @@ namespace LawrApp.Layouts.MaterialControl
 
 					this.panelMain.Enabled = true;
 					this.nudCantidad.Value = 1;
-
 					this.ResetControls();
 					this.btnbuscar.Enabled = true;
 				}
@@ -96,8 +70,36 @@ namespace LawrApp.Layouts.MaterialControl
 					MetroMessageBox.Show(this, "Error al intentar Modificar al apoderado", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					this._cAsignarMaterial.Data = new tMaterialSalon();
 				}
-			}
 
+				if (dgvListado.Rows.Count > 0)
+					this.btnEliminar.Enabled = true;
+		  	}
+		     else
+				{
+					int codigo = this._cAsignarMaterial.Insert();
+					
+					if(	codigo > 0)
+					{	
+						this.dgvListado.Rows.Add(this.cboSalones.SelectedValue,
+												 this._key,
+												 this._codMaterial,
+												 this.txtDescripcion.Text,
+												 this.nudCantidad.Value);
+						i = i + 1;
+
+						this.ResetControls();
+						this.btnEliminar.Enabled = true;
+						this.pgsLoad.Visible = false;
+					}
+					else
+					{
+						this.pgsLoad.Visible = false;
+						MetroMessageBox.Show(this, "Error al intentar registrar al Material", "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+	
+						this.panelMain.Enabled = true;
+						this._cAsignarMaterial.Data = new tMaterialSalon();
+					}
+			}
 			this._hilo.Abort();
 		}
 
@@ -148,11 +150,8 @@ namespace LawrApp.Layouts.MaterialControl
 			if (this._objMaterialofAula != null)
 			{
 				this.cboSalones.SelectedValue  = this.dgvListado.CurrentRow.Cells[0].Value.ToString();
-				this.txtDescripcion.Text      = this._objMaterialofAula.Description;
-				this.txtCategoria.Text        = this._objMaterialofAula.Category.Name;
-				this.txtMarca.Text			  = this._objMaterialofAula.Marca.Name;
-				this.txtModelo.Text           = this._objMaterialofAula.Model;
-
+				this.txtDescripcion.Text       = this.dgvListado.CurrentRow.Cells[3].Value.ToString();
+				this.txtCategoria.Text         = this._objMaterialofAula.Category.Name;
 				this.nudCantidad.Value = Convert.ToInt32(this.dgvListado.CurrentRow.Cells[4].Value); 
 
 				this.pgsLoad.Visible = false;
@@ -206,10 +205,9 @@ namespace LawrApp.Layouts.MaterialControl
 				return;
 		}
 
-		private void ObtenerDataOfMaterial(int Codigo, string Descripcion, string Categoria, string Marca, string Modelo, string key)
+		private void ObtenerDataOfMaterial(int Codigo, string Descripcion, string Categoria, string Marca, string Modelo)
 		{
 			this._codMaterial		 = Convert.ToInt32(Codigo);
-			this._key				 = key;
 			this.txtDescripcion.Text = Descripcion;
 			this.txtMarca.Text       = Marca;
 			this.txtCategoria.Text   = Categoria;
@@ -230,7 +228,7 @@ namespace LawrApp.Layouts.MaterialControl
 
 			this.nudCantidad.Value   = 1;
 			this.nudCantidad.Enabled = false;
-			this.btnbuscar.Enabled   = false;
+			this.btnbuscar.Enabled   = true;
 			this.btnAgregar.Enabled  = false;
 		}
 
@@ -275,6 +273,13 @@ namespace LawrApp.Layouts.MaterialControl
 		{
 			this.txtDescripcion.Enabled = true;
 			this.btnbuscar.Enabled = true;
+
+			if (this.dgvListado.Rows.Count > 0)
+			{
+				this.dgvListado.Rows.Clear();
+				this.btnEliminar.Enabled = false;
+			}
+			this.ResetControls();
 		}
 
 		private void btnAgregar_Click(object sender, EventArgs e)
@@ -282,6 +287,11 @@ namespace LawrApp.Layouts.MaterialControl
 			this._hilo = new Thread(new ThreadStart(this.SubmitInsertOrUpdate));
 
 			this.JoinData();
+			if (!this.btnbuscar.Enabled)
+				this._gotoModify = true;
+			else
+				this._gotoModify = false;
+
 			this.panelMain.Enabled = false;
 			this.pgsLoad.Visible = true;
 
@@ -291,7 +301,10 @@ namespace LawrApp.Layouts.MaterialControl
 		private void dgvListado_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
 			if (this.dgvListado.CurrentRow.Selected)
+			{
+				this.btnbuscar.Enabled = false;
 				this.ActionForModification();
+			}
 			else
 				return;
 
@@ -299,8 +312,6 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void btnSalir_Click(object sender, EventArgs e)
 		{
-			frmMain main = new frmMain(this._data);
-			main.Show();
 			this.Close();
 		}
 
@@ -308,6 +319,12 @@ namespace LawrApp.Layouts.MaterialControl
 		{
 			if (this.dgvListado.Rows.Count > 0)
 				this.ActionForDelete();
+		}
+
+		private void frmAsignarMaterial_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			frmMain main = new frmMain(this._data);
+			main.Show();
 		}
 	}
 }

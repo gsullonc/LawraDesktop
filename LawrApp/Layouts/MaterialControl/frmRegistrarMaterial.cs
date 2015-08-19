@@ -51,14 +51,13 @@ namespace LawrApp.Layouts.MaterialControl
 				if (codigo > 0)
 				{
 					this.pgsLoad.Visible = false;
-					object[] d = new object[5]
+					object[] d = new object[4]
 					{
 						codigo,
 						this._cMaterial.DataMaterial.Description + "" + "_"  +
 						this._cMaterial.DataMarca.Name + "" + "_"  +
 						this._cMaterial.DataMaterial.Model ,
 						this._cMaterial.DataCategoria.Name,
-						"Buen Estado",
 						DateTime.Now.ToString("yy-mm-dd")
 					};
 
@@ -89,8 +88,7 @@ namespace LawrApp.Layouts.MaterialControl
 																this._objMaterial.Model;
 
 					this.dgvListado.CurrentRow.Cells[2].Value = this._objMaterial.Category.Name;
-					this.dgvListado.CurrentRow.Cells[3].Value = "Buen Estado";
-					this.dgvListado.CurrentRow.Cells[4].Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+					this.dgvListado.CurrentRow.Cells[3].Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
 					this.pgsLoad.Visible = false;
 
@@ -119,7 +117,7 @@ namespace LawrApp.Layouts.MaterialControl
 
 			if (this._objMaterial != null)
 			{
-				this.txtDescripcion.Text     = this._objMaterial.Description;
+				this.txtDescripcion.Text	 = this._objMaterial.Description;
 				this.cboCategoria.Text	     = this._objMaterial.Category.Name;
 				this.cboMarca.Text           = this._objMaterial.Marca.Name;
 
@@ -130,7 +128,10 @@ namespace LawrApp.Layouts.MaterialControl
 				this.pgsLoad.Visible         = false;
 				this.panelRegister.Enabled   = true;
 				this.panelSearch.Enabled     = true;
+
 				this.txtDescripcion.Focus();
+
+				this.lblValidateCategoria.Visible =false;
 			}
 			else
 			{
@@ -151,15 +152,17 @@ namespace LawrApp.Layouts.MaterialControl
 
 			this.dgvListado.DataSource = this._data.Tables["ListaMaterial"];
 
-			this.dgvListado.Columns["Codigo"].Visible = false;
+			this.dgvListado.Columns["Codigo"].Visible		= false;
+
+			this.dgvListado.Columns["Description"].FillWeight = 150;
+			this.dgvListado.Columns["Category"].FillWeight    = 50;
+			this.dgvListado.Columns["Modifieddate"].FillWeight = 70;
+
 			this.dgvListado.Columns["Description"].HeaderText  = "Descripcion";
 			this.dgvListado.Columns["Category"].HeaderText     = "Categoria";
 			this.dgvListado.Columns["Modifieddate"].HeaderText = "Ult. Modificacion";
 
-			this.dgvListado.Columns["Description"].FillWeight = 120;
-			this.dgvListado.Columns["Category"].FillWeight = 60;
-			this.dgvListado.Columns["Condicion"].FillWeight = 60;
-			this.dgvListado.Columns["Modifieddate"].FillWeight = 60;
+			
 
 			this.panelMain.Enabled = true;
 			this.pgsLoad.Visible = false;
@@ -581,8 +584,6 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void btnSalir_Click(object sender, EventArgs e)
 		{
-			frmMain main = new frmMain(this._data);
-			main.Show();
 			this.Close();
 		}
 
@@ -602,6 +603,38 @@ namespace LawrApp.Layouts.MaterialControl
 				if (e.KeyChar == '.' || e.KeyChar=='\b')
 					e.Handled = false;
 			}
+		}
+
+		private void dgvListado_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		{
+			if (this.dgvListado.CurrentRow != null)
+				this.ActionForModification();
+			else
+				return;
+		}
+
+		private void dgvListado_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyData == Keys.Enter)
+			{
+				if (this.dgvListado.CurrentRow != null)
+					this.ActionForModification();
+				else
+					return;
+			}
+			if(e.KeyData == Keys.Delete)
+			{
+				if (this.dgvListado.Rows.Count > 0)
+					this.ActionForDelete();
+				else
+					return;
+			}
+		}
+
+		private void frmRegistrarMaterial_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			frmMain main = new frmMain(this._data);
+			main.Show();
 		}
 	}
 }
