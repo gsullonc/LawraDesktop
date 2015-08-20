@@ -17,10 +17,11 @@ namespace LawrApp.Layouts.MaterialControl
 	{
 		Adquisicion    _cAdqusicion = new Adquisicion();
 		DataGeneral    _dts;
+
 		private Thread _hilo;
 
 		private  int   _codMaterial;
-		private string _key;
+		private int    _cantidadIngresadoMaterial;
 
 		public frmIngresos(DataGeneral dts)
 		{
@@ -85,13 +86,14 @@ namespace LawrApp.Layouts.MaterialControl
 
 		#region METODOS QUE USA DELEGADOS
 
-		private void ObtenerDataOfMaterial(int Codigo, string Descripcion, string Categoria, string Marca, string Modelo)
+		private void ObtenerDataOfMaterial(int Codigo, string Descripcion, string Categoria, string Marca, string Modelo, int Cantidad)
 		{
-			this._codMaterial           = Codigo;
-			this.txtDescripcion.Text    = Descripcion;
-			this.txtMarca.Text          = Marca;
-			this.txtCategoria.Text      = Categoria;
-			this.txtModelo.Text			= Modelo;
+			this._codMaterial               = Codigo;
+			this.txtDescripcion.Text        = Descripcion;
+			this.txtMarca.Text              = Marca;
+			this.txtCategoria.Text          = Categoria;
+			this.txtModelo.Text			    = Modelo;
+			this._cantidadIngresadoMaterial	= Cantidad;
 			this.cboTipoIngreso.Text = "Seleccione...";
 
 			this.txtDescripcion.Enabled = true;
@@ -233,7 +235,6 @@ namespace LawrApp.Layouts.MaterialControl
 				this.lblValidateNº_Documento.Visible = true;
 
 				this.lblValidateCantidad.Visible = false;
-
 			}
 		}
 
@@ -269,7 +270,6 @@ namespace LawrApp.Layouts.MaterialControl
 				this.lblValidateNº_Documento.Visible = true;
 			else
 				this.lblValidateNº_Documento.Visible = false;
-
 		}
 
 		private void frmIngresos_FormClosing(object sender, FormClosingEventArgs e)
@@ -289,9 +289,7 @@ namespace LawrApp.Layouts.MaterialControl
 		private void nudCantidad_Leave(object sender, EventArgs e)
 		{
 			if(this.nudCantidad.Value == 0)
-			{
 				this.nudCantidad.Value = 1;
-			}
 		}
 
 		private void txtNªDocumento_TextChanged(object sender, EventArgs e)
@@ -324,5 +322,6 @@ namespace LawrApp.Layouts.MaterialControl
 					e.Handled = false;
 			}
 		}
+
 	}
 }

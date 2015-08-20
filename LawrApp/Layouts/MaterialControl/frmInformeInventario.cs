@@ -26,7 +26,6 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private Materiales _cMaterial = new Materiales();
 		
-
 		public frmInformeInventario(DataGeneral dts)
 		{
 			InitializeComponent();
@@ -179,7 +178,6 @@ namespace LawrApp.Layouts.MaterialControl
 			this._hilo = new Thread(new ThreadStart(this.DataAulas));
 
 			this._hilo.Start();
-
 		}
 
 		private void btnSalir_Click(object sender, EventArgs e)

@@ -22,6 +22,7 @@ namespace LawrApp.Layouts.MaterialControl
 		private int	   _codigoSalon;
 		private string _condicion;
 		private string _key;
+
 		private Materiales _cMaterial = new Materiales();
 
 		public delegate void getCondicionMaterial(string condicion);
@@ -149,7 +150,6 @@ namespace LawrApp.Layouts.MaterialControl
 				return;
 			}
 			
-
 			this._hilo = new Thread(new ThreadStart(this.Registrar));
 			this._condicion = this.cboCondicion.Text;
 			this.JoinData();

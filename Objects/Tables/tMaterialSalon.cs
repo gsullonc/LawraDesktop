@@ -7,10 +7,11 @@ namespace Objects.Tables
 {
 	public class tMaterialSalon
 	{
-		public int Codigo { get; set; }
-		public int CodigoMaterial { get; set; }
-		public int CodigoSalon { get; set; }
-		public string Key { get; set; }
+		public int Codigo		   { get; set; }
+		public int CodigoMaterial  { get; set; }
+		public int CodigoSalon     { get; set; }
+		public string Key          { get; set; }
+		public int Quantity        { get; set; }
 		public string ModifiedDate { get; set; }
 	}
 }

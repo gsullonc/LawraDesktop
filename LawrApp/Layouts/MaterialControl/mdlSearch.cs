@@ -17,15 +17,22 @@ namespace LawrApp.Layouts.MaterialControl
 	public partial class mdlSearch : MetroForm
 	{
 		Materiales _cMaterial = new Materiales();
+		Adquisicion _cAdquisicion = new Adquisicion();
+
 		DataGeneral _dts = new DataGeneral();
 		lMaterial _ListadoMaterial = new lMaterial();
+
+		DataTable _dt2 = new DataTable();
+
 		private Thread _hilo;
+
 
 		public delegate void getMaterial(int Codigo,
 										 string Descripcion,
 										 string Categoria, 
 										 string Marca,
-										 string Modelo
+										 string Modelo,
+										 int Cantidad
 										 );
 
 		public event getMaterial SendMaterial;
@@ -37,26 +44,6 @@ namespace LawrApp.Layouts.MaterialControl
 		}
 
 		#region HILOS
-
-		private void LoadDataMaterial()
-		{
-			CheckForIllegalCrossThreadCalls = false;
-			this._cMaterial.List(this._dts);
-
-			this.dgvListado.DataSource = this._dts.Tables["ListaMaterial"];
-
-			this.dgvListado.Columns["Codigo"].Visible       = false;
-			this.dgvListado.Columns["Modifieddate"].Visible = false;
-
-			this.dgvListado.Columns["Description"].HeaderText = "Descripcion";
-			this.dgvListado.Columns["Category"].HeaderText    = "Categoria";
-
-			this.dgvListado.Columns["Description"].FillWeight = 120;
-			this.dgvListado.Columns["Category"].FillWeight    = 60;
-
-			this.panelMain.Enabled = true;
-			this.pgsLoad.Visible   = false;
-		}
 				
 		private void SendToAdquisicion()
 		{
@@ -81,6 +68,57 @@ namespace LawrApp.Layouts.MaterialControl
 
 		}
 
+		private void LoadDataIngresos()
+		{
+			CheckForIllegalCrossThreadCalls = false;
+
+			List<lIngresos> lingreso = this._cAdquisicion.ListIngresos();
+
+			if (lingreso.Count > 0)
+			{
+				foreach (lIngresos item in lingreso)
+				{
+					object[] dataMaterial = this._dts.Tables["ListaMaterial"].Select("Codigo=" + item.CodigoMaterial)[0].ItemArray;
+
+					string Descripcion = Convert.ToString(dataMaterial[1]);
+					string Categoria = Convert.ToString(dataMaterial[2]);
+
+					object[] ingresos = new object[6]
+					 {
+						item.Codigo,
+						item.CodigoMaterial,
+						item.Key,
+						Descripcion,
+						Categoria,
+						item.Quantity
+					 };
+
+					this._dt2.Rows.Add(ingresos);
+				}
+
+				this.dgvListado.DataSource = _dt2;
+
+				this.dgvListado.Columns[0].Visible = false;
+				this.dgvListado.Columns[1].Visible = false;
+				this.dgvListado.Columns[2].Visible = false;
+
+				this.dgvListado.Columns[3].FillWeight = 150;
+				this.dgvListado.Columns[4].FillWeight = 50;
+				this.dgvListado.Columns[5].FillWeight = 45;
+
+				this.panelMain.Enabled = true;
+
+				this.dgvListado.ClearSelection();
+
+				this.pgsLoad.Visible = false;
+			}
+			else
+			{
+				MetroMessageBox.Show(this, "No se ha encontrado Informacion ", "lISTA INGRESOS ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+
+		}
+
 		#endregion
 
 		#region METODOS
@@ -92,33 +130,44 @@ namespace LawrApp.Layouts.MaterialControl
 				int index = this.dgvListado.CurrentCell.RowIndex;
 
 				int codigo = Convert.ToInt32(this.dgvListado.Rows[index].Cells[0].Value);
-				string descripcion = Convert.ToString(this.dgvListado.Rows[index].Cells[1].Value);
-				string categoria = Convert.ToString(this.dgvListado.Rows[index].Cells[2].Value);
+				string descripcion = Convert.ToString(this.dgvListado.Rows[index].Cells[3].Value);
+				string categoria = Convert.ToString(this.dgvListado.Rows[index].Cells[4].Value);
 				string Marca = "d";
 				string Modelo = "Ovalada";
+				int Cantidad = Convert.ToInt32(this.dgvListado.Rows[index].Cells[5].Value);
 
-				this.SendMaterial(codigo, descripcion, categoria, Marca, Modelo);
+				this.SendMaterial(codigo, descripcion, categoria, Marca, Modelo,Cantidad);
 
 				this.Dispose();
 			}
 			else
 				return;
 		}
-		void GetMateriales()
+
+		private void ColumnListIngresos()
 		{
-			this._hilo = new Thread(new ThreadStart(this.LoadDataMaterial));
-
-			this.panelMain.Enabled = false;
-			this.pgsLoad.Visible = true;
-
-			this._hilo.Start();
+			this._dt2.Columns.Add("Codigo", typeof(string));
+			this._dt2.Columns.Add("Codigo_Material", typeof(string));
+			this._dt2.Columns.Add("Key", typeof(string));
+			this._dt2.Columns.Add("Descripcion", typeof(string));
+			this._dt2.Columns.Add("Categoria", typeof(string));
+			this._dt2.Columns.Add("Cantidad", typeof(string));
 		}
 
 		#endregion
 
 		private void mdlSearch_Load(object sender, EventArgs e)
 		{
-			this.GetMateriales();
+			this.panelMain.Enabled = false;
+
+			this.ColumnListIngresos();
+
+			this._hilo = new Thread(new ThreadStart(this.LoadDataIngresos));
+
+			this.panelMain.Enabled = false;
+			this.pgsLoad.Visible = true;
+
+			this._hilo.Start();
 		}
 
 		private void txtfiltro_TextChanged(object sender, EventArgs e)

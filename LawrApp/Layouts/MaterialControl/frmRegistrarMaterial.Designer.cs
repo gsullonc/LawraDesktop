@@ -189,7 +189,7 @@
 			this.dgvListado.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
 			this.dgvListado.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
 			this.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgvListado.Location = new System.Drawing.Point(3, 47);
+			this.dgvListado.Location = new System.Drawing.Point(3, 45);
 			this.dgvListado.MultiSelect = false;
 			this.dgvListado.Name = "dgvListado";
 			this.dgvListado.ReadOnly = true;

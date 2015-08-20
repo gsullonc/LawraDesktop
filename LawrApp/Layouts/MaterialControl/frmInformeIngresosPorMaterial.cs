@@ -34,6 +34,64 @@ namespace LawrApp.Layouts.MaterialControl
 
 		#region Hilo
 
+		private void LoadDataIngresos()
+		{
+			CheckForIllegalCrossThreadCalls = false;
+
+			List<lIngresos> lingreso = this._cAdquisicion.ListIngresos();
+
+			if (lingreso.Count > 0)
+			{
+				foreach (lIngresos item in lingreso)
+				{
+					object[] dataMaterial = this._data.Tables["ListaMaterial"].Select("Codigo=" + item.CodigoMaterial)[0].ItemArray;
+
+					string Descripcion = Convert.ToString(dataMaterial[1]);
+					string Categoria = Convert.ToString(dataMaterial[2]);
+
+					object[] ingresos = new object[6]
+					 {
+						item.Codigo,
+						item.CodigoMaterial,
+						item.Key,
+						Descripcion,
+						Categoria,
+						item.Quantity
+					 };
+
+					this._dt2.Rows.Add(ingresos);
+				}
+
+				this.dgvListadoMaterial.DataSource = _dt2;
+
+				this.dgvListadoMaterial.Columns[0].Visible = false;
+				this.dgvListadoMaterial.Columns[1].Visible = false;
+				this.dgvListadoMaterial.Columns[2].Visible = false;
+
+				this.dgvListadoMaterial.Columns[3].FillWeight = 150;
+				this.dgvListadoMaterial.Columns[4].FillWeight = 50;
+				this.dgvListadoMaterial.Columns[5].FillWeight = 30;
+
+				this.panelListado.Enabled = true;
+				this.btnDetalle.Enabled = true;
+
+				this.dgvListadoMaterial.ClearSelection();
+
+				this.pgsLoad.Visible = false;
+			}
+			else
+			{
+				this.txtFiltroMaterial.Enabled = false;
+
+				this.btnModificar.Enabled = false;
+				this.btnEliminar.Enabled = false;
+				this.btnImprimir.Enabled = false;
+
+				MetroMessageBox.Show(this, "No se ha encontrado Informacion ", "lISTA INGRESOS ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+
+		}
+
 		private void SubmitDelete()
 		{
 			CheckForIllegalCrossThreadCalls = false;
@@ -68,6 +126,7 @@ namespace LawrApp.Layouts.MaterialControl
 
 			this._hilo.Abort();
 		}
+
 		private void LoadDetalleIngresos()
 		{
 			CheckForIllegalCrossThreadCalls = false;
@@ -201,64 +260,6 @@ namespace LawrApp.Layouts.MaterialControl
 			frmMain main = new frmMain(this._data);
 			main.Show();
 			this.Close();
-		}
-
-		private void LoadDataIngresos()
-		{
-			CheckForIllegalCrossThreadCalls = false;
-
-			 List<lIngresos> lingreso = this._cAdquisicion.ListIngresos();
-
-			 if (lingreso.Count > 0)
-			 {
-				 foreach (lIngresos item in lingreso)
-				 {
-					 object[] dataMaterial = this._data.Tables["ListaMaterial"].Select("Codigo=" + item.CodigoMaterial)[0].ItemArray;
-
-					 string Descripcion = Convert.ToString(dataMaterial[1]);
-					 string Categoria	= Convert.ToString(dataMaterial[2]); 
-
-					 object[] ingresos = new object[6]
-					 {
-						item.Codigo,
-						item.CodigoMaterial,
-						item.Key,
-						Descripcion,
-						Categoria,
-						item.Quantity
-					 };
-
-					 this._dt2.Rows.Add(ingresos);
-				 }
-
-				 this.dgvListadoMaterial.DataSource = _dt2;
-
-				 this.dgvListadoMaterial.Columns[0].Visible = false;
-				 this.dgvListadoMaterial.Columns[1].Visible = false;
-				 this.dgvListadoMaterial.Columns[2].Visible = false;
-
-				 this.dgvListadoMaterial.Columns[3].FillWeight = 150;
-				 this.dgvListadoMaterial.Columns[4].FillWeight = 50;
-				 this.dgvListadoMaterial.Columns[5].FillWeight = 30;
-			
-				 this.panelListado.Enabled       = true;
-				 this.btnDetalle.Enabled         = true;
-
-				 this.dgvListadoMaterial.ClearSelection();
-
-				 this.pgsLoad.Visible			= false;
-			 }
-			 else
-			 {
-				 this.txtFiltroMaterial.Enabled = false;
-
-				 this.btnModificar.Enabled      = false;
-				 this.btnEliminar.Enabled		= false;
-				 this.btnImprimir.Enabled		= false;
-
-				 MetroMessageBox.Show(this, "No se ha encontrado Informacion ", "lISTA INGRESOS ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-			 }
-				 
 		}
 
 		private void frmInformeIngresosPorMaterial_Load(object sender, EventArgs e)

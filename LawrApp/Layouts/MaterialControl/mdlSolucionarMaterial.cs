@@ -30,6 +30,7 @@ namespace LawrApp.Layouts.MaterialControl
 		public event getCondicionMaterial UpdateCondicionMaterial;
 
 		private Thread _hilo;
+
 		private bool _gotoModify = false;
 
 		public mdlSolucionarMaterial( int CodigoAula, int CodigoMaterial, string nameMaterial, string key)

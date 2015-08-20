@@ -46,13 +46,10 @@
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.cboSalones = new System.Windows.Forms.ComboBox();
 			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-			this.btnEliminar = new MetroFramework.Controls.MetroButton();
 			this.dgvListado = new System.Windows.Forms.DataGridView();
-			this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colKeyMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colCodMaterial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
+			this.txtfiltro = new System.Windows.Forms.TextBox();
+			this.btnEliminar = new MetroFramework.Controls.MetroButton();
 			this.panelMain.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.spcAsignacion)).BeginInit();
 			this.spcAsignacion.Panel1.SuspendLayout();
@@ -65,7 +62,6 @@
 			// panelMain
 			// 
 			this.panelMain.Controls.Add(this.spcAsignacion);
-			this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelMain.Location = new System.Drawing.Point(30, 70);
 			this.panelMain.Name = "panelMain";
 			this.panelMain.Size = new System.Drawing.Size(740, 406);
@@ -98,15 +94,17 @@
 			// 
 			// spcAsignacion.Panel2
 			// 
-			this.spcAsignacion.Panel2.Controls.Add(this.btnEliminar);
 			this.spcAsignacion.Panel2.Controls.Add(this.dgvListado);
+			this.spcAsignacion.Panel2.Controls.Add(this.metroLabel7);
+			this.spcAsignacion.Panel2.Controls.Add(this.txtfiltro);
+			this.spcAsignacion.Panel2.Controls.Add(this.btnEliminar);
 			this.spcAsignacion.Size = new System.Drawing.Size(740, 406);
-			this.spcAsignacion.SplitterDistance = 306;
+			this.spcAsignacion.SplitterDistance = 285;
 			this.spcAsignacion.TabIndex = 0;
 			// 
 			// pgsLoad
 			// 
-			this.pgsLoad.Location = new System.Drawing.Point(282, 14);
+			this.pgsLoad.Location = new System.Drawing.Point(260, 14);
 			this.pgsLoad.Maximum = 100;
 			this.pgsLoad.Name = "pgsLoad";
 			this.pgsLoad.Size = new System.Drawing.Size(21, 19);
@@ -118,7 +116,7 @@
 			// 
 			// btnSalir
 			// 
-			this.btnSalir.Location = new System.Drawing.Point(3, 372);
+			this.btnSalir.Location = new System.Drawing.Point(1, 372);
 			this.btnSalir.Name = "btnSalir";
 			this.btnSalir.Size = new System.Drawing.Size(75, 31);
 			this.btnSalir.TabIndex = 14;
@@ -129,7 +127,7 @@
 			// btnAgregar
 			// 
 			this.btnAgregar.Enabled = false;
-			this.btnAgregar.Location = new System.Drawing.Point(228, 372);
+			this.btnAgregar.Location = new System.Drawing.Point(206, 372);
 			this.btnAgregar.Name = "btnAgregar";
 			this.btnAgregar.Size = new System.Drawing.Size(75, 31);
 			this.btnAgregar.TabIndex = 13;
@@ -140,15 +138,21 @@
 			// nudCantidad
 			// 
 			this.nudCantidad.Enabled = false;
-			this.nudCantidad.Location = new System.Drawing.Point(3, 310);
+			this.nudCantidad.Location = new System.Drawing.Point(4, 310);
+			this.nudCantidad.Maximum = new decimal(new int[] {
+            150,
+            0,
+            0,
+            0});
 			this.nudCantidad.Name = "nudCantidad";
-			this.nudCantidad.Size = new System.Drawing.Size(300, 29);
+			this.nudCantidad.Size = new System.Drawing.Size(277, 29);
 			this.nudCantidad.TabIndex = 3;
 			this.nudCantidad.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+			this.nudCantidad.Leave += new System.EventHandler(this.nudCantidad_Leave);
 			// 
 			// metroLabel6
 			// 
@@ -162,9 +166,9 @@
 			// txtModelo
 			// 
 			this.txtModelo.Enabled = false;
-			this.txtModelo.Location = new System.Drawing.Point(3, 252);
+			this.txtModelo.Location = new System.Drawing.Point(4, 252);
 			this.txtModelo.Name = "txtModelo";
-			this.txtModelo.Size = new System.Drawing.Size(300, 29);
+			this.txtModelo.Size = new System.Drawing.Size(277, 29);
 			this.txtModelo.TabIndex = 10;
 			// 
 			// metroLabel5
@@ -179,15 +183,15 @@
 			// txtCategoria
 			// 
 			this.txtCategoria.Enabled = false;
-			this.txtCategoria.Location = new System.Drawing.Point(1, 198);
+			this.txtCategoria.Location = new System.Drawing.Point(4, 144);
 			this.txtCategoria.Name = "txtCategoria";
-			this.txtCategoria.Size = new System.Drawing.Size(302, 29);
+			this.txtCategoria.Size = new System.Drawing.Size(277, 29);
 			this.txtCategoria.TabIndex = 8;
 			// 
 			// metroLabel4
 			// 
 			this.metroLabel4.AutoSize = true;
-			this.metroLabel4.Location = new System.Drawing.Point(-2, 176);
+			this.metroLabel4.Location = new System.Drawing.Point(4, 122);
 			this.metroLabel4.Name = "metroLabel4";
 			this.metroLabel4.Size = new System.Drawing.Size(67, 19);
 			this.metroLabel4.TabIndex = 7;
@@ -196,15 +200,15 @@
 			// txtMarca
 			// 
 			this.txtMarca.Enabled = false;
-			this.txtMarca.Location = new System.Drawing.Point(3, 144);
+			this.txtMarca.Location = new System.Drawing.Point(4, 198);
 			this.txtMarca.Name = "txtMarca";
-			this.txtMarca.Size = new System.Drawing.Size(300, 29);
+			this.txtMarca.Size = new System.Drawing.Size(277, 29);
 			this.txtMarca.TabIndex = 6;
 			// 
 			// metroLabel3
 			// 
 			this.metroLabel3.AutoSize = true;
-			this.metroLabel3.Location = new System.Drawing.Point(3, 122);
+			this.metroLabel3.Location = new System.Drawing.Point(4, 176);
 			this.metroLabel3.Name = "metroLabel3";
 			this.metroLabel3.Size = new System.Drawing.Size(46, 19);
 			this.metroLabel3.TabIndex = 5;
@@ -213,9 +217,9 @@
 			// btnbuscar
 			// 
 			this.btnbuscar.Enabled = false;
-			this.btnbuscar.Location = new System.Drawing.Point(258, 90);
+			this.btnbuscar.Location = new System.Drawing.Point(246, 90);
 			this.btnbuscar.Name = "btnbuscar";
-			this.btnbuscar.Size = new System.Drawing.Size(45, 29);
+			this.btnbuscar.Size = new System.Drawing.Size(35, 29);
 			this.btnbuscar.TabIndex = 2;
 			this.btnbuscar.Text = "....";
 			this.btnbuscar.UseSelectable = true;
@@ -226,7 +230,7 @@
 			this.txtDescripcion.Enabled = false;
 			this.txtDescripcion.Location = new System.Drawing.Point(3, 90);
 			this.txtDescripcion.Name = "txtDescripcion";
-			this.txtDescripcion.Size = new System.Drawing.Size(249, 29);
+			this.txtDescripcion.Size = new System.Drawing.Size(237, 29);
 			this.txtDescripcion.TabIndex = 3;
 			this.txtDescripcion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMarca_KeyDown);
 			// 
@@ -244,7 +248,7 @@
 			this.cboSalones.FormattingEnabled = true;
 			this.cboSalones.Location = new System.Drawing.Point(3, 36);
 			this.cboSalones.Name = "cboSalones";
-			this.cboSalones.Size = new System.Drawing.Size(300, 29);
+			this.cboSalones.Size = new System.Drawing.Size(278, 29);
 			this.cboSalones.TabIndex = 1;
 			this.cboSalones.SelectionChangeCommitted += new System.EventHandler(this.cboSalones_SelectionChangeCommitted);
 			this.cboSalones.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMarca_KeyDown);
@@ -258,17 +262,6 @@
 			this.metroLabel1.TabIndex = 0;
 			this.metroLabel1.Text = "Salon";
 			// 
-			// btnEliminar
-			// 
-			this.btnEliminar.Enabled = false;
-			this.btnEliminar.Location = new System.Drawing.Point(355, 372);
-			this.btnEliminar.Name = "btnEliminar";
-			this.btnEliminar.Size = new System.Drawing.Size(75, 31);
-			this.btnEliminar.TabIndex = 15;
-			this.btnEliminar.Text = "Eliminar";
-			this.btnEliminar.UseSelectable = true;
-			this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-			// 
 			// dgvListado
 			// 
 			this.dgvListado.AllowUserToAddRows = false;
@@ -281,16 +274,9 @@
 			this.dgvListado.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
 			this.dgvListado.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
 			this.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgvListado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colCodigo,
-            this.colKeyMaterial,
-            this.colCodMaterial,
-            this.colDescripcion,
-            this.colCategoria});
-			this.dgvListado.Location = new System.Drawing.Point(10, 36);
+			this.dgvListado.Location = new System.Drawing.Point(6, 71);
 			this.dgvListado.MultiSelect = false;
 			this.dgvListado.Name = "dgvListado";
-			this.dgvListado.ReadOnly = true;
 			this.dgvListado.RowHeadersVisible = false;
 			this.dgvListado.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.dgvListado.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -301,49 +287,39 @@
 			this.dgvListado.RowTemplate.Height = 28;
 			this.dgvListado.RowTemplate.ReadOnly = true;
 			this.dgvListado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvListado.ShowCellErrors = false;
-			this.dgvListado.ShowCellToolTips = false;
-			this.dgvListado.ShowEditingIcon = false;
-			this.dgvListado.ShowRowErrors = false;
-			this.dgvListado.Size = new System.Drawing.Size(417, 303);
+			this.dgvListado.Size = new System.Drawing.Size(439, 268);
 			this.dgvListado.StandardTab = true;
-			this.dgvListado.TabIndex = 4;
+			this.dgvListado.TabIndex = 157;
 			this.dgvListado.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellDoubleClick);
 			// 
-			// colCodigo
+			// metroLabel7
 			// 
-			this.colCodigo.HeaderText = "Codigo Aula";
-			this.colCodigo.Name = "colCodigo";
-			this.colCodigo.ReadOnly = true;
-			this.colCodigo.Visible = false;
+			this.metroLabel7.AutoSize = true;
+			this.metroLabel7.Location = new System.Drawing.Point(3, 14);
+			this.metroLabel7.Name = "metroLabel7";
+			this.metroLabel7.Size = new System.Drawing.Size(57, 19);
+			this.metroLabel7.TabIndex = 156;
+			this.metroLabel7.Text = "Material";
 			// 
-			// colKeyMaterial
+			// txtfiltro
 			// 
-			this.colKeyMaterial.FillWeight = 40F;
-			this.colKeyMaterial.HeaderText = "Key";
-			this.colKeyMaterial.Name = "colKeyMaterial";
-			this.colKeyMaterial.ReadOnly = true;
+			this.txtfiltro.Enabled = false;
+			this.txtfiltro.Location = new System.Drawing.Point(3, 36);
+			this.txtfiltro.Name = "txtfiltro";
+			this.txtfiltro.Size = new System.Drawing.Size(444, 29);
+			this.txtfiltro.TabIndex = 16;
+			this.txtfiltro.TextChanged += new System.EventHandler(this.txtfiltro_TextChanged);
 			// 
-			// colCodMaterial
+			// btnEliminar
 			// 
-			this.colCodMaterial.HeaderText = "Codigo Material";
-			this.colCodMaterial.Name = "colCodMaterial";
-			this.colCodMaterial.ReadOnly = true;
-			this.colCodMaterial.Visible = false;
-			// 
-			// colDescripcion
-			// 
-			this.colDescripcion.FillWeight = 96.8319F;
-			this.colDescripcion.HeaderText = "Descripcion";
-			this.colDescripcion.Name = "colDescripcion";
-			this.colDescripcion.ReadOnly = true;
-			// 
-			// colCategoria
-			// 
-			this.colCategoria.FillWeight = 40.21895F;
-			this.colCategoria.HeaderText = "Cantidad";
-			this.colCategoria.Name = "colCategoria";
-			this.colCategoria.ReadOnly = true;
+			this.btnEliminar.Enabled = false;
+			this.btnEliminar.Location = new System.Drawing.Point(372, 372);
+			this.btnEliminar.Name = "btnEliminar";
+			this.btnEliminar.Size = new System.Drawing.Size(75, 31);
+			this.btnEliminar.TabIndex = 15;
+			this.btnEliminar.Text = "Eliminar";
+			this.btnEliminar.UseSelectable = true;
+			this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
 			// 
 			// frmAsignarMaterial
 			// 
@@ -366,6 +342,7 @@
 			this.spcAsignacion.Panel1.ResumeLayout(false);
 			this.spcAsignacion.Panel1.PerformLayout();
 			this.spcAsignacion.Panel2.ResumeLayout(false);
+			this.spcAsignacion.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.spcAsignacion)).EndInit();
 			this.spcAsignacion.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).EndInit();
@@ -394,12 +371,9 @@
 		private MetroFramework.Controls.MetroButton btnSalir;
 		private MetroFramework.Controls.MetroButton btnAgregar;
 		private MetroFramework.Controls.MetroButton btnEliminar;
-		private System.Windows.Forms.DataGridView dgvListado;
 		private MetroFramework.Controls.MetroProgressSpinner pgsLoad;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colCodigo;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colKeyMaterial;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colCodMaterial;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colDescripcion;
-		private System.Windows.Forms.DataGridViewTextBoxColumn colCategoria;
+		private MetroFramework.Controls.MetroLabel metroLabel7;
+		private System.Windows.Forms.TextBox txtfiltro;
+		private System.Windows.Forms.DataGridView dgvListado;
 	}
 }

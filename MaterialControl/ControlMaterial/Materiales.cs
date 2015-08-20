@@ -81,7 +81,25 @@ namespace MaterialControl.ControlMaterial
 				return 0;
 			}
 		}
+		public List<lkeys> ListarKeys(int CodigoAula, int CodigoMaterial, int Cantidad)
+		{
+			Query query = new Query("api/material/"+ CodigoMaterial + "/Aula/"+ CodigoAula + "/Key");
 
+			try
+			{
+				query.SendRequestGET();
+
+				if (query.ResponseStatusCode != HttpStatusCode.OK)
+					throw new ArgumentNullException("No se encontraron datos", "Materiales");
+
+				return JsonConvert.DeserializeObject<List<lkeys>>(query.ResponseContent);
+			}
+			catch (Exception ex)
+			{
+				this._msgExceptionRegMateriales = ex.Message;
+				return null;
+			}
+		}
 		public DataSet List(DataSet dts)
 		{
 			Query query = new Query("api/material");

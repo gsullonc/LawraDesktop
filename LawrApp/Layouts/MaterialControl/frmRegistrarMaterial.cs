@@ -211,7 +211,7 @@ namespace LawrApp.Layouts.MaterialControl
 		#region METODOS
 		void ActionForDelete()
 		{
-			if (this.dgvListado.CurrentRow.Selected)
+			if (this.dgvListado.CurrentRow != null)
 			{
 				DialogResult result = MetroMessageBox.Show(
 					this,

@@ -30,17 +30,17 @@
 		{
 			this.panelMain = new System.Windows.Forms.Panel();
 			this.dgvListado = new System.Windows.Forms.DataGridView();
+			this.btnSalir = new MetroFramework.Controls.MetroButton();
+			this.btnGuardar = new MetroFramework.Controls.MetroButton();
+			this.cboSalon = new System.Windows.Forms.ComboBox();
+			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+			this.pgsLoad = new MetroFramework.Controls.MetroProgressSpinner();
 			this.colCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colKeys = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colCategorias = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ColCondicion1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colCondicion = new System.Windows.Forms.DataGridViewComboBoxColumn();
-			this.btnSalir = new MetroFramework.Controls.MetroButton();
-			this.btnGuardar = new MetroFramework.Controls.MetroButton();
-			this.cboSalon = new System.Windows.Forms.ComboBox();
-			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-			this.pgsLoad = new MetroFramework.Controls.MetroProgressSpinner();
 			this.panelMain.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvListado)).BeginInit();
 			this.SuspendLayout();
@@ -91,44 +91,6 @@
 			this.dgvListado.Size = new System.Drawing.Size(734, 355);
 			this.dgvListado.TabIndex = 7;
 			// 
-			// colCodigo
-			// 
-			this.colCodigo.HeaderText = "Codigo";
-			this.colCodigo.Name = "colCodigo";
-			this.colCodigo.Visible = false;
-			// 
-			// colKeys
-			// 
-			this.colKeys.FillWeight = 80F;
-			this.colKeys.HeaderText = "Keys";
-			this.colKeys.Name = "colKeys";
-			// 
-			// colDescripcion
-			// 
-			this.colDescripcion.FillWeight = 120F;
-			this.colDescripcion.HeaderText = "Descripcion";
-			this.colDescripcion.Name = "colDescripcion";
-			// 
-			// colCategorias
-			// 
-			this.colCategorias.FillWeight = 60F;
-			this.colCategorias.HeaderText = "Categoria";
-			this.colCategorias.Name = "colCategorias";
-			// 
-			// ColCondicion1
-			// 
-			this.ColCondicion1.HeaderText = "Condicion";
-			this.ColCondicion1.Name = "ColCondicion1";
-			this.ColCondicion1.Visible = false;
-			// 
-			// colCondicion
-			// 
-			this.colCondicion.DataPropertyName = "(ninguno)";
-			this.colCondicion.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-			this.colCondicion.FillWeight = 70F;
-			this.colCondicion.HeaderText = "Condicionc";
-			this.colCondicion.Name = "colCondicion";
-			// 
 			// btnSalir
 			// 
 			this.btnSalir.Location = new System.Drawing.Point(3, 432);
@@ -169,7 +131,7 @@
 			// 
 			// pgsLoad
 			// 
-			this.pgsLoad.Location = new System.Drawing.Point(30, 574);
+			this.pgsLoad.Location = new System.Drawing.Point(30, 571);
 			this.pgsLoad.Maximum = 100;
 			this.pgsLoad.Name = "pgsLoad";
 			this.pgsLoad.Size = new System.Drawing.Size(21, 19);
@@ -179,6 +141,44 @@
 			this.pgsLoad.UseSelectable = true;
 			this.pgsLoad.Value = 50;
 			this.pgsLoad.Visible = false;
+			// 
+			// colCodigo
+			// 
+			this.colCodigo.HeaderText = "Codigo";
+			this.colCodigo.Name = "colCodigo";
+			this.colCodigo.Visible = false;
+			// 
+			// colKeys
+			// 
+			this.colKeys.FillWeight = 70F;
+			this.colKeys.HeaderText = "Keys";
+			this.colKeys.Name = "colKeys";
+			// 
+			// colDescripcion
+			// 
+			this.colDescripcion.FillWeight = 120F;
+			this.colDescripcion.HeaderText = "Descripcion";
+			this.colDescripcion.Name = "colDescripcion";
+			// 
+			// colCategorias
+			// 
+			this.colCategorias.FillWeight = 60F;
+			this.colCategorias.HeaderText = "Categoria";
+			this.colCategorias.Name = "colCategorias";
+			// 
+			// ColCondicion1
+			// 
+			this.ColCondicion1.HeaderText = "Condicion";
+			this.ColCondicion1.Name = "ColCondicion1";
+			this.ColCondicion1.Visible = false;
+			// 
+			// colCondicion
+			// 
+			this.colCondicion.DataPropertyName = "(ninguno)";
+			this.colCondicion.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+			this.colCondicion.FillWeight = 70F;
+			this.colCondicion.HeaderText = "Condicionc";
+			this.colCondicion.Name = "colCondicion";
 			// 
 			// frmInformeInventario
 			// 

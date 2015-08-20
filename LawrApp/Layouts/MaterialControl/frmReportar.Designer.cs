@@ -31,7 +31,7 @@
 			this.components = new System.ComponentModel.Container();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.btnDesmarcar = new MetroFramework.Controls.MetroButton();
-			this.btneliminardd = new MetroFramework.Controls.MetroButton();
+			this.btneliminar = new MetroFramework.Controls.MetroButton();
 			this.btnSeleccionar = new MetroFramework.Controls.MetroButton();
 			this.btnimprimir = new MetroFramework.Controls.MetroButton();
 			this.btnSalir = new MetroFramework.Controls.MetroButton();
@@ -58,7 +58,7 @@
 			// panel1
 			// 
 			this.panel1.Controls.Add(this.btnDesmarcar);
-			this.panel1.Controls.Add(this.btneliminardd);
+			this.panel1.Controls.Add(this.btneliminar);
 			this.panel1.Controls.Add(this.btnSeleccionar);
 			this.panel1.Controls.Add(this.btnimprimir);
 			this.panel1.Controls.Add(this.btnSalir);
@@ -88,15 +88,16 @@
 			this.btnDesmarcar.UseSelectable = true;
 			this.btnDesmarcar.Click += new System.EventHandler(this.btnDesmarcar_Click);
 			// 
-			// btneliminardd
+			// btneliminar
 			// 
-			this.btneliminardd.Location = new System.Drawing.Point(302, 437);
-			this.btneliminardd.Name = "btneliminardd";
-			this.btneliminardd.Size = new System.Drawing.Size(75, 31);
-			this.btneliminardd.TabIndex = 21;
-			this.btneliminardd.Text = "Eliminar";
-			this.btneliminardd.UseSelectable = true;
-			this.btneliminardd.Click += new System.EventHandler(this.btneliminardd_Click);
+			this.btneliminar.Enabled = false;
+			this.btneliminar.Location = new System.Drawing.Point(302, 437);
+			this.btneliminar.Name = "btneliminar";
+			this.btneliminar.Size = new System.Drawing.Size(75, 31);
+			this.btneliminar.TabIndex = 21;
+			this.btneliminar.Text = "Eliminar";
+			this.btneliminar.UseSelectable = true;
+			this.btneliminar.Click += new System.EventHandler(this.btneliminardd_Click);
 			// 
 			// btnSeleccionar
 			// 
@@ -333,7 +334,7 @@
 		private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
 		private MetroFramework.Controls.MetroButton btnimprimir;
 		private MetroFramework.Controls.MetroButton btnSeleccionar;
-		private MetroFramework.Controls.MetroButton btneliminardd;
+		private MetroFramework.Controls.MetroButton btneliminar;
 		private MetroFramework.Controls.MetroButton btnDesmarcar;
 	}
 }

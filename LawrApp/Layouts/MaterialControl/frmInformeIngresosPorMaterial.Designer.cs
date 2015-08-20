@@ -42,16 +42,16 @@
 			this.btnDetalle = new MetroFramework.Controls.MetroButton();
 			this.tabDetalleIngresos = new MetroFramework.Controls.MetroTabPage();
 			this.panelDetalle = new System.Windows.Forms.Panel();
+			this.lblCategoria = new MetroFramework.Controls.MetroLabel();
+			this.lblc = new MetroFramework.Controls.MetroLabel();
+			this.lblMarca = new MetroFramework.Controls.MetroLabel();
+			this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+			this.lbDescripcion = new MetroFramework.Controls.MetroLabel();
 			this.btnModificar = new MetroFramework.Controls.MetroButton();
 			this.btmImprimir = new MetroFramework.Controls.MetroButton();
 			this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
 			this.btnCancelar = new MetroFramework.Controls.MetroButton();
 			this.dgvListadoDetalle = new System.Windows.Forms.DataGridView();
-			this.lbDescripcion = new MetroFramework.Controls.MetroLabel();
-			this.lblMarca = new MetroFramework.Controls.MetroLabel();
-			this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
-			this.lblCategoria = new MetroFramework.Controls.MetroLabel();
-			this.lblc = new MetroFramework.Controls.MetroLabel();
 			this.panelMain.SuspendLayout();
 			this.tabcontrolMain.SuspendLayout();
 			this.tabpagListadoIngreso.SuspendLayout();
@@ -74,7 +74,7 @@
 			// 
 			// pgsLoad
 			// 
-			this.pgsLoad.Location = new System.Drawing.Point(18, 477);
+			this.pgsLoad.Location = new System.Drawing.Point(18, 471);
 			this.pgsLoad.Maximum = 100;
 			this.pgsLoad.Name = "pgsLoad";
 			this.pgsLoad.Size = new System.Drawing.Size(16, 18);
@@ -252,6 +252,50 @@
 			this.panelDetalle.Size = new System.Drawing.Size(702, 427);
 			this.panelDetalle.TabIndex = 28;
 			// 
+			// lblCategoria
+			// 
+			this.lblCategoria.AutoSize = true;
+			this.lblCategoria.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+			this.lblCategoria.Location = new System.Drawing.Point(566, 14);
+			this.lblCategoria.Name = "lblCategoria";
+			this.lblCategoria.Size = new System.Drawing.Size(0, 0);
+			this.lblCategoria.TabIndex = 34;
+			// 
+			// lblc
+			// 
+			this.lblc.AutoSize = true;
+			this.lblc.Location = new System.Drawing.Point(475, 14);
+			this.lblc.Name = "lblc";
+			this.lblc.Size = new System.Drawing.Size(74, 19);
+			this.lblc.TabIndex = 33;
+			this.lblc.Text = "Categoria :";
+			// 
+			// lblMarca
+			// 
+			this.lblMarca.AutoSize = true;
+			this.lblMarca.Location = new System.Drawing.Point(296, 14);
+			this.lblMarca.Name = "lblMarca";
+			this.lblMarca.Size = new System.Drawing.Size(0, 0);
+			this.lblMarca.TabIndex = 32;
+			// 
+			// metroLabel4
+			// 
+			this.metroLabel4.AutoSize = true;
+			this.metroLabel4.Location = new System.Drawing.Point(287, 14);
+			this.metroLabel4.Name = "metroLabel4";
+			this.metroLabel4.Size = new System.Drawing.Size(57, 19);
+			this.metroLabel4.TabIndex = 31;
+			this.metroLabel4.Text = "Marca : ";
+			// 
+			// lbDescripcion
+			// 
+			this.lbDescripcion.AutoSize = true;
+			this.lbDescripcion.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+			this.lbDescripcion.Location = new System.Drawing.Point(63, 14);
+			this.lbDescripcion.Name = "lbDescripcion";
+			this.lbDescripcion.Size = new System.Drawing.Size(0, 0);
+			this.lbDescripcion.TabIndex = 30;
+			// 
 			// btnModificar
 			// 
 			this.btnModificar.Location = new System.Drawing.Point(523, 387);
@@ -302,7 +346,7 @@
 			this.dgvListadoDetalle.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
 			this.dgvListadoDetalle.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
 			this.dgvListadoDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgvListadoDetalle.Location = new System.Drawing.Point(3, 71);
+			this.dgvListadoDetalle.Location = new System.Drawing.Point(3, 61);
 			this.dgvListadoDetalle.MultiSelect = false;
 			this.dgvListadoDetalle.Name = "dgvListadoDetalle";
 			this.dgvListadoDetalle.ReadOnly = true;
@@ -320,53 +364,9 @@
 			this.dgvListadoDetalle.ShowCellToolTips = false;
 			this.dgvListadoDetalle.ShowEditingIcon = false;
 			this.dgvListadoDetalle.ShowRowErrors = false;
-			this.dgvListadoDetalle.Size = new System.Drawing.Size(696, 301);
+			this.dgvListadoDetalle.Size = new System.Drawing.Size(696, 310);
 			this.dgvListadoDetalle.StandardTab = true;
 			this.dgvListadoDetalle.TabIndex = 7;
-			// 
-			// lbDescripcion
-			// 
-			this.lbDescripcion.AutoSize = true;
-			this.lbDescripcion.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-			this.lbDescripcion.Location = new System.Drawing.Point(63, 14);
-			this.lbDescripcion.Name = "lbDescripcion";
-			this.lbDescripcion.Size = new System.Drawing.Size(0, 0);
-			this.lbDescripcion.TabIndex = 30;
-			// 
-			// lblMarca
-			// 
-			this.lblMarca.AutoSize = true;
-			this.lblMarca.Location = new System.Drawing.Point(296, 14);
-			this.lblMarca.Name = "lblMarca";
-			this.lblMarca.Size = new System.Drawing.Size(0, 0);
-			this.lblMarca.TabIndex = 32;
-			// 
-			// metroLabel4
-			// 
-			this.metroLabel4.AutoSize = true;
-			this.metroLabel4.Location = new System.Drawing.Point(296, 14);
-			this.metroLabel4.Name = "metroLabel4";
-			this.metroLabel4.Size = new System.Drawing.Size(57, 19);
-			this.metroLabel4.TabIndex = 31;
-			this.metroLabel4.Text = "Marca : ";
-			// 
-			// lblCategoria
-			// 
-			this.lblCategoria.AutoSize = true;
-			this.lblCategoria.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-			this.lblCategoria.Location = new System.Drawing.Point(566, 14);
-			this.lblCategoria.Name = "lblCategoria";
-			this.lblCategoria.Size = new System.Drawing.Size(0, 0);
-			this.lblCategoria.TabIndex = 34;
-			// 
-			// lblc
-			// 
-			this.lblc.AutoSize = true;
-			this.lblc.Location = new System.Drawing.Point(475, 14);
-			this.lblc.Name = "lblc";
-			this.lblc.Size = new System.Drawing.Size(74, 19);
-			this.lblc.TabIndex = 33;
-			this.lblc.Text = "Categoria :";
 			// 
 			// frmInformeIngresosPorMaterial
 			// 

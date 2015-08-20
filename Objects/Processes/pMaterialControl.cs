@@ -11,6 +11,11 @@ namespace Objects.Processes
 		public tMaterial Material { get; set; }
 	}
 
+
+	public class  lkeys
+	{
+		public string Keys { get; set;}
+	}
 	public class lMaterial
 	{
 		public int Codigo			{ get; set; }
