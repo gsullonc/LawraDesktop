@@ -6,6 +6,7 @@ using Objects.Tables;
 using Options;
 using System.Net;
 using Newtonsoft.Json;
+using System.Collections;
 
 namespace MaterialControl.ControlMaterial
 {
@@ -100,9 +101,9 @@ namespace MaterialControl.ControlMaterial
 			}
 		}
 
-		public bool Delete(int Codigo, int CodigoAula)
+		public bool Delete(int CodigoMaterialSalon)
 		{
-			Query query = new Query("api/students/destroy/" + Codigo);
+			Query query = new Query("api/students/destroy/" + CodigoMaterialSalon);
 			try
 			{
 				query.SendRequestDELETE();

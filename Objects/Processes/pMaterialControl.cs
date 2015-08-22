@@ -27,6 +27,7 @@ namespace Objects.Processes
 	}
 	public class lMaterialOfAula
 	{
+		public int CodigoMaterialSalon { get; set; }
 		public int Codigo { get; set; }
 		public string Key { get; set; }
 		public string Description { get; set; }

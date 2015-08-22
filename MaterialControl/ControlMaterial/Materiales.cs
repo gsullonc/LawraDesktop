@@ -81,7 +81,7 @@ namespace MaterialControl.ControlMaterial
 				return 0;
 			}
 		}
-		public List<lkeys> ListarKeys(int CodigoAula, int CodigoMaterial, int Cantidad)
+		public List<lkeys> ListarKeys(int CodigoAula, int CodigoMaterial, int Cantidad )
 		{
 			Query query = new Query("api/material/"+ CodigoMaterial + "/Aula/"+ CodigoAula + "/Key");
 

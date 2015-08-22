@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			this.panel1 = new System.Windows.Forms.Panel();
+			this.panelMain = new System.Windows.Forms.Panel();
 			this.btnDesmarcar = new MetroFramework.Controls.MetroButton();
 			this.btneliminar = new MetroFramework.Controls.MetroButton();
 			this.btnSeleccionar = new MetroFramework.Controls.MetroButton();
@@ -50,32 +50,32 @@
 			this.tsmItemSolucionar = new System.Windows.Forms.ToolStripMenuItem();
 			this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.panel1.SuspendLayout();
+			this.panelMain.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvListado)).BeginInit();
 			this.cmsOptions.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// panel1
+			// panelMain
 			// 
-			this.panel1.Controls.Add(this.btnDesmarcar);
-			this.panel1.Controls.Add(this.btneliminar);
-			this.panel1.Controls.Add(this.btnSeleccionar);
-			this.panel1.Controls.Add(this.btnimprimir);
-			this.panel1.Controls.Add(this.btnSalir);
-			this.panel1.Controls.Add(this.btnSolucionar);
-			this.panel1.Controls.Add(this.btnReportar);
-			this.panel1.Controls.Add(this.dgvListado);
-			this.panel1.Controls.Add(this.metroLabel3);
-			this.panel1.Controls.Add(this.txtfiltro);
-			this.panel1.Controls.Add(this.cboTipoBusqueda);
-			this.panel1.Controls.Add(this.metroLabel2);
-			this.panel1.Controls.Add(this.cboSalon);
-			this.panel1.Controls.Add(this.metroLabel1);
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel1.Location = new System.Drawing.Point(30, 97);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(740, 471);
-			this.panel1.TabIndex = 0;
+			this.panelMain.Controls.Add(this.btnDesmarcar);
+			this.panelMain.Controls.Add(this.btneliminar);
+			this.panelMain.Controls.Add(this.btnSeleccionar);
+			this.panelMain.Controls.Add(this.btnimprimir);
+			this.panelMain.Controls.Add(this.btnSalir);
+			this.panelMain.Controls.Add(this.btnSolucionar);
+			this.panelMain.Controls.Add(this.btnReportar);
+			this.panelMain.Controls.Add(this.dgvListado);
+			this.panelMain.Controls.Add(this.metroLabel3);
+			this.panelMain.Controls.Add(this.txtfiltro);
+			this.panelMain.Controls.Add(this.cboTipoBusqueda);
+			this.panelMain.Controls.Add(this.metroLabel2);
+			this.panelMain.Controls.Add(this.cboSalon);
+			this.panelMain.Controls.Add(this.metroLabel1);
+			this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelMain.Location = new System.Drawing.Point(30, 97);
+			this.panelMain.Name = "panelMain";
+			this.panelMain.Size = new System.Drawing.Size(740, 471);
+			this.panelMain.TabIndex = 0;
 			// 
 			// btnDesmarcar
 			// 
@@ -83,7 +83,7 @@
 			this.btnDesmarcar.Location = new System.Drawing.Point(193, 437);
 			this.btnDesmarcar.Name = "btnDesmarcar";
 			this.btnDesmarcar.Size = new System.Drawing.Size(103, 31);
-			this.btnDesmarcar.TabIndex = 22;
+			this.btnDesmarcar.TabIndex = 10;
 			this.btnDesmarcar.Text = "Desmarcar todo";
 			this.btnDesmarcar.UseSelectable = true;
 			this.btnDesmarcar.Click += new System.EventHandler(this.btnDesmarcar_Click);
@@ -94,7 +94,7 @@
 			this.btneliminar.Location = new System.Drawing.Point(302, 437);
 			this.btneliminar.Name = "btneliminar";
 			this.btneliminar.Size = new System.Drawing.Size(75, 31);
-			this.btneliminar.TabIndex = 21;
+			this.btneliminar.TabIndex = 7;
 			this.btneliminar.Text = "Eliminar";
 			this.btneliminar.UseSelectable = true;
 			this.btneliminar.Click += new System.EventHandler(this.btneliminardd_Click);
@@ -104,7 +104,7 @@
 			this.btnSeleccionar.Location = new System.Drawing.Point(84, 437);
 			this.btnSeleccionar.Name = "btnSeleccionar";
 			this.btnSeleccionar.Size = new System.Drawing.Size(103, 31);
-			this.btnSeleccionar.TabIndex = 20;
+			this.btnSeleccionar.TabIndex = 9;
 			this.btnSeleccionar.Text = "Marcar todos";
 			this.btnSeleccionar.UseSelectable = true;
 			this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
@@ -114,7 +114,7 @@
 			this.btnimprimir.Location = new System.Drawing.Point(500, 437);
 			this.btnimprimir.Name = "btnimprimir";
 			this.btnimprimir.Size = new System.Drawing.Size(75, 31);
-			this.btnimprimir.TabIndex = 19;
+			this.btnimprimir.TabIndex = 6;
 			this.btnimprimir.Text = "Imprimir";
 			this.btnimprimir.UseSelectable = true;
 			// 
@@ -123,7 +123,7 @@
 			this.btnSalir.Location = new System.Drawing.Point(3, 437);
 			this.btnSalir.Name = "btnSalir";
 			this.btnSalir.Size = new System.Drawing.Size(75, 31);
-			this.btnSalir.TabIndex = 18;
+			this.btnSalir.TabIndex = 8;
 			this.btnSalir.Text = "Salir";
 			this.btnSalir.UseSelectable = true;
 			this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
@@ -133,7 +133,7 @@
 			this.btnSolucionar.Location = new System.Drawing.Point(581, 437);
 			this.btnSolucionar.Name = "btnSolucionar";
 			this.btnSolucionar.Size = new System.Drawing.Size(75, 31);
-			this.btnSolucionar.TabIndex = 17;
+			this.btnSolucionar.TabIndex = 5;
 			this.btnSolucionar.Text = "Solucionar";
 			this.btnSolucionar.UseSelectable = true;
 			this.btnSolucionar.Click += new System.EventHandler(this.btnSolucionar_Click);
@@ -143,7 +143,7 @@
 			this.btnReportar.Location = new System.Drawing.Point(662, 437);
 			this.btnReportar.Name = "btnReportar";
 			this.btnReportar.Size = new System.Drawing.Size(75, 31);
-			this.btnReportar.TabIndex = 16;
+			this.btnReportar.TabIndex = 5;
 			this.btnReportar.Text = "Reportar";
 			this.btnReportar.UseSelectable = true;
 			this.btnReportar.Click += new System.EventHandler(this.btnReportar_Click);
@@ -177,10 +177,11 @@
 			this.dgvListado.ShowRowErrors = false;
 			this.dgvListado.Size = new System.Drawing.Size(734, 349);
 			this.dgvListado.StandardTab = true;
-			this.dgvListado.TabIndex = 8;
+			this.dgvListado.TabIndex = 4;
 			this.dgvListado.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellClick);
 			this.dgvListado.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellValueChanged);
 			this.dgvListado.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgvListado_CurrentCellDirtyStateChanged_1);
+			this.dgvListado.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvListado_KeyDown);
 			this.dgvListado.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvListado_MouseDown);
 			// 
 			// metroLabel3
@@ -198,7 +199,7 @@
 			this.txtfiltro.Location = new System.Drawing.Point(456, 35);
 			this.txtfiltro.Name = "txtfiltro";
 			this.txtfiltro.Size = new System.Drawing.Size(281, 29);
-			this.txtfiltro.TabIndex = 6;
+			this.txtfiltro.TabIndex = 3;
 			this.txtfiltro.TextChanged += new System.EventHandler(this.txtfiltro_TextChanged);
 			// 
 			// cboTipoBusqueda
@@ -208,7 +209,7 @@
 			this.cboTipoBusqueda.Location = new System.Drawing.Point(232, 35);
 			this.cboTipoBusqueda.Name = "cboTipoBusqueda";
 			this.cboTipoBusqueda.Size = new System.Drawing.Size(218, 29);
-			this.cboTipoBusqueda.TabIndex = 5;
+			this.cboTipoBusqueda.TabIndex = 2;
 			this.cboTipoBusqueda.SelectionChangeCommitted += new System.EventHandler(this.cboTipoBusqueda_SelectionChangeCommitted);
 			this.cboTipoBusqueda.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cboTipoBusqueda_KeyDown);
 			// 
@@ -294,7 +295,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 600);
 			this.Controls.Add(this.pgsLoad);
-			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.panelMain);
 			this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.MaximizeBox = false;
@@ -305,8 +306,8 @@
 			this.Style = MetroFramework.MetroColorStyle.Green;
 			this.Text = "Reportar Material";
 			this.Load += new System.EventHandler(this.frmReportar_Load);
-			this.panel1.ResumeLayout(false);
-			this.panel1.PerformLayout();
+			this.panelMain.ResumeLayout(false);
+			this.panelMain.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvListado)).EndInit();
 			this.cmsOptions.ResumeLayout(false);
 			this.ResumeLayout(false);
@@ -315,7 +316,7 @@
 
 		#endregion
 
-		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Panel panelMain;
 		private MetroFramework.Controls.MetroLabel metroLabel3;
 		private System.Windows.Forms.TextBox txtfiltro;
 		private System.Windows.Forms.ComboBox cboTipoBusqueda;

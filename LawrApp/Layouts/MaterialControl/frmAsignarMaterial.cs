@@ -7,11 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MetroFramework.Forms;
-using MetroFramework;
 using System.Threading;
 using MaterialControl.ControlMaterial;
 using Objects.Tables;
 using Objects.Processes;
+
+using MetroFramework;
 
 
 namespace LawrApp.Layouts.MaterialControl
@@ -28,23 +29,18 @@ namespace LawrApp.Layouts.MaterialControl
 	
 		private Thread _hilo;
 
-		private int _codSalon;
 		private int _cantidadIngresadoMaterial;
+		private int _codSalon;
 		private int _codMaterial;
+		private string _key;
 		private bool _gotoModify = false;
-
-		public frmAsignarMaterial( DataGeneral dts)
+		public frmAsignarMaterial(DataGeneral dts)
 		{
 			this._data = dts;
 			InitializeComponent();
 		}
 
-		private void btnbuscar_Click(object sender, EventArgs e)
-		{
-			mdlSearch search = new mdlSearch(this._data);
-			search.SendMaterial += new mdlSearch.getMaterial(this.ObtenerDataOfMaterial);
-			search.ShowDialog();
-		}
+		#region HILOS
 
 		private void LoadMaterialOfAula()
 		{
@@ -54,43 +50,44 @@ namespace LawrApp.Layouts.MaterialControl
 
 			if (lista != null && lista.Any())
 			{
+				this.dgvListado.Enabled = true;
+
 				foreach (lMaterialOfAula item in lista)
 				{
-					object[] obj = new object[5] 
+					object[] obj = new object[6] 
 					{   
 						this.cboSalones.SelectedValue,
 						item.Codigo,
 						item.Key,
 						item.Description + " " + "_" + item.Marca + " " + "_" + item.Model,
-						item.Category
+						item.Category,
+						false
 					};
 
 					this._dt.Rows.Add(obj);
 				}
-
+			
 				this.dgvListado.DataSource = this._dt;
 
-				this.dgvListado.Columns[1].ReadOnly = true;
+				this.dgvListado.Columns["Codigo_Material"].Visible = false;
+				this.dgvListado.Columns["Codigo_Aula"].Visible = false;
+
+				this.dgvListado.Columns["Key"].FillWeight         = 60;
+				this.dgvListado.Columns["Descripcion"].FillWeight = 120;
+				this.dgvListado.Columns["Categoria"].FillWeight   = 45;
+				this.dgvListado.Columns["Selecciona"].FillWeight  = 30;
+
 				this.dgvListado.Columns[2].ReadOnly = true;
 				this.dgvListado.Columns[3].ReadOnly = true;
-
-				this.dgvListado.Columns["Codigo Material"].Visible    = false;
-				this.dgvListado.Columns["Codigo Aula"].Visible        = false;
-
-				this.dgvListado.Columns["Key"].FillWeight		      = 50;
-				this.dgvListado.Columns["Descripcion"].FillWeight     = 110;
-				this.dgvListado.Columns["Categoria"].FillWeight		  = 50;
+				this.dgvListado.Columns[4].ReadOnly = true;
+				this.dgvListado.Columns[5].ReadOnly = false;
 
 				this.btnEliminar.Enabled = true;
 				this.txtfiltro.Enabled   = true;
-				this.pgsLoad.Visible = false;
+				this.pgsLoad.Visible     = false;
 				this.dgvListado.Enabled = true;
-
+				
 				this.dgvListado.ClearSelection();
-				
-
-				
-
 			}
 			else
 			{
@@ -105,7 +102,6 @@ namespace LawrApp.Layouts.MaterialControl
 			this._hilo.Abort();
 		}
 
-		#region HILOS
 
 		private void SubmitInsertOrUpdate()
 		{
@@ -119,19 +115,41 @@ namespace LawrApp.Layouts.MaterialControl
 
 				foreach (lkeys row in keys)
 				{
-					object[] d = new object[5]
+					object[] d = new object[6]
 					{
 						this._codSalon,
 						this._codMaterial,
 						row.Keys,
 						this.txtDescripcion.Text,
-						this.txtCategoria.Text
+						this.txtCategoria.Text,
+						false
 					};
 					this._dt.Rows.Add(d);
 				}
 
+				this.dgvListado.DataSource = this._dt;
+
+				this.dgvListado.Columns["Codigo_Material"].Visible = false;
+				this.dgvListado.Columns["Codigo_Aula"].Visible     = false;
+
+				this.dgvListado.Columns["Key"].FillWeight         = 60;
+				this.dgvListado.Columns["Descripcion"].FillWeight = 120;
+				this.dgvListado.Columns["Categoria"].FillWeight   = 45;
+				this.dgvListado.Columns["Selecciona"].FillWeight  = 30;
+
+				this.dgvListado.Columns[2].ReadOnly = true;
+				this.dgvListado.Columns[3].ReadOnly = true;
+				this.dgvListado.Columns[4].ReadOnly = true;
+				this.dgvListado.Columns[4].ReadOnly = false;
+
+				if (this.dgvListado.Rows.Count > 0)
+					this.txtfiltro.Enabled = true;
+				else
+					this.txtfiltro.Enabled = false;
 				this.pgsLoad.Visible = false;
 				this.panelMain.Enabled = true;
+
+				this.dgvListado.ClearSelection();
 			}
 			else
 				MessageBox.Show("Error al generar keys de los materiale");
@@ -139,37 +157,61 @@ namespace LawrApp.Layouts.MaterialControl
 			this._hilo.Abort();
 		}
 
-		private void AgregarColumnDatatable()
-		{
-			_dt.Columns.Add("Codigo Aula",	  typeof(int));
-			_dt.Columns.Add("Codigo Material",typeof(int));
-			_dt.Columns.Add("Key",            typeof(string));
-			_dt.Columns.Add("Descripcion",    typeof(string));
-			_dt.Columns.Add("Categoria",      typeof(string));
-		}
-
 		private void SubmitDelete()
 		{
 			CheckForIllegalCrossThreadCalls = false;
 
+			DataGridViewRow row = new DataGridViewRow();
 
-			if (this._cAsignarMaterial.Delete(this._codMaterial, Convert.ToInt32(this.dgvListado.CurrentRow.Cells[0].Value) ))
+			for (int i = 0; i < this.dgvListado.Rows.Count; i++)
 			{
-				this.pgsLoad.Visible = false;
-				this.dgvListado.Rows.RemoveAt(this.dgvListado.CurrentRow.Index);
-				this.btnEliminar.Enabled = false;
-				MetroMessageBox.Show(this, "La Asignacion del Material ha sifo Eliminado", "CORRECTO", MessageBoxButtons.OK, MessageBoxIcon.Question);
-				
-				this.btnbuscar.Enabled   = true;
-				this.btnEliminar.Enabled = true;
+				row = this.dgvListado.Rows[i];
 
-				this.ResetControls();
+				if (Convert.ToBoolean(row.Cells[5].Value) == true)
+				{
+					this._codSalon = Convert.ToInt32(row.Cells[0].Value);
+					this._codMaterial = Convert.ToInt32(row.Cells[1].Value);
+					this._key = Convert.ToString(row.Cells[2].Value);
+
+					if (this._cAsignarMaterial.Delete(this._codMaterial))
+					{
+
+						DataRow[] datos = this._dt.Select("Codigo_Aula=" + this._codSalon + 
+														  "AND Codigo_Material='" + this._codMaterial + "'" +
+														  "AND Key='" + this._key + "'"); ;
+
+						this.dgvListado.Rows.RemoveAt(this._dt.Rows.IndexOf(datos[0]));
+
+						i--;
+
+						this.btnEliminar.Enabled = false;
+						this.btnbuscar.Enabled = true;
+						this.btnEliminar.Enabled = true;
+
+						this.ResetControls();
+					}
+					else
+					{
+						this.pgsLoad.Visible = false;
+						MetroMessageBox.Show(this, this._cAsignarMaterial.MsgExeption, "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+				}
+
+			}
+
+			this.pgsLoad.Visible = false;
+			this.panelMain.Enabled = true;
+
+			if (this.dgvListado.Rows.Count == 0)
+			{
+				
+				this.dgvListado.Enabled     = false;
+				this.txtDescripcion.Enabled = false;
+				this.txtfiltro.Enabled      = false;
+				this.btnEliminar.Enabled    = false;
 			}
 			else
-			{
-				this.pgsLoad.Visible = false;
-				MetroMessageBox.Show(this, this._cAsignarMaterial.MsgExeption, "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
+				this.btnEliminar.Enabled = false;
 
 			this._hilo.Abort();
 		}
@@ -225,31 +267,19 @@ namespace LawrApp.Layouts.MaterialControl
 
 		#endregion
 
+
 		#region METODOS
 
 		void ActionForDelete()
 		{
 			if (this.dgvListado.CurrentRow.Selected)
 			{
-				DialogResult result = MetroMessageBox.Show(
-					this,
-					"Realmente Deseas Eliminar EL Material seleccionado?\nPresiona Ok para Eliminar...",
-					"ADVERTENCIA",
-					MessageBoxButtons.OKCancel,
-					MessageBoxIcon.Warning
-				);
+				this._hilo = new Thread(new ThreadStart(SubmitDelete));
 
-				if (result == DialogResult.OK)
-				{
-					this._hilo = new Thread(new ThreadStart(SubmitDelete));
+				this.btnbuscar.Enabled = false;
+				this.pgsLoad.Visible = true;
 
-					this.btnbuscar.Enabled = false;
-					this.pgsLoad.Visible = true;
-
-					this._codMaterial = Convert.ToInt32(this.dgvListado.CurrentRow.Cells[0].Value);
-
-					this._hilo.Start();
-				}
+				this._hilo.Start();
 			}
 			else
 				return;
@@ -318,23 +348,30 @@ namespace LawrApp.Layouts.MaterialControl
 
 			this._hilo.Start();
 		}
+		private void AgregarColumnDatatable()
+		{
+			_dt.Columns.Add("Codigo_Aula",     typeof(string));
+			_dt.Columns.Add("Codigo_Material", typeof(string));
+			_dt.Columns.Add("Key",             typeof(string));
+			_dt.Columns.Add("Descripcion",     typeof(string));
+			_dt.Columns.Add("Categoria",       typeof(string));
+			_dt.Columns.Add("Selecciona",      typeof(bool));
+		}
 
 		#endregion
 
-		private void frmAsignarMaterial_Load(object sender, EventArgs e)
+		private void frmAsigMaterial_Load(object sender, EventArgs e)
 		{
 			this.AgregarColumnDatatable();
 
 			this._hilo = new Thread(new ThreadStart(this.DataAulas));
+
 			this.cboSalones.Enabled = false;
 			this.pgsLoad.Visible = true;
-			this._hilo.Start();
-		}
 
-		private void txtMarca_KeyDown(object sender, KeyEventArgs e)
-		{
-			if (e.KeyCode != Keys.Down && e.KeyCode != Keys.Up)
-				e.SuppressKeyPress = true;
+			this._hilo.Start();
+
+			this.dgvListado.ClearSelection();
 		}
 
 		private void cboSalones_SelectionChangeCommitted(object sender, EventArgs e)
@@ -358,10 +395,18 @@ namespace LawrApp.Layouts.MaterialControl
 
 			this._hilo = new Thread(new ThreadStart(this.LoadMaterialOfAula));
 			this._codSalon = Convert.ToInt32(this.cboSalones.SelectedValue);
+
 			this.pgsLoad.Visible = true;
 			this.panelMain.Enabled = false;
 
 			this._hilo.Start();
+		}
+
+		private void btnbuscar_Click(object sender, EventArgs e)
+		{
+			mdlSearch search = new mdlSearch(this._data);
+			search.SendMaterial += new mdlSearch.getMaterial(this.ObtenerDataOfMaterial);
+			search.ShowDialog();
 		}
 
 		private void btnAgregar_Click(object sender, EventArgs e)
@@ -373,7 +418,35 @@ namespace LawrApp.Layouts.MaterialControl
 			this.pgsLoad.Visible = true;
 
 			this._hilo.Start();
+		}
 
+		private void btnSalir_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
+
+		private void frmAsigMaterial_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			frmMain main = new frmMain(this._data);
+			main.Show();
+		}
+
+		private void btnEliminar_Click(object sender, EventArgs e)
+		{
+			List<DataGridViewRow> CantidadRowsChekeadas = (from item in this.dgvListado.Rows.Cast<DataGridViewRow>()
+														   let valor = Convert.ToBoolean(item.Cells["Selecciona"].Value)
+														   where valor
+														   select item).ToList();
+			if (CantidadRowsChekeadas.Count() < 0)
+				return;
+			this.ActionForDelete();
+			
+		}
+
+		private void cboSalones_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode != Keys.Down && e.KeyCode != Keys.Up)
+				e.SuppressKeyPress = true;
 		}
 
 		private void dgvListado_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -385,39 +458,75 @@ namespace LawrApp.Layouts.MaterialControl
 			}
 			else
 				return;
-
-		}
-
-		private void btnSalir_Click(object sender, EventArgs e)
-		{
-			this.Close();
-		}
-
-		private void btnEliminar_Click(object sender, EventArgs e)
-		{
-			if (this.dgvListado.Rows.Count > 0)
-				this.ActionForDelete();
-		}
-
-		private void frmAsignarMaterial_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			frmMain main = new frmMain(this._data);
-			main.Show();
 		}
 
 		private void txtfiltro_TextChanged(object sender, EventArgs e)
 		{
-			TextBox txt = (TextBox)sender;
-			this._dt.DefaultView.RowFilter = (" Descripcion Like '%" + this.txtfiltro.Text + "%'");
+			this._dt.DefaultView.RowFilter = ("Descripcion like '%" + this.txtfiltro.Text + "%'");
 			this.dgvListado.DataSource = this._dt.DefaultView;
 		}
 
-		private void nudCantidad_Leave(object sender, EventArgs e)
+		private void dgvListado_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (nudCantidad.Text == "")
+			if (e.KeyData == Keys.Delete)
 			{
-				this.nudCantidad.Value = 1;
+				if (this.dgvListado.CurrentRow != null)
+				{
+					if (this.dgvListado.Rows.Count > 0)
+						this.ActionForDelete();
+				}
+				else
+					return;
 			}
 		}
+
+		private void dgvListado_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+		{
+			if (e.RowIndex == -1)
+				return;
+
+			if (this.dgvListado.Columns[5].Name == "Selecciona")
+			{
+				DataGridViewRow row = new DataGridViewRow();
+				for (int i = 0; i < this.dgvListado.Rows.Count; i++)
+				{
+					row = this.dgvListado.Rows[i];
+
+					if (row.Cells[e.ColumnIndex].Value == null)
+						Convert.ToBoolean(row.Cells[e.ColumnIndex].Value = false);
+
+					if (((bool)row.Cells[e.ColumnIndex].Value == true))
+					{
+						row.Cells["key"].Style.BackColor         = Color.FromArgb(232, 232, 232);
+						row.Cells["Descripcion"].Style.BackColor = Color.FromArgb(232, 232, 232);
+						row.Cells["Categoria"].Style.BackColor   = Color.FromArgb(232, 232, 232);
+						row.Cells["Selecciona"].Style.BackColor  = Color.FromArgb(232, 232, 232);
+
+					}
+					if ((bool)row.Cells[5].Value == false)
+					{
+						row.Cells["key"].Style.BackColor         = Color.White;
+						row.Cells["Descripcion"].Style.BackColor = Color.White;
+						row.Cells["Categoria"].Style.BackColor   = Color.White;
+						row.Cells["Selecciona"].Style.BackColor  = Color.White;
+
+						row.Cells["key"].Style.ForeColor = Color.FromArgb(90, 92, 93);
+						row.Cells["Descripcion"].Style.ForeColor = Color.FromArgb(90, 92, 93);
+						row.Cells["Categoria"].Style.ForeColor   = Color.FromArgb(90, 92, 93);
+						row.Cells["Selecciona"].Style.ForeColor  = Color.FromArgb(90, 92, 93);
+					}
+				}
+			}
+			
+		}
+
+		private void dgvListado_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+		{
+			if (this.dgvListado.IsCurrentCellDirty)
+			{
+				this.dgvListado.CommitEdit(DataGridViewDataErrorContexts.Commit);
+			}
+		}
+		
 	}
 }

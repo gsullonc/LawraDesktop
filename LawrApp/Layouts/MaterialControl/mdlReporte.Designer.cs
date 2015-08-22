@@ -30,6 +30,7 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.panelMain = new System.Windows.Forms.Panel();
+			this.lblValidateResponsable = new System.Windows.Forms.Label();
 			this.btnSalir = new MetroFramework.Controls.MetroButton();
 			this.btnguardar = new MetroFramework.Controls.MetroButton();
 			this.txtDetalle = new System.Windows.Forms.TextBox();
@@ -41,7 +42,6 @@
 			this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
 			this.txtDescripcion = new System.Windows.Forms.TextBox();
 			this.pgsLoad = new MetroFramework.Controls.MetroProgressSpinner();
-			this.lblValidateResponsable = new System.Windows.Forms.Label();
 			this.toltipValid = new System.Windows.Forms.ToolTip(this.components);
 			this.panelMain.SuspendLayout();
 			this.SuspendLayout();
@@ -65,6 +65,18 @@
 			this.panelMain.Size = new System.Drawing.Size(340, 305);
 			this.panelMain.TabIndex = 0;
 			// 
+			// lblValidateResponsable
+			// 
+			this.lblValidateResponsable.BackColor = System.Drawing.Color.Transparent;
+			this.lblValidateResponsable.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblValidateResponsable.ForeColor = System.Drawing.Color.Red;
+			this.lblValidateResponsable.Location = new System.Drawing.Point(81, 74);
+			this.lblValidateResponsable.Name = "lblValidateResponsable";
+			this.lblValidateResponsable.Size = new System.Drawing.Size(24, 16);
+			this.lblValidateResponsable.TabIndex = 63;
+			this.lblValidateResponsable.Text = "*";
+			this.lblValidateResponsable.Visible = false;
+			// 
 			// btnSalir
 			// 
 			this.btnSalir.Location = new System.Drawing.Point(189, 271);
@@ -73,6 +85,7 @@
 			this.btnSalir.TabIndex = 5;
 			this.btnSalir.Text = "Salir";
 			this.btnSalir.UseSelectable = true;
+			this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
 			// 
 			// btnguardar
 			// 
@@ -168,18 +181,6 @@
 			this.pgsLoad.UseSelectable = true;
 			this.pgsLoad.Value = 50;
 			this.pgsLoad.Visible = false;
-			// 
-			// lblValidateResponsable
-			// 
-			this.lblValidateResponsable.BackColor = System.Drawing.Color.Transparent;
-			this.lblValidateResponsable.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblValidateResponsable.ForeColor = System.Drawing.Color.Red;
-			this.lblValidateResponsable.Location = new System.Drawing.Point(81, 74);
-			this.lblValidateResponsable.Name = "lblValidateResponsable";
-			this.lblValidateResponsable.Size = new System.Drawing.Size(24, 16);
-			this.lblValidateResponsable.TabIndex = 63;
-			this.lblValidateResponsable.Text = "*";
-			this.lblValidateResponsable.Visible = false;
 			// 
 			// toltipValid
 			// 
