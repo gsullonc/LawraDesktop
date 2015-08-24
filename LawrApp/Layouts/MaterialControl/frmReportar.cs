@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using MetroFramework.Forms;
 using MetroFramework;
 using Objects.Processes;
+using LawrApp.Layouts.Reportes;
 using MaterialControl.ControlMaterial;
 using System.Collections;
 
@@ -21,11 +22,12 @@ namespace LawrApp.Layouts.MaterialControl
 		AsignarMaterial _cAsignarMaterial = new AsignarMaterial();
 		private DataTable _dt = new DataTable();
 		private DataGeneral _data;
-
+		ArrayList codigo = new ArrayList();
+		string s = "";
 		private Thread _hilo;
 
 		private int _codMaterial,_codSalon;
-		private int _codigoMaterialSalon;
+		private string _codigoMaterialSalon;
 		private string _nameMaterial;
 		private string _key;
 		public frmReportar(DataGeneral dts)
@@ -43,38 +45,54 @@ namespace LawrApp.Layouts.MaterialControl
 			List<DataGridViewRow> CantidadRowsChekeadas = (from item in this.dgvListado.Rows.Cast<DataGridViewRow>()
 														   let valor = Convert.ToBoolean(item.Cells["Seleccion"].Value) where valor  select item).ToList();
 
-			DataGridViewRow row = new DataGridViewRow();
-
-			for (int i = 0; i < this.dgvListado.Rows.Count; i++)
-			{
-				row = this.dgvListado.Rows[i];
-				 
-				if (Convert.ToBoolean(row.Cells[7].Value) == true)
+			foreach(DataGridViewRow rows in this.dgvListado.Rows)
+			{	 
+				if (Convert.ToBoolean(rows.Cells[8].Value) == true)
 				{
-					this._codigoMaterialSalon = Convert.ToInt32(row.Cells[0].Value);
+					this._codigoMaterialSalon = Convert.ToString(rows.Cells[0 ].Value);
 
 					this.panelMain.Enabled = false;
 
-					ArrayList codigo = new ArrayList();
 					codigo.Add(_codigoMaterialSalon);
-
-						if (this._cAsignarMaterial.Delete(this._codigoMaterialSalon))
-						{
-							DataRow[] datos = this._dt.Select("Codigo=" + this._codigoMaterialSalon + "");
-
-							this.dgvListado.Rows.RemoveAt(this._dt.Rows.IndexOf(datos[0]));
-							i--;
-						}
-						else
-						{
-							this.pgsLoad.Visible = false;
-							MetroMessageBox.Show(this, this._cAsignarMaterial.MsgExeption, "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-						}
 				}
 
 			}
+			for (int j = 0; j < codigo.Count; j ++ )
+			{
+				string[] d = new string[codigo.Count];
 
-			this.pgsLoad.Visible = false;
+				d[j] = Convert.ToString(codigo[j]);
+
+				s += d[j] + ' ';
+			}
+
+			if (this._cAsignarMaterial.Delete(s))
+			{
+				foreach (string d in  codigo)
+				{
+
+					DataRow[] datos = this._data.Tables["ListaMaterialesOfAula"].Select("Codigo=" + d + "");
+
+				MessageBox.Show("codigo a eliminar : " + d);
+				this.dgvListado.Rows.RemoveAt(this._data.Tables["ListaMaterialesOfAula"].Rows.IndexOf(datos[0]));
+
+				}
+
+				this.codigo.Clear();
+				s = string.Empty.ToString();
+
+				MetroMessageBox.Show(this, "Se han Eliminado: " + CantidadRowsChekeadas.Count + " Materiales correctamene",
+									"CORRECTO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+			else
+			{
+				this.pgsLoad.Visible = false;
+				MetroMessageBox.Show(this, this._cAsignarMaterial.MsgExeption, "ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+
+			
+			
+		    this.pgsLoad.Visible = false;
 			this.panelMain.Enabled = true;
 
 			if(this.dgvListado.Rows.Count == 0)
@@ -92,9 +110,6 @@ namespace LawrApp.Layouts.MaterialControl
 			}
 			else
 			 this.btneliminar.Enabled = false;
-
-			MetroMessageBox.Show(this, "Se han Eliminado: " + CantidadRowsChekeadas.Count + " Materiales correctamene",
-								"CORRECTO", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 			this._hilo.Abort();
 		}
@@ -126,15 +141,15 @@ namespace LawrApp.Layouts.MaterialControl
 						item.Description + " " + "_" + item.Marca + " " + "_" + item.Model,
 						item.Category,
 						conditionString,
-						false,
-						item.Condicion
+						item.Condicion,
+						false
 					};
 
-					this._dt.Rows.Add(obj);
+					this._data.Tables["ListaMaterialesOfAula"].Rows.Add(obj);
 				}
 				this.dgvListado.Enabled = true;
 
-				this.dgvListado.DataSource = this._dt;
+				this.dgvListado.DataSource = this._data.Tables["ListaMaterialesOfAula"];
 
 				this.dgvListado.Columns[1].ReadOnly = true;
 				this.dgvListado.Columns[2].ReadOnly = true;
@@ -142,11 +157,12 @@ namespace LawrApp.Layouts.MaterialControl
 				this.dgvListado.Columns[4].ReadOnly = true;
 				this.dgvListado.Columns[5].ReadOnly = true;
 				this.dgvListado.Columns[6].ReadOnly = true;
+				this.dgvListado.Columns[7].ReadOnly = true;
 
 				this.dgvListado.Columns["Codigo"].Visible               = false;
-				this.dgvListado.Columns["Codigo_Aula"].Visible          = false;
-				this.dgvListado.Columns["Codigo_Material"].Visible      = false;
-				this.dgvListado.Columns["C_Value"].Visible	            = false;
+				this.dgvListado.Columns["CodigoAula"].Visible          = false;
+				this.dgvListado.Columns["CodigoMaterial"].Visible      = false;
+				this.dgvListado.Columns["Valor"].Visible	            = false;
 
 				this.dgvListado.Columns["Key"].FillWeight				= 60;
 				this.dgvListado.Columns["Descripcion"].FillWeight		= 100;
@@ -232,32 +248,21 @@ namespace LawrApp.Layouts.MaterialControl
 				return;
 		}
 
-		private void AgregarColumnDatatableGlobal()
-		{
-			this._dt.Columns.Add("Codigo",              typeof(string));
-			this._dt.Columns.Add("Codigo_Aula",         typeof(string));
-			this._dt.Columns.Add("Codigo_Material",		typeof(string));
-			this._dt.Columns.Add("Key",                 typeof(string));
-			this._dt.Columns.Add("Descripcion",         typeof(string));
-			this._dt.Columns.Add("Categoria",	        typeof(string));
-			this._dt.Columns.Add("Condicion",           typeof(string));
-			this._dt.Columns.Add("Seleccion",	        typeof(bool));
-			this._dt.Columns.Add("C_Value",		        typeof(string));
-		}
-
 		//Actualiza la condicion de un material que se ha reportado individualmente
 		private void UpdateCondicionReportIndividual(string condicion)
 		{
-			DataRow[] datos = this._dt.Select("Codigo=" + this._codigoMaterialSalon + "");
+			int index = this.dgvListado.CurrentCell.RowIndex;
+			this._codigoMaterialSalon = this.dgvListado.Rows[index].Cells[0].Value.ToString();
+			DataRow[] datos = this._data.Tables["ListaMaterialesOfAula"].Select("Codigo=" + this._codigoMaterialSalon + "");
 			DataRow row = datos[0];
 
-			this._dt.Rows[this._dt.Rows.IndexOf(row)][6] = condicion;
+			this._data.Tables["ListaMaterialesOfAula"].Rows[this._data.Tables["ListaMaterialesOfAula"].Rows.IndexOf(row)][6] = condicion;
 
 			switch(condicion)
 			{
 				case "Req. Reparacion":
 
-					this._dt.Rows[this._dt.Rows.IndexOf(row)][8] = "B";
+					this._data.Tables["ListaMaterialesOfAula"].Rows[this._data.Tables["ListaMaterialesOfAula"].Rows.IndexOf(row)][7] = "B";
 
 					this.btnReportar.Enabled = true;
 					this.btnSolucionar.Enabled = false;
@@ -266,7 +271,7 @@ namespace LawrApp.Layouts.MaterialControl
 
 				case "En Pesimo Estado":
 
-					this._dt.Rows[this._dt.Rows.IndexOf(row)][8] = "C";
+				this._data.Tables["ListaMaterialesOfAula"].Rows[this._data.Tables["ListaMaterialesOfAula"].Rows.IndexOf(row)][7] = "C";
 
 					this.btnReportar.Enabled = false;
 					this.btnSolucionar.Enabled = true;
@@ -280,12 +285,12 @@ namespace LawrApp.Layouts.MaterialControl
 		//Actualiza la condicion de un material que se ha solucionado
 		private void UpdateCondicionSolucionIndividual()
 		{
-			DataRow[] datos = this._dt.Select("Codigo=" + this._codigoMaterialSalon);
+			DataRow[] datos = this._data.Tables["ListaMaterialesOfAula"].Select("Codigo=" + this._codigoMaterialSalon);
 			
 			DataRow row = datos[0];
 
-			this._dt.Rows[this._dt.Rows.IndexOf(row)][6] = "En Buen Estado";
-			this._dt.Rows[this._dt.Rows.IndexOf(row)][8] = "A";
+			this._data.Tables["ListaMaterialesOfAula"].Rows[this._data.Tables["ListaMaterialesOfAula"].Rows.IndexOf(row)][6] = "En Buen Estado";
+			this._data.Tables["ListaMaterialesOfAula"].Rows[this._data.Tables["ListaMaterialesOfAula"].Rows.IndexOf(row)][7] = "A";
 			this.pgsLoad.Visible = false;
 		}
 
@@ -365,8 +370,6 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void frmReportar_Load(object sender, EventArgs e)
 		{
-			this.AgregarColumnDatatableGlobal();
-
 			//DENTRO DEL HLO TENGO QUE PONERLO Y TEGO QUE CONVERTIR TODAS LOS ETDOS QUE SE COMUNICAN CON EL SERVIDOR EN HILOS
 
 			this.cboSalon.ValueMember    = "Codigo";
@@ -388,8 +391,8 @@ namespace LawrApp.Layouts.MaterialControl
 		{
 			if(this.dgvListado.Rows.Count > 0)
 			{
-				this._dt.DefaultView.RowFilter = String.Empty;
-				this._dt.Rows.Clear();
+				this._data.Tables["ListaMaterialesOfAula"].DefaultView.RowFilter = String.Empty;
+				this._data.Tables["ListaMaterialesOfAula"].Rows.Clear();
 			}
 
 			this.GetMaterialesOneAula();
@@ -404,7 +407,7 @@ namespace LawrApp.Layouts.MaterialControl
 				if (posicion_row_Mause >= 0)
 				{
 					this.dgvListado.Rows[posicion_row_Mause].Selected = true;
-					this.dgvListado.CurrentCell = this.dgvListado.Rows[posicion_row_Mause].Cells[7];
+					this.dgvListado.CurrentCell = this.dgvListado.Rows[posicion_row_Mause].Cells[6];
 
 					if(this.dgvListado.CurrentCell.Value.ToString() == "Req. Reparacion")
 					{
@@ -451,13 +454,13 @@ namespace LawrApp.Layouts.MaterialControl
 		{
 				if( this.cboTipoBusqueda.SelectedValue.ToString() == "All" )
 				{
-					this._dt.DefaultView.RowFilter = ("Key + ' ' + Descripcion + ' ' + Categoria like '%" + this.txtfiltro.Text + "%'");
-					this.dgvListado.DataSource = this._dt.DefaultView;
+					this._data.Tables["ListaMaterialesOfAula"].DefaultView.RowFilter = ("Key + ' ' + Descripcion + ' ' + Categoria like '%" + this.txtfiltro.Text + "%'");
+					this.dgvListado.DataSource = this._data.Tables["ListaMaterialesOfAula"].DefaultView;
 				}
 				else
 				{
-					this.dgvListado.DataSource = this._dt.DefaultView;
-					this._dt.DefaultView.RowFilter = ("Key + ' ' + Descripcion + ' ' + Categoria like '%" + this.txtfiltro.Text + "%' AND C_Value='" + 
+					this.dgvListado.DataSource = this._data.Tables["ListaMaterialesOfAula"].DefaultView;
+					this._data.Tables["ListaMaterialesOfAula"].DefaultView.RowFilter = ("Key + ' ' + Descripcion + ' ' + Categoria like '%" + this.txtfiltro.Text + "%' AND C_Value='" + 
 					 this.cboTipoBusqueda.SelectedValue.ToString() + "'");	
 				}
 			    
@@ -473,13 +476,13 @@ namespace LawrApp.Layouts.MaterialControl
 		{
 			if ( this.cboTipoBusqueda.SelectedValue.ToString() != "All" )
 			{
-				this._dt.DefaultView.RowFilter = ("C_Value='" + this.cboTipoBusqueda.SelectedValue.ToString() + "'");
-				this.dgvListado.DataSource = this._dt.DefaultView;
+				this._data.Tables["ListaMaterialesOfAula"].DefaultView.RowFilter = ("Valor='" + this.cboTipoBusqueda.SelectedValue.ToString() + "'");
+				this.dgvListado.DataSource = this._data.Tables["ListaMaterialesOfAula"].DefaultView;
 			}
 			else
 			{
-				this._dt.DefaultView.RowFilter = string.Empty;
-				this.dgvListado.DataSource = this._dt;
+				this._data.Tables["ListaMaterialesOfAula"].DefaultView.RowFilter = string.Empty;
+				this.dgvListado.DataSource = this._data.Tables["ListaMaterialesOfAula"];
 			}
 
 			txtfiltro.Clear();
@@ -538,7 +541,7 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void btnReportar_Click(object sender, EventArgs e)
 		{
-			this._codigoMaterialSalon = Convert.ToInt32(this.dgvListado.CurrentRow.Cells[0].Value);
+			this._codigoMaterialSalon = Convert.ToString(this.dgvListado.CurrentRow.Cells[0].Value);
 
 			List<DataGridViewRow> CantidadRowsChekeadas = (from item in this.dgvListado.Rows.Cast<DataGridViewRow>()
 														   let valor = Convert.ToBoolean(item.Cells["Seleccion"].Value) where valor  select item).ToList();
@@ -604,7 +607,7 @@ namespace LawrApp.Layouts.MaterialControl
 
 						this.btneliminar.Enabled = true;
 					}
-					if ((bool)row.Cells[7].Value == false)
+					if ((bool)row.Cells[8].Value == false)
 
 						row.Cells["key"].Style.BackColor		 = Color.White;
 						row.Cells["Descripcion"].Style.BackColor = Color.White;
@@ -638,14 +641,14 @@ namespace LawrApp.Layouts.MaterialControl
 					{
 						this.dgvListado.CurrentRow.Selected = true;
 
-						if ((bool)this.dgvListado.CurrentRow.Cells[7].Value == false)
+						if ((bool)this.dgvListado.CurrentRow.Cells[8].Value == false)
 						{
 							this.EnableBotonesSegunEstados();
-							this.dgvListado.CurrentRow.Cells[7].Value = true;
+							this.dgvListado.CurrentRow.Cells[8].Value = true;
 						}
 						else
 						{
-							this.dgvListado.CurrentRow.Cells[7].Value = false;
+							this.dgvListado.CurrentRow.Cells[8].Value = false;
 							this.dgvListado.CurrentRow.Selected = false;
 						}
 						  
@@ -656,6 +659,12 @@ namespace LawrApp.Layouts.MaterialControl
 				else
 					return;
 			}
+		}
+
+		private void btnimprimir_Click(object sender, EventArgs e)
+		{
+			rptMaterialesOfAula s = new rptMaterialesOfAula();
+			s.Show();
 		}
 
 	}

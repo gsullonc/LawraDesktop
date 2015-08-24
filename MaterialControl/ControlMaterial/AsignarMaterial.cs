@@ -101,7 +101,7 @@ namespace MaterialControl.ControlMaterial
 			}
 		}
 
-		public bool Delete(int CodigoMaterialSalon)
+		public bool Delete(string CodigoMaterialSalon)
 		{
 			Query query = new Query("api/students/destroy/" + CodigoMaterialSalon);
 			try

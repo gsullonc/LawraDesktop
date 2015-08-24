@@ -169,11 +169,12 @@ namespace LawrApp.Layouts.MaterialControl
 
 				if (Convert.ToBoolean(row.Cells[5].Value) == true)
 				{
+
 					this._codSalon = Convert.ToInt32(row.Cells[0].Value);
 					this._codMaterial = Convert.ToInt32(row.Cells[1].Value);
 					this._key = Convert.ToString(row.Cells[2].Value);
 
-					if (this._cAsignarMaterial.Delete(this._codMaterial))
+					if (this._cAsignarMaterial.Delete(Convert.ToString(row.Cells[0].Value)))
 					{
 
 						DataRow[] datos = this._dt.Select("Codigo_Aula=" + this._codSalon + 

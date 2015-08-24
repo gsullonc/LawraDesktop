@@ -117,6 +117,7 @@
 			this.btnimprimir.TabIndex = 6;
 			this.btnimprimir.Text = "Imprimir";
 			this.btnimprimir.UseSelectable = true;
+			this.btnimprimir.Click += new System.EventHandler(this.btnimprimir_Click);
 			// 
 			// btnSalir
 			// 

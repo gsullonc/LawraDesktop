@@ -59,10 +59,10 @@ namespace LawrApp.Layouts.MaterialControl
 						item.Quantity
 					 };
 
-					this._dt2.Rows.Add(ingresos);
+					this._data.Tables["ListaIngresos"].Rows.Add(ingresos);
 				}
 
-				this.dgvListadoMaterial.DataSource = _dt2;
+				this.dgvListadoMaterial.DataSource = this._data.Tables["ListaIngresos"];
 
 				this.dgvListadoMaterial.Columns[0].Visible = false;
 				this.dgvListadoMaterial.Columns[1].Visible = false;
@@ -131,13 +131,13 @@ namespace LawrApp.Layouts.MaterialControl
 		{
 			CheckForIllegalCrossThreadCalls = false;
 
-			List<lDetalleIngresosOfMaterial> _listIngresos  = this._cAdquisicion.ListDetalleOfIngresosForMaterial(this._codMaterial);
+			List<lDetalleIngresosOfMaterial> _listIngresos = this._cAdquisicion.ListDetalleOfIngresosForMaterial(this._codMaterial);
 
 			if (_listIngresos.Count > 0)
 			{
 				this._dt.Rows.Clear();
-			
-				 
+
+
 				foreach (lDetalleIngresosOfMaterial item in _listIngresos)
 				{
 					object[] d = new object[7]
@@ -166,26 +166,15 @@ namespace LawrApp.Layouts.MaterialControl
 				this.dgvListadoDetalle.Columns[6].FillWeight = 30;
 
 
-				this.pgsLoad.Visible      = false;
+				this.pgsLoad.Visible = false;
 				this.btnModificar.Enabled = true;
-				this.btnEliminar.Enabled  = true;
+				this.btnEliminar.Enabled = true;
 			}
 		}
 
 		#endregion
 
 		#region METODOS
-
-		private void LLenarColumn()
-		{
-			this._dt.Columns.Add("Codigo",          typeof(string));
-			this._dt.Columns.Add("Codigo Material" ,typeof(string));
-			this._dt.Columns.Add("Tipo",			typeof(string));
-			this._dt.Columns.Add("F.Ingreso",       typeof(string));
-			this._dt.Columns.Add("Cantidad",		typeof(string));
-			this._dt.Columns.Add("Nº Documento",    typeof(string));
-			this._dt.Columns.Add("Costo",           typeof(string));
-		}
 		private void ActionForDelete()
 		{
 			if (this.dgvListadoMaterial.CurrentRow != null)
@@ -203,9 +192,9 @@ namespace LawrApp.Layouts.MaterialControl
 					this._hilo = new Thread(new ThreadStart(SubmitDelete));
 
 					this.panelListado.Enabled = false;
-					this.btmImprimir.Enabled  = false;
+					this.btmImprimir.Enabled = false;
 					this.btnModificar.Enabled = false;
-					this.btnEliminar.Enabled  = false;
+					this.btnEliminar.Enabled = false;
 					this.pgsLoad.Visible = true;
 
 					this._codMaterial = Convert.ToInt32(this.dgvListadoMaterial.CurrentRow.Cells[0].Value);
@@ -219,12 +208,12 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void ColumnListIngresos()
 		{
-			this._dt2.Columns.Add("Codigo",          typeof(string));
+			this._dt2.Columns.Add("Codigo", typeof(string));
 			this._dt2.Columns.Add("Codigo_Material", typeof(string));
-			this._dt2.Columns.Add("Key",		     typeof(string));
-			this._dt2.Columns.Add("Descripcion",	 typeof(string));
-			this._dt2.Columns.Add("Categoria",		 typeof(string));
-			this._dt2.Columns.Add("Cantidad",		 typeof(string));
+			this._dt2.Columns.Add("Key", typeof(string));
+			this._dt2.Columns.Add("Descripcion", typeof(string));
+			this._dt2.Columns.Add("Categoria", typeof(string));
+			this._dt2.Columns.Add("Cantidad", typeof(string));
 		}
 
 		private void DetallarIngresos()
@@ -236,7 +225,7 @@ namespace LawrApp.Layouts.MaterialControl
 			object[] dataMaterial = this._data.Tables["ListaMaterial"].Select("Codigo=" + _codMaterial)[0].ItemArray;
 
 			this.lbDescripcion.Text = Convert.ToString(dataMaterial[1]);
-			this.lblCategoria.Text  = Convert.ToString(dataMaterial[2]); 
+			this.lblCategoria.Text = Convert.ToString(dataMaterial[2]);
 
 			this.panelDetalle.Enabled = true;
 			this._dt.Rows.Clear();
@@ -267,7 +256,6 @@ namespace LawrApp.Layouts.MaterialControl
 			this.tabcontrolMain.SelectedTab = this.tabpagListadoIngreso;
 			this.panelDetalle.Enabled = false;
 
-			this.LLenarColumn();
 			this.ColumnListIngresos();
 
 			this._hilo = new Thread(new ThreadStart(this.LoadDataIngresos));
@@ -284,7 +272,7 @@ namespace LawrApp.Layouts.MaterialControl
 		}
 
 		private void txtFiltro_TextChanged_1(object sender, EventArgs e)
-		 {
+		{
 			TextBox txt = (TextBox)sender;
 
 			this._dt2.DefaultView.RowFilter = ("Descripcion like '%" + this.txtFiltroMaterial.Text + "%'");
@@ -337,6 +325,5 @@ namespace LawrApp.Layouts.MaterialControl
 			frmMain main = new frmMain(this._data);
 			main.Show();
 		}
-
 	}
 }
