@@ -30,12 +30,22 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-			this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-			this.dataGeneral = new LawrApp.DataGeneral();
 			this.ListaMaterialesOfAulaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			((System.ComponentModel.ISupportInitialize)(this.dataGeneral)).BeginInit();
+			this.dataGeneral = new LawrApp.DataGeneral();
+			this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
 			((System.ComponentModel.ISupportInitialize)(this.ListaMaterialesOfAulaBindingSource)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dataGeneral)).BeginInit();
 			this.SuspendLayout();
+			// 
+			// ListaMaterialesOfAulaBindingSource
+			// 
+			this.ListaMaterialesOfAulaBindingSource.DataMember = "ListaMaterialesOfAula";
+			this.ListaMaterialesOfAulaBindingSource.DataSource = this.dataGeneral;
+			// 
+			// dataGeneral
+			// 
+			this.dataGeneral.DataSetName = "DataGeneral";
+			this.dataGeneral.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
 			// 
 			// reportViewer1
 			// 
@@ -45,21 +55,11 @@
 			reportDataSource1.Value = this.ListaMaterialesOfAulaBindingSource;
 			this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
 			this.reportViewer1.LocalReport.ReportEmbeddedResource = "LawrApp.Layouts.Reportes.Informes.MaterialesEnAula.rdlc";
-			this.reportViewer1.Location = new System.Drawing.Point(0, 60);
+			this.reportViewer1.Location = new System.Drawing.Point(0, 70);
 			this.reportViewer1.Name = "reportViewer1";
-			this.reportViewer1.Size = new System.Drawing.Size(800, 520);
+			this.reportViewer1.Size = new System.Drawing.Size(800, 510);
 			this.reportViewer1.TabIndex = 0;
 			this.reportViewer1.ZoomMode = Microsoft.Reporting.WinForms.ZoomMode.FullPage;
-			// 
-			// dataGeneral
-			// 
-			this.dataGeneral.DataSetName = "DataGeneral";
-			this.dataGeneral.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-			// 
-			// ListaMaterialesOfAulaBindingSource
-			// 
-			this.ListaMaterialesOfAulaBindingSource.DataMember = "ListaMaterialesOfAula";
-			this.ListaMaterialesOfAulaBindingSource.DataSource = this.dataGeneral;
 			// 
 			// rptMaterialesOfAula
 			// 
@@ -68,14 +68,14 @@
 			this.ClientSize = new System.Drawing.Size(800, 600);
 			this.Controls.Add(this.reportViewer1);
 			this.Name = "rptMaterialesOfAula";
-			this.Padding = new System.Windows.Forms.Padding(0, 60, 0, 20);
+			this.Padding = new System.Windows.Forms.Padding(0, 70, 0, 20);
 			this.Resizable = false;
 			this.Style = MetroFramework.MetroColorStyle.Default;
 			this.Text = "Materiales";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.Load += new System.EventHandler(this.rptMaterialesOfAula_Load);
-			((System.ComponentModel.ISupportInitialize)(this.dataGeneral)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.ListaMaterialesOfAulaBindingSource)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dataGeneral)).EndInit();
 			this.ResumeLayout(false);
 
 		}

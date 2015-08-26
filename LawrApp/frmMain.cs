@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using MetroFramework.Forms;
 using MetroFramework;
-
+using LawrApp.Layouts.Reportes;
 using Access;
 using Objects.Tables;
 using System.Threading;
@@ -279,8 +279,10 @@ namespace LawrApp
 			this.Close();
 		}
 
-		private void listadoToolStripMenuItem_Click(object sender, EventArgs e)
+		private void especificoToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			//rptEspecifico rptEspecifico = new rptEspecifico(_data);
+			//rptEspecifico.Show();
 		}
 	}
 }

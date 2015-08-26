@@ -62,6 +62,26 @@ namespace Objects.Processes
 		public string EntryDate		 { get; set; }
 		public int Quantity			 { get; set; }
 		public string DocumentNumber { get; set; }
-		public int Price { get; set; }
+		public int Price			 { get; set; }
+	}
+
+	public class lReportEspecifico 
+	{
+		public string Aula						 { get; set; }
+		public string UltInventario				 { get; set; }
+		public lMaterialOfAula  Materiales       { get; set; }
+		public lConteroPorCondicion Conteo       { get; set; }
+		public lGastos Gastos				     { get; set; }
+	}
+
+	public class lConteroPorCondicion 
+	{
+		public string Condicion					{ get; set; }
+		public int Cantidad						{ get; set; }
+	}
+	public class lGastos 
+	{
+		public string Condicion					{ get; set; }
+		public int Monto						{ get; set; }
 	}
 }

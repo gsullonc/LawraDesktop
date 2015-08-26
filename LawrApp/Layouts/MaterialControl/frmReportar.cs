@@ -23,6 +23,7 @@ namespace LawrApp.Layouts.MaterialControl
 		private DataTable _dt = new DataTable();
 		private DataGeneral _data;
 		ArrayList codigo = new ArrayList();
+		
 		string s = "";
 		private Thread _hilo;
 
@@ -118,7 +119,8 @@ namespace LawrApp.Layouts.MaterialControl
 			CheckForIllegalCrossThreadCalls = false;
 
 			List<lMaterialOfAula> lista = this._cMaterial.ListforAula(this._codSalon);
-		
+			List<lReportEspecifico> Reporte = this._cMaterial.ReporteIndividual();
+
 			if (lista != null && lista.Any())
 			{
 				foreach (lMaterialOfAula item in lista)
@@ -196,6 +198,8 @@ namespace LawrApp.Layouts.MaterialControl
 				this.btnimprimir.Enabled		   = true;
 				this.btnSeleccionar.Enabled		   = true;
 				this.btneliminar.Enabled		   = false;
+
+				
 			}
 			else
 			{
@@ -208,7 +212,43 @@ namespace LawrApp.Layouts.MaterialControl
 			this.panelMain.Enabled = true;
 			this.btnReportar.Enabled = true;
 
+
+			if (Reporte != null )
+			{
+				foreach (lReportEspecifico item in Reporte)
+				{
+					object[] Materiales = new object[8] 
+					{
+						item.Materiales.CodigoMaterialSalon,
+						item.Materiales.Codigo,
+						item.Materiales.Key,
+						item.Materiales.Description,
+					    item.Materiales.Category,
+						item.Materiales.Marca,
+						item.Materiales.Model,
+						item.Materiales.Condicion
+					};
+
+					object[] Conteo = new object[2]
+					{
+						item.Conteo.Condicion,
+						item.Conteo.Cantidad
+					};
+
+					this._data.Tables["ConteoPorEstado"].Rows.Add(Conteo);
+
+					object[] Gastos = new object[2]
+					{
+						item.Gastos.Condicion,
+						item.Gastos.Monto
+					};
+
+					this._data.Tables["Gastos"].Rows.Add(Gastos);
+				}
+
 			this._hilo.Abort();
+
+			}
 		}
 
 		#endregion
@@ -663,8 +703,11 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void btnimprimir_Click(object sender, EventArgs e)
 		{
-			rptMaterialesOfAula s = new rptMaterialesOfAula(_data);
-			s.Show();
+			//rptMaterialesOfAula s = new rptMaterialesOfAula(_data);
+			//s.Show();
+
+			rptEspecifico rptEspecifico = new rptEspecifico(_data);
+			rptEspecifico.Show();
 		}
 
 	}

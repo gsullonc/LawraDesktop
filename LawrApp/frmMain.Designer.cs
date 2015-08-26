@@ -106,6 +106,8 @@
 			this.lblUserName = new MetroFramework.Controls.MetroLabel();
 			this.ttInfo = new System.Windows.Forms.ToolTip(this.components);
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.reportesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.especificoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuOptions.SuspendLayout();
 			this.tableTiles.SuspendLayout();
 			this.panelLoginIn.SuspendLayout();
@@ -124,7 +126,8 @@
             this.registrosToolStripMenuItem1,
             this.periodosToolStripMenuItem,
             this.configuracionesToolStripMenuItem1,
-            this.controlDeMaterialesToolStripMenuItem});
+            this.controlDeMaterialesToolStripMenuItem,
+            this.reportesToolStripMenuItem1});
 			this.menuOptions.Location = new System.Drawing.Point(20, 30);
 			this.menuOptions.Name = "menuOptions";
 			this.menuOptions.Size = new System.Drawing.Size(960, 28);
@@ -974,6 +977,21 @@
 			this.pictureBox1.TabIndex = 10;
 			this.pictureBox1.TabStop = false;
 			// 
+			// reportesToolStripMenuItem1
+			// 
+			this.reportesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.especificoToolStripMenuItem});
+			this.reportesToolStripMenuItem1.Name = "reportesToolStripMenuItem1";
+			this.reportesToolStripMenuItem1.Size = new System.Drawing.Size(80, 24);
+			this.reportesToolStripMenuItem1.Text = "Reportes";
+			// 
+			// especificoToolStripMenuItem
+			// 
+			this.especificoToolStripMenuItem.Name = "especificoToolStripMenuItem";
+			this.especificoToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+			this.especificoToolStripMenuItem.Text = "Especifico";
+			this.especificoToolStripMenuItem.Click += new System.EventHandler(this.especificoToolStripMenuItem_Click);
+			// 
 			// frmMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -1092,6 +1110,8 @@
 		private System.Windows.Forms.ToolStripMenuItem regisroDeIngresosDeMaterialesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem listadoDeIngresoPorMaterialToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem listadoMaterialPorAulaToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem especificoToolStripMenuItem;
 
     }
 }

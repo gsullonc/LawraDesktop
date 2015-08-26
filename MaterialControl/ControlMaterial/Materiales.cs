@@ -157,6 +157,26 @@ namespace MaterialControl.ControlMaterial
 			}
 		}
 
+		public List<lReportEspecifico> ReporteIndividual()
+		{
+			Query query = new Query("api/material/condicion");
+
+			try
+			{
+				query.SendRequestGET();
+
+				if (query.ResponseStatusCode != HttpStatusCode.OK)
+					throw new ArgumentNullException("No se encontraron datos", "Informacion");
+
+				return JsonConvert.DeserializeObject<List<lReportEspecifico>>(query.ResponseContent);
+			}
+			catch (Exception ex)
+			{
+				this._msgExceptionRegMateriales = ex.Message;
+				return null;
+			}
+		}
+
 		public List<lMaterial> ListforAulaAndCondicion(int codAula,string Condicion)
 		{
 			Query query = new Query("api/students/parents_show/" + codAula + " /" + Condicion  );

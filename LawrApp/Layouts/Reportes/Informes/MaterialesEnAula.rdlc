@@ -89,7 +89,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -271,9 +270,7 @@
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
+                          <Style />
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Descripcion</rd:DefaultName>
@@ -381,7 +378,7 @@
         <Top>4.03669cm</Top>
         <Left>0.17639cm</Left>
         <Height>1.2cm</Height>
-        <Width>16.13391cm</Width>
+        <Width>16.1339cm</Width>
         <Style>
           <Border>
             <Style>None</Style>

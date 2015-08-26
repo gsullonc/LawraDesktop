@@ -343,6 +343,12 @@
     <Compile Include="Layouts\regPersonal\FrmregPersonal.Designer.cs">
       <DependentUpon>FrmregPersonal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\Reportes\rptEspecifico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Layouts\Reportes\rptEspecifico.Designer.cs">
+      <DependentUpon>rptEspecifico.cs</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\Reportes\rptMaterialesOfAula.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -463,6 +469,10 @@
       <DependentUpon>FrmregPersonal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Layouts\Reportes\Informes\MaterialesEnAula.rdlc" />
+    <EmbeddedResource Include="Layouts\Reportes\Informes\rptEspecifico.rdlc" />
+    <EmbeddedResource Include="Layouts\Reportes\rptEspecifico.resx">
+      <DependentUpon>rptEspecifico.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Layouts\Reportes\rptMaterialesOfAula.resx">
       <DependentUpon>rptMaterialesOfAula.cs</DependentUpon>
     </EmbeddedResource>
