@@ -663,7 +663,7 @@ namespace LawrApp.Layouts.MaterialControl
 
 		private void btnimprimir_Click(object sender, EventArgs e)
 		{
-			rptMaterialesOfAula s = new rptMaterialesOfAula();
+			rptMaterialesOfAula s = new rptMaterialesOfAula(_data);
 			s.Show();
 		}
 

@@ -462,7 +462,7 @@
     <EmbeddedResource Include="Layouts\regPersonal\FrmregPersonal.resx">
       <DependentUpon>FrmregPersonal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Layouts\Reportes\Informes\InfMaterialesAula.rdlc" />
+    <EmbeddedResource Include="Layouts\Reportes\Informes\MaterialesEnAula.rdlc" />
     <EmbeddedResource Include="Layouts\Reportes\rptMaterialesOfAula.resx">
       <DependentUpon>rptMaterialesOfAula.cs</DependentUpon>
     </EmbeddedResource>
